@@ -1,0 +1,1 @@
+enum TokenLabel { none, xa, tokenId }

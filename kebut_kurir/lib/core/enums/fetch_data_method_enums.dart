@@ -1,0 +1,1 @@
+enum FetchDataMethod { get, post, put, delete }
