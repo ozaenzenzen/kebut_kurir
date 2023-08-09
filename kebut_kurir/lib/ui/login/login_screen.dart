@@ -163,21 +163,24 @@ class LoginScreen extends GetView<LoginController> {
                         child: ButtonCustom(
                           text: 'Masuk',
                           textSize: 18,
+                          buttonColor: Color(0xFFFFFF00),
                           onTap: () async {
-                            if (controller.tecEmail.text.isNotEmpty && controller.tecPass.text.isNotEmpty) {
-                              // await controller.loginUser().then(
-                              //   (value) {
-                              //     if (value != null) {
-                              //       Get.offNamed(Routes.main);
-                              //     }
-                              //   },
-                              // );
-                            } else {
-                              controller.dialogsUtils.showToastMessage('Lengkapi email dan password kamu');
-                            }
+                            // if (controller.tecEmail.text.isNotEmpty && controller.tecPass.text.isNotEmpty) {
+                            //   // await controller.loginUser().then(
+                            //   //   (value) {
+                            //   //     if (value != null) {
+                            //   //       Get.offNamed(Routes.main);
+                            //   //     }
+                            //   //   },
+                            //   // );
+                            //   Get.offNamed(Routes.main);
+                            // } else {
+                            //   controller.dialogsUtils.showToastMessage('Lengkapi email dan password kamu');
+                            // }
+                            Get.offNamed(Routes.main);
                           },
                           borderRadius: 6,
-                          textColor: Colors.white,
+                          textColor: Color(0xFF42526D),
                           paddingVer: 13,
                         ),
                       ),
@@ -195,11 +198,11 @@ class LoginScreen extends GetView<LoginController> {
                           text: 'Belum punya akun?',
                           style: AppTheme.textStyle.blackTextStyle.copyWith(
                             fontSize: AppTheme.textConfig.size.n,
-                            color: AppTheme.colors.greyColor3,
+                            color: Color(0xFF121419),
                           ),
                           children: [
                             TextSpan(
-                              text: ' Daftar',
+                              text: ' Daftar Sekarang',
                               recognizer: TapGestureRecognizer()..onTap = () => Get.toNamed(Routes.register, arguments: false),
                               style: AppTheme.textStyle.primaryTextStyle.copyWith(
                                 fontSize: AppTheme.textConfig.size.n,

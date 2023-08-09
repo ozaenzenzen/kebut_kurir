@@ -4,6 +4,7 @@ class Routes {
   static const String main = '/main';
   static const String home = '/home';
   static const String profile = '/profile';
+  static const String editProfileScreen = '/edit_profile_screen';
   static const String login = '/login';
   static const String register = '/register';
   static const String ktpGuide = '/ktp_guide';
@@ -59,5 +60,9 @@ class Routes {
   static const String formKomplainScreen = '/form_komplain_screen';
   static const String paymentMyOrderScreen = '/payment_my_order_screen';
   static const String newPasswordScreen = '/new_password_screen';
+  static const String pesanScreen = '/pesan_screen';
+  static const String infoPengajuanScreen = '/info_pengajuan_screen';
+  static const String infoDriverScreen = '/info_driver_screen';
+  static const String pickupBarangScreen = '/pick_up_barang_screen';
 
 }

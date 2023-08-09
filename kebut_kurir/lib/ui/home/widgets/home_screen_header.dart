@@ -23,6 +23,9 @@ class HomeScreenHeader extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SizedBox(
+                height: 6.h,
+              ),
               Text(
                 'Selamat Datang',
                 style: AppTheme.textStyle.blackTextStyle.copyWith(
@@ -34,48 +37,12 @@ class HomeScreenHeader extends StatelessWidget {
               GetBuilder<HomeController>(
                 builder: (HomeController controller) {
                   return Text(
-                    'Hello, ',
+                    'Hello Driver!',
                     style: AppTheme.textStyle.blackTextStyle.copyWith(
                       fontSize: 17.sp,
                       fontWeight: AppTheme.textConfig.weight.semiBold,
                     ),
                   );
-                  // return FutureBuilder<ResultUserData?>(
-                  //   future: controller.getUserDataLocal(),
-                  //   builder: (BuildContext context, AsyncSnapshot<ResultUserData?> snapshot) {
-                  //     if (snapshot.hasError) {
-                  //       return Text(
-                  //         'Hello, ',
-                  //         style: AppTheme.textStyle.blackTextStyle.copyWith(
-                  //           fontSize: 17.sp,
-                  //           fontWeight: AppTheme.textConfig.weight.semiBold,
-                  //         ),
-                  //       );
-                  //     } else {
-                  //       if (snapshot.hasData) {
-                  //         if (snapshot.data != '') {
-                  //           return Text(
-                  //             'Hello, ${snapshot.data!.shortname}',
-                  //             style: AppTheme.textStyle.blackTextStyle.copyWith(
-                  //               fontSize: 17.sp,
-                  //               fontWeight: AppTheme.textConfig.weight.semiBold,
-                  //             ),
-                  //           );
-                  //         } else {
-                  //           return Text(
-                  //             'Hello, ',
-                  //             style: AppTheme.textStyle.blackTextStyle.copyWith(
-                  //               fontSize: 17.sp,
-                  //               fontWeight: AppTheme.textConfig.weight.semiBold,
-                  //             ),
-                  //           );
-                  //         }
-                  //       } else {
-                  //         return const SizedBox();
-                  //       }
-                  //     }
-                  //   },
-                  // );
                 },
               ),
               // Text(
