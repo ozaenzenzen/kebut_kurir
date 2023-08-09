@@ -1,15 +1,11 @@
 import 'dart:async';
 
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freerasp/utils/hash_converter.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/app/navigation/app_pages.dart';
-import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/app/security/freerasp_config.dart';
-
 import 'package:kebut_kurir/core/theme/theme_custom/theme_data_custom.dart';
 
 class AppMain extends StatefulWidget {

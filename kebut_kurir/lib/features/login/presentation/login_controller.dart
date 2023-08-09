@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
-import 'package:kebut_kurir/core/utils/prefs.dart';
 import 'package:kebut_kurir/features/login/data/model/login_model.dart';
 import 'package:kebut_kurir/features/login/domain/login_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   final LoginRepository _loginRepo = LoginRepository();

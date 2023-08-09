@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/asset_image_widget.dart';
 import 'package:kebut_kurir/features/home/presentation/home_controller.dart';
 import 'package:kebut_kurir/ui/home/widgets/home_screen_banner.dart';
-
-import 'package:kebut_kurir/ui/home/widgets/home_screen_header.dart';
-import 'package:kebut_kurir/ui/home/widgets/home_screen_menu.dart';
 import 'package:kebut_kurir/ui/home/widgets/home_screen_daily_schedule_widget.dart';
+import 'package:kebut_kurir/ui/home/widgets/home_screen_header.dart';
 import 'package:kebut_kurir/ui/home/widgets/home_screen_saldo.dart';
 
 class HomeScreen extends GetView<HomeController> {

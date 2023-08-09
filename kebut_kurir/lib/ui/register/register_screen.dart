@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/utils/picture_utils.dart';
-import 'package:kebut_kurir/core/utils/toast_custom.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/core/widgets/button_custom_widget.dart';
 import 'package:kebut_kurir/core/widgets/insert_photo_widget.dart';

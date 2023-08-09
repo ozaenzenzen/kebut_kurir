@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,8 +16,7 @@ class ItemInfoDriverWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      width: 343,
-      height: 72,
+      width: size.width,
       padding: const EdgeInsets.all(16),
       decoration: ShapeDecoration(
         color: Colors.white,

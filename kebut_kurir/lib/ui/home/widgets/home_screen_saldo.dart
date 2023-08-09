@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kebut_kurir/app/navigation/app_routes.dart';
-import 'package:kebut_kurir/core/theme/app_theme.dart';
 
 class HomeScreenAbsensi extends StatelessWidget {
   const HomeScreenAbsensi({super.key});

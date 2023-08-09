@@ -36,7 +36,7 @@ class ChatScreen extends GetView<ChatController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.r),
                             border: Border.all(width: 1, color: AppTheme.colors.primaryColor),
-                            color: Colors.white,
+                            color: const Color(0xFFD9F3E5),
                           ),
                           padding: EdgeInsets.all(12.w),
                           child: Text(
@@ -53,7 +53,7 @@ class ChatScreen extends GetView<ChatController> {
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.r),
-                            color: AppTheme.colors.greyColor6,
+                            color: Colors.white,
                           ),
                           padding: EdgeInsets.all(12.w),
                           child: Text(

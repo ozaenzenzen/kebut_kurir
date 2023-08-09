@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,7 +8,6 @@ import 'package:kebut_kurir/features/profile/domain/profile_pengaturan_profile_m
 import 'package:kebut_kurir/features/profile/domain/profile_tentang_kami_menu.dart';
 import 'package:kebut_kurir/features/profile/presentation/profile_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:skeletons/skeletons.dart';
 
 // class ProfileScreenV2 extends GetView<ProfileController> {
 //   const ProfileScreenV2({super.key});
