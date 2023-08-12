@@ -11,6 +11,7 @@ class CustomDialog extends StatelessWidget {
   final String? subTitle;
   final String? asset;
   final ButtonDirection? buttonDirection;
+  final bool? reverseButton;
   final String? primaryButtonText;
   final String? secondaryButtonText;
   final void Function()? onTapPrimary;
@@ -25,6 +26,7 @@ class CustomDialog extends StatelessWidget {
     this.onTapSecondary,
     this.primaryButtonText,
     this.secondaryButtonText,
+    this.reverseButton = false,
     this.buttonDirection = ButtonDirection.VERTICAL,
   }) : super(key: key);
 
@@ -85,28 +87,53 @@ class CustomDialog extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Visibility(
-                      visible: primaryButtonText != null && primaryButtonText != '',
+                      visible: !reverseButton! ? primaryButtonText != null && primaryButtonText != '' : secondaryButtonText != null && secondaryButtonText != '',
                       child: Expanded(
                         child: ButtonCustom(
                           paddingVer: 8.h,
                           borderRadius: 6.r,
                           paddingHor: 12.w,
-                          text: primaryButtonText!,
-                          textColor: AppTheme.colors.primaryColor,
-                          buttonColor: AppTheme.colors.secondaryColor,
+                          text: !reverseButton! ? primaryButtonText! : secondaryButtonText!,
+                          textColor: !reverseButton! ? AppTheme.colors.primaryColor : const Color(0xFF42526D),
+                          buttonColor: !reverseButton! ? AppTheme.colors.secondaryColor : AppTheme.colors.whiteColor,
+                          onTap: () {
+                            if (!reverseButton!) {
+                              if (onTapPrimary != null) {
+                                onTapPrimary!();
+                              }
+                            } else {
+                              if (onTapSecondary != null) {
+                                onTapSecondary!("");
+                              }
+                            }
+                          },
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      width: 6,
+                    ),
                     Visibility(
-                      visible: secondaryButtonText != null && secondaryButtonText != '',
+                      visible: !reverseButton! ? secondaryButtonText != null && secondaryButtonText != '' : primaryButtonText != null && primaryButtonText != '',
                       child: Expanded(
                         child: ButtonCustom(
                           paddingVer: 8.h,
                           paddingHor: 12.w,
                           borderRadius: 6.r,
-                          text: secondaryButtonText!,
-                          textColor: AppTheme.colors.secondaryColor,
-                          buttonColor: AppTheme.colors.whiteColor,
+                          text: !reverseButton! ? secondaryButtonText! : primaryButtonText,
+                          textColor: !reverseButton! ? AppTheme.colors.secondaryColor : const Color(0xFF42526D),
+                          buttonColor: !reverseButton! ? AppTheme.colors.whiteColor : AppTheme.colors.secondaryColor,
+                          onTap: () {
+                            if (!reverseButton!) {
+                              if (onTapSecondary != null) {
+                                onTapSecondary!("");
+                              }
+                            } else {
+                              if (onTapPrimary != null) {
+                                onTapPrimary!();
+                              }
+                            }
+                          },
                         ),
                       ),
                     ),

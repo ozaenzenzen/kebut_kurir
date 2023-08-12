@@ -11,7 +11,6 @@ class InfoDriverScreen extends GetView<InfoDriverController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: PreferredSize(
         child: const AppBarWidget(
           title: 'Info Driver',
@@ -21,27 +20,43 @@ class InfoDriverScreen extends GetView<InfoDriverController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ItemInfoDriverWidget(
-              title: "Jumlah Cuti",
-              imagePath: "",
-              preffixValue: "2",
+            SizedBox(
+              height: 16.h,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: ItemInfoDriverWidget(
+                title: "Jumlah Cuti",
+                imagePath: "",
+                preffixValue: "2",
+              ),
             ),
             SizedBox(
               height: 16.h,
             ),
-            ItemInfoDriverWidget(
-              title: "Jumlah Keterlambatan",
-              imagePath: "",
-              preffixValue: "0",
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: ItemInfoDriverWidget(
+                title: "Jumlah Keterlambatan",
+                imagePath: "",
+                preffixValue: "0",
+              ),
             ),
             SizedBox(
               height: 16.h,
             ),
-            ItemInfoDriverWidget(
-              title: "Jumlah Overtime / Bulan",
-              imagePath: "",
-              preffixValue: "0",
-            )
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: ItemInfoDriverWidget(
+                title: "Jumlah Overtime / Bulan",
+                imagePath: "",
+                preffixValue: "0",
+              ),
+            ),
           ],
         ),
       ),

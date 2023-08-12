@@ -364,7 +364,7 @@ class _ProfileScreenV2State extends State<ProfileScreenV2> {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        'Exit',
+                        'Keluar',
                         style: AppTheme.textStyle.blackTextStyle.copyWith(
                           color: const Color(0xffF22E2E),
                           fontSize: AppTheme.textConfig.size.n,

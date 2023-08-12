@@ -7,7 +7,9 @@ class ProfilePengaturanProfileMenu {
     ProfileMenuItemModels(
       title: 'Info Driver',
       menuIcon: 'assets/icon_bookmarks.png',
-      onTap: () async {},
+      onTap: () {
+        Get.toNamed(Routes.infoDriverScreen);
+      },
     ),
     ProfileMenuItemModels(
       title: 'Info Pengajuan',

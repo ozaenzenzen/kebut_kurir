@@ -54,6 +54,7 @@ class DialogsUtils {
     Function(dynamic)? secondaryButton,
     ButtonDirection? buttonDirection,
     bool isBarrierDismissible = true,
+    bool reverseButton = false,
   }) {
     showDialog(
       context: context,
@@ -68,10 +69,12 @@ class DialogsUtils {
           onTapPrimary: primaryButton,
           onTapSecondary: secondaryButton,
           buttonDirection: buttonDirection,
+          reverseButton: reverseButton,
         );
       },
     );
   }
+  
 
   void showSuccessDialog({
     required BuildContext context,

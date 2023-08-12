@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ButtonPickupBarangWidget extends StatelessWidget {
   final Function() onCancelledTap;
@@ -35,11 +36,12 @@ class ButtonPickupBarangWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
+              child: InkWell(
+            onTap: onCancelledTap,
             child: Container(
-              height: 48,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
               decoration: ShapeDecoration(
-                color: Color(0xFFFFF2F3),
+                color: const Color(0xFFFFF2F3),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               ),
               child: Row(
@@ -50,25 +52,24 @@ class ButtonPickupBarangWidget extends StatelessWidget {
                   Text(
                     'Tolak',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFFFF7A83),
+                    style: GoogleFonts.mukta(
+                      color: const Color(0xFFFF7A83),
                       fontSize: 16,
-                      fontFamily: 'Mukta',
                       fontWeight: FontWeight.w600,
-                      height: 1.50,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
+          )),
           const SizedBox(width: 12),
           Expanded(
+              child: InkWell(
+            onTap: onTakeTap,
             child: Container(
-              height: 48,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
               decoration: ShapeDecoration(
-                color: Color(0xFF00B050),
+                color: const Color(0xFF00B050),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               ),
               child: Row(
@@ -79,18 +80,16 @@ class ButtonPickupBarangWidget extends StatelessWidget {
                   Text(
                     'Ambil',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.mukta(
                       color: Colors.white,
                       fontSize: 16,
-                      fontFamily: 'Mukta',
                       fontWeight: FontWeight.w600,
-                      height: 1.50,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
+          )),
         ],
       ),
     );

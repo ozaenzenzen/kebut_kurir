@@ -12,7 +12,6 @@ class PickupBarangScreen extends GetView<PickupBarangController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: PreferredSize(
         child: const AppBarWidget(
           title: 'Daftar Pickup',
@@ -21,6 +20,7 @@ class PickupBarangScreen extends GetView<PickupBarangController> {
       ),
       resizeToAvoidBottomInset: true,
       body: const ListPickupBarangWidget(),
+      // body: const EmptyStatePickupBarangWidget(),
     );
   }
 }

@@ -70,7 +70,6 @@ class ItemPickupBarangWidget extends StatelessWidget {
             const SizedBox(height: 12),
             Container(
               width: double.infinity,
-              height: 75,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,

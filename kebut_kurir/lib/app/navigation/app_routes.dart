@@ -65,5 +65,7 @@ class Routes {
   static const String infoDriverScreen = '/info_driver_screen';
   static const String pickupBarangScreen = '/pick_up_barang_screen';
   static const String detailPickupBarangScreen = '/detail_pick_up_barang_screen';
+  static const String absenScreen = '/absen_screen';
+  static const String afterPickupBarang = '/after_pickup_barang_screen';
 
 }

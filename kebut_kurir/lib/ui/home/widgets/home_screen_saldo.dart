@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kebut_kurir/app/navigation/app_routes.dart';
 
 class HomeScreenAbsensi extends StatelessWidget {
   const HomeScreenAbsensi({super.key});
@@ -59,7 +61,11 @@ class HomeScreenAbsensi extends StatelessWidget {
             ),
           ),
           SizedBox(width: 8.w),
-          Container(
+          InkWell(
+            onTap: () {
+              Get.toNamed(Routes.absenScreen);
+            },
+            child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: ShapeDecoration(
                 color: const Color(0xFF00B050),
@@ -74,7 +80,9 @@ class HomeScreenAbsensi extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-              )),
+              ),
+            ),
+          )
         ],
       ),
     );
