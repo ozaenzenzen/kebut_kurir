@@ -67,5 +67,7 @@ class Routes {
   static const String detailPickupBarangScreen = '/detail_pick_up_barang_screen';
   static const String absenScreen = '/absen_screen';
   static const String afterPickupBarang = '/after_pickup_barang_screen';
+  static const String scanQRScreen = '/scan_qr_screen';
+  static const String volumeBarangScreen = '/volume_barang_screen';
 
 }

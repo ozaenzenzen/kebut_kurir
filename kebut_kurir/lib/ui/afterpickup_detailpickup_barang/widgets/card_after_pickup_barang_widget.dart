@@ -350,50 +350,55 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                           width: 6,
                         ),
                         Expanded(
-                          child: Container(
-                            height: 70,
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                            decoration: ShapeDecoration(
-                              color: const Color(0xFFE6F7EE),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 18,
-                                  height: 18,
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: 0,
-                                        top: 0,
-                                        child: Container(
-                                          width: 18,
-                                          height: 18,
-                                          decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(Routes.scanQRScreen);
+                            },
+                            child: Container(
+                              height: 70,
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              decoration: ShapeDecoration(
+                                color: const Color(0xFFE6F7EE),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 18,
+                                    height: 18,
+                                    child: Stack(
+                                      children: [
+                                        Positioned(
+                                          left: 0,
+                                          top: 0,
+                                          child: Container(
+                                            width: 18,
+                                            height: 18,
+                                            decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: Text(
-                                    'Scan\nQR',
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.mukta(
-                                      color: const Color(0xFF008D40),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      height: 1.17,
+                                      ],
                                     ),
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 8),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Scan\nQR',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.mukta(
+                                        color: const Color(0xFF008D40),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        height: 1.17,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

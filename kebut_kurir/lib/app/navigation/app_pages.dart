@@ -14,6 +14,8 @@ import 'package:kebut_kurir/features/pesan/presentation/pesan_binding.dart';
 import 'package:kebut_kurir/features/pick_up_barang/presentation/pick_up_barang_binding.dart';
 import 'package:kebut_kurir/features/profile/presentation/profile_binding.dart';
 import 'package:kebut_kurir/features/register/presentation/register_binding.dart';
+import 'package:kebut_kurir/features/scan_qr/presentation/scan_qr_binding.dart';
+import 'package:kebut_kurir/features/volume_barang/presentation/volume_barang_binding.dart';
 import 'package:kebut_kurir/ui/absen/absen_screen.dart';
 import 'package:kebut_kurir/ui/afterpickup_detailpickup_barang/after_pickup_barang_screen.dart';
 import 'package:kebut_kurir/ui/chat/chat_screen.dart';
@@ -26,6 +28,7 @@ import 'package:kebut_kurir/ui/login/login_screen.dart';
 import 'package:kebut_kurir/ui/main/main_screen.dart';
 import 'package:kebut_kurir/ui/pick_up_barang/pick_up_barang_screen.dart';
 import 'package:kebut_kurir/ui/register/register_screen.dart';
+import 'package:kebut_kurir/ui/scan_qr/scan_qr_screen.dart';
 
 class AppPages {
   AppPages._();
@@ -107,6 +110,18 @@ class AppPages {
       page: () => const RegisterScreen(),
       transition: Transition.rightToLeftWithFade,
       binding: RegisterBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.scanQRScreen,
+      page: () => const ScanQRScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: ScanQRBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.volumeBarangScreen,
+      page: () => const ScanQRScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: VolumeBarangBinding(),
     ),
   ];
 }
