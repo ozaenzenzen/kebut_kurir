@@ -112,7 +112,7 @@ class LoginScreen extends GetView<LoginController> {
                               style: AppTheme.textStyle.primaryTextStyle.copyWith(
                                 fontSize: AppTheme.textConfig.size.m,
                                 fontWeight: AppTheme.textConfig.weight.bold,
-                                color: AppTheme.colors.primaryColor2,
+                                color: AppTheme.colors.secondaryColor,
                               ),
                             ),
                           ),
@@ -163,7 +163,7 @@ class LoginScreen extends GetView<LoginController> {
                         child: ButtonCustom(
                           text: 'Masuk',
                           textSize: 18,
-                          buttonColor: Color(0xFFFFFF00),
+                          buttonColor: AppTheme.colors.primaryColor,
                           onTap: () async {
                             // if (controller.tecEmail.text.isNotEmpty && controller.tecPass.text.isNotEmpty) {
                             //   // await controller.loginUser().then(
@@ -180,7 +180,7 @@ class LoginScreen extends GetView<LoginController> {
                             Get.offNamed(Routes.main);
                           },
                           borderRadius: 6,
-                          textColor: Color(0xFF42526D),
+                          textColor: AppTheme.colors.blackColor1,
                           paddingVer: 13,
                         ),
                       ),
@@ -198,7 +198,7 @@ class LoginScreen extends GetView<LoginController> {
                           text: 'Belum punya akun?',
                           style: AppTheme.textStyle.blackTextStyle.copyWith(
                             fontSize: AppTheme.textConfig.size.n,
-                            color: Color(0xFF121419),
+                            color: AppTheme.colors.blackColor1,
                           ),
                           children: [
                             TextSpan(
@@ -207,6 +207,7 @@ class LoginScreen extends GetView<LoginController> {
                               style: AppTheme.textStyle.primaryTextStyle.copyWith(
                                 fontSize: AppTheme.textConfig.size.n,
                                 fontWeight: AppTheme.textConfig.weight.bold,
+                                color: AppTheme.colors.secondaryColor,
                               ),
                             ),
                           ],

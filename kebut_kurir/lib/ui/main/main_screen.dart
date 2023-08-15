@@ -50,7 +50,7 @@ class MainScreen extends GetView<MainScreenController> {
                     item: NavBarItem(
                       iconData: Icons.home,
                       size: 25,
-                      selectedColor: controller.tabIndex.value == 0 ? AppTheme.colors.primaryColor : AppTheme.colors.greyColor,
+                      selectedColor: controller.tabIndex.value == 0 ? AppTheme.colors.blackColor2 : AppTheme.colors.greyColor,
                       text: 'Beranda',
                     ),
                   ),
@@ -58,7 +58,7 @@ class MainScreen extends GetView<MainScreenController> {
                     item: NavBarItem(
                       iconData: Icons.chat_outlined,
                       size: 25,
-                      selectedColor: controller.tabIndex.value == 1 ? AppTheme.colors.primaryColor : AppTheme.colors.greyColor,
+                      selectedColor: controller.tabIndex.value == 1 ? AppTheme.colors.blackColor2 : AppTheme.colors.greyColor,
                       text: 'Pesan',
                     ),
                   ),
@@ -66,7 +66,7 @@ class MainScreen extends GetView<MainScreenController> {
                     item: NavBarItem(
                       iconData: Icons.account_circle,
                       size: 25,
-                      selectedColor: controller.tabIndex.value == 2 ? AppTheme.colors.primaryColor : AppTheme.colors.greyColor,
+                      selectedColor: controller.tabIndex.value == 2 ? AppTheme.colors.blackColor2 : AppTheme.colors.greyColor,
                       text: 'Akun',
                     ),
                   ),

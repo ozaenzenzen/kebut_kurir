@@ -29,11 +29,7 @@ class HomeScreenBanner extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  gradient: const LinearGradient(
-                    begin: Alignment(-1.00, 0.00),
-                    end: Alignment(1, 0),
-                    colors: [Color(0xFF00B050), Color(0xFF009745)],
-                  ),
+                  color: AppTheme.colors.primaryColor2
                 ),
                 child: Align(
                   alignment: Alignment.centerLeft,
@@ -60,7 +56,7 @@ class HomeScreenBanner extends StatelessWidget {
                 height: 8,
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 decoration: BoxDecoration(
-                  color: controller.activeIndex.value == index ? AppTheme.colors.primaryColor : AppTheme.colors.greyColor8,
+                  color: controller.activeIndex.value == index ? AppTheme.colors.secondaryColor : AppTheme.colors.greyColor8,
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),

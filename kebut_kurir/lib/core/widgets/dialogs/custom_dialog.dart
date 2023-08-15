@@ -122,7 +122,7 @@ class CustomDialog extends StatelessWidget {
                           borderRadius: 6.r,
                           text: !reverseButton! ? secondaryButtonText! : primaryButtonText,
                           textColor: !reverseButton! ? AppTheme.colors.secondaryColor : const Color(0xFF42526D),
-                          buttonColor: !reverseButton! ? AppTheme.colors.whiteColor : AppTheme.colors.secondaryColor,
+                          buttonColor: !reverseButton! ? AppTheme.colors.whiteColor : AppTheme.colors.primaryColor,
                           onTap: () {
                             if (!reverseButton!) {
                               if (onTapSecondary != null) {

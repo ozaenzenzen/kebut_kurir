@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
+import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/features/afterpickup_detailpickup_barang/presentation/after_pickup_barang_controller.dart';
 
 class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
@@ -76,7 +77,7 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                                   child: Text(
                                     'Menuju Lokasi Pengirim',
                                     style: GoogleFonts.mukta(
-                                      color: const Color(0xFF008D40),
+                                      color: AppTheme.colors.secondaryColor3,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500,
                                       height: 1.33,
@@ -110,11 +111,16 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                                     Positioned(
                                       left: 0,
                                       top: 0,
-                                      child: Container(
+                                      child: Image.asset(
+                                        "assets/near_me.png",
                                         width: 24,
                                         height: 24,
-                                        decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
                                       ),
+                                      // child: Container(
+                                      //   width: 24,
+                                      //   height: 24,
+                                      //   decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
+                                      // ),
                                     ),
                                   ],
                                 ),
@@ -228,7 +234,7 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                           Text(
                             'Lihat Detail',
                             style: GoogleFonts.mukta(
-                              color: const Color(0xFF00843C),
+                              color: AppTheme.colors.blackColor2,
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                             ),
@@ -267,10 +273,10 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                                       Positioned(
                                         left: 0,
                                         top: 0,
-                                        child: Container(
+                                        child: Image.asset(
+                                          "assets/sms.png",
                                           width: 18,
                                           height: 18,
-                                          decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
                                         ),
                                       ),
                                     ],
@@ -299,7 +305,6 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                         ),
                         Expanded(
                           child: Container(
-                            width: 110.33,
                             height: 70,
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                             decoration: ShapeDecoration(
@@ -319,10 +324,10 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                                       Positioned(
                                         left: 0,
                                         top: 0,
-                                        child: Container(
+                                        child: Image.asset(
+                                          "assets/ic_call.png",
                                           width: 18,
                                           height: 18,
-                                          decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
                                         ),
                                       ),
                                     ],
@@ -374,11 +379,16 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                                         Positioned(
                                           left: 0,
                                           top: 0,
-                                          child: Container(
+                                          child: Image.asset(
+                                            "assets/ic_scan.png",
                                             width: 18,
                                             height: 18,
-                                            decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
                                           ),
+                                          // child: Container(
+                                          //   width: 18,
+                                          //   height: 18,
+                                          //   decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
+                                          // ),
                                         ),
                                       ],
                                     ),
@@ -424,7 +434,7 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                             height: 48,
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                             decoration: ShapeDecoration(
-                              color: const Color(0xFFE6F7EE),
+                              color: const Color(0xFFFFEBEC),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                             ),
                             child: Row(
@@ -436,7 +446,7 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                                   'Batalkan Pickup',
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.mukta(
-                                    color: const Color(0xFF00B050),
+                                    color: const Color(0xFFFF7A83),
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     height: 1.50,
@@ -454,7 +464,7 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                             height: 48,
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                             decoration: ShapeDecoration(
-                              color: const Color(0xFF00B050),
+                              color: AppTheme.colors.primaryColor,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                             ),
                             child: Row(
@@ -465,12 +475,18 @@ class CardAfterPickupWidget extends GetView<AfterPickupBarangController> {
                                 Text(
                                   'Sampai di lokasi',
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.mukta(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                  style: AppTheme.textStyle.blackTextStyle.copyWith(
+                                    fontSize: AppTheme.textConfig.size.ml,
                                     height: 1.50,
+                                    color: AppTheme.colors.blackColor2,
+                                    fontWeight: AppTheme.textConfig.weight.semiBold,
                                   ),
+                                  // style: GoogleFonts.mukta(
+                                  //   color: Colors.white,
+                                  //   fontSize: 16,
+                                  //   fontWeight: FontWeight.w600,
+                                  //   height: 1.50,
+                                  // ),
                                 ),
                               ],
                             ),

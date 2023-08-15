@@ -27,7 +27,7 @@ class InfoDriverScreen extends GetView<InfoDriverController> {
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: ItemInfoDriverWidget(
                 title: "Jumlah Cuti",
-                imagePath: "",
+                imagePath: "assets/ic_pickup.png",
                 preffixValue: "2",
               ),
             ),
@@ -40,7 +40,7 @@ class InfoDriverScreen extends GetView<InfoDriverController> {
               ),
               child: ItemInfoDriverWidget(
                 title: "Jumlah Keterlambatan",
-                imagePath: "",
+                imagePath: "assets/ic_delivery.png",
                 preffixValue: "0",
               ),
             ),
@@ -53,7 +53,7 @@ class InfoDriverScreen extends GetView<InfoDriverController> {
               ),
               child: ItemInfoDriverWidget(
                 title: "Jumlah Overtime / Bulan",
-                imagePath: "",
+                imagePath: "assets/ic_delivery.png",
                 preffixValue: "0",
               ),
             ),

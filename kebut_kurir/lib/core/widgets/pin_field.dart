@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:pinput/pinput.dart';
 

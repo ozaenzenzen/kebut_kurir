@@ -42,12 +42,12 @@ class _ProfileScreenV2State extends State<ProfileScreenV2> {
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xff009E48),
+
         // backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         title: Text(
           'Akun',
-          style: AppTheme.textStyle.whiteTextStyle.copyWith(
+          style: AppTheme.textStyle.blackTextStyle.copyWith(
             fontSize: AppTheme.textConfig.size.nl,
             fontWeight: AppTheme.textConfig.weight.semiBold,
           ),
@@ -60,7 +60,7 @@ class _ProfileScreenV2State extends State<ProfileScreenV2> {
           children: <Widget>[
             Container(
               // height: 190.h,
-              color: const Color(0xff009E48),
+              color: AppTheme.colors.primaryColor2,
               padding: EdgeInsets.symmetric(
                 horizontal: 16.w,
                 vertical: 15.h,
@@ -132,7 +132,7 @@ class _ProfileScreenV2State extends State<ProfileScreenV2> {
                             Text(
                               'Agung Azhari',
                               // '${controller.resultUserData?.shortname}',
-                              style: AppTheme.textStyle.whiteTextStyle.copyWith(
+                              style: AppTheme.textStyle.blackTextStyle.copyWith(
                                 fontSize: AppTheme.textConfig.size.n,
                                 fontWeight: AppTheme.textConfig.weight.semiBold,
                               ),
@@ -154,9 +154,9 @@ class _ProfileScreenV2State extends State<ProfileScreenV2> {
                             //         ),
                             //       ),
                             Text(
-                              'agungazharii@gmail.com',
+                              '#userID',
                               // '${controller.resultUserData?.email}',
-                              style: AppTheme.textStyle.whiteTextStyle.copyWith(
+                              style: AppTheme.textStyle.blackTextStyle.copyWith(
                                 fontSize: AppTheme.textConfig.size.m,
                               ),
                             ),
@@ -171,12 +171,11 @@ class _ProfileScreenV2State extends State<ProfileScreenV2> {
                         child: Icon(
                           Icons.edit,
                           size: 24.h,
-                          color: AppTheme.colors.whiteColor1,
+                          color: AppTheme.colors.blackColor2,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 16.h),
                 ],
               ),
             ),

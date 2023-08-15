@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/features/absen/presentation/absen_controller.dart';
 
 class CardAbsenWidget extends GetView<AbsenController> {
@@ -55,11 +56,10 @@ class CardAbsenWidget extends GetView<AbsenController> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  Image.asset(
+                    "assets/ic_date.png",
                     width: 24,
                     height: 24,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -85,11 +85,10 @@ class CardAbsenWidget extends GetView<AbsenController> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  Image.asset(
+                    "assets/ic_location.png",
                     width: 24,
                     height: 24,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -117,7 +116,7 @@ class CardAbsenWidget extends GetView<AbsenController> {
                 width: size.width,
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 decoration: ShapeDecoration(
-                  color: const Color(0xFF00B050),
+                  color: AppTheme.colors.primaryColor,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                 ),
                 child: Row(
@@ -128,10 +127,9 @@ class CardAbsenWidget extends GetView<AbsenController> {
                     Text(
                       'Presensi',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.mukta(
-                        color: Colors.white,
-                        fontSize: 18,
+                      style: AppTheme.textStyle.blackTextStyle.copyWith(
                         fontWeight: FontWeight.w600,
+                        fontSize: 18
                       ),
                     ),
                   ],

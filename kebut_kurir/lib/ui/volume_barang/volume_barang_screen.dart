@@ -2,6 +2,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/core/widgets/textfield_widget/underline_textfield_widget.dart';
 import 'package:kebut_kurir/features/volume_barang/presentation/volume_barang_controller.dart';
@@ -243,7 +244,7 @@ class VolumeBarangScreen extends GetView<VolumeBarangController> {
                       height: 48,
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                       decoration: ShapeDecoration(
-                        color: const Color(0xFF00B050),
+                        color: AppTheme.colors.primaryColor,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                       ),
                       child: Row(
@@ -254,12 +255,18 @@ class VolumeBarangScreen extends GetView<VolumeBarangController> {
                           Text(
                             'Submit',
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.mukta(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                            style: AppTheme.textStyle.blackTextStyle.copyWith(
+                              color: AppTheme.colors.blackColor2,
+                              fontSize: AppTheme.textConfig.size.n,
+                              fontWeight: AppTheme.textConfig.weight.semiBold,
                               height: 1.50,
                             ),
+                            // style: GoogleFonts.mukta(
+                            //   color: Colors.white,
+                            //   fontSize: 16,
+                            //   fontWeight: FontWeight.w600,
+                            //   height: 1.50,
+                            // ),
                           ),
                         ],
                       ),

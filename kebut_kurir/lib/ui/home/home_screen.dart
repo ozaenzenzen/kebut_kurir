@@ -17,14 +17,14 @@ class HomeScreen extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: AppTheme.colors.whiteColor,
       appBar: AppBar(
-        backgroundColor: AppTheme.colors.primaryColor,
+        backgroundColor: Colors.white,
         leadingWidth: 80.w,
         leading: Container(
           height: 40.h,
           width: 60.w,
           child: Center(
             child: AssetImageWidget(
-              assets: 'assets/logo_white.png',
+              assets: 'assets/ic_kurir.png',
               height: 40.h,
               width: 60.w,
             ),
@@ -42,7 +42,7 @@ class HomeScreen extends GetView<HomeController> {
                   onTap: () {},
                   child: Icon(
                     Icons.notifications,
-                    color: Colors.white,
+                    color: AppTheme.colors.blackColor2,
                     size: 20.w,
                   ),
                 ),

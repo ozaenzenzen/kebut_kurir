@@ -45,7 +45,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                           Text(
                             'Foto Profil',
                             style: AppTheme.textStyle.blackTextStyle.copyWith(
-                              fontSize: AppTheme.textConfig.size.m,
+                              fontSize: AppTheme.textConfig.size.n,
                               fontWeight: AppTheme.textConfig.weight.regular,
                             ),
                           ),
@@ -136,7 +136,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                             child: Text(
                               'Upload Foto',
                               style: AppTheme.textStyle.blackTextStyle.copyWith(
-                                color: const Color(0xff00B050),
+                                color: AppTheme.colors.secondaryColor3,
                                 fontSize: AppTheme.textConfig.size.ml,
                                 fontWeight: AppTheme.textConfig.weight.regular,
                                 decoration: TextDecoration.underline,

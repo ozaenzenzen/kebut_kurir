@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kebut_kurir/core/theme/app_theme.dart';
 
 class ButtonPickupBarangWidget extends StatelessWidget {
   final Function() onCancelledTap;
@@ -69,7 +70,7 @@ class ButtonPickupBarangWidget extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
               decoration: ShapeDecoration(
-                color: const Color(0xFF00B050),
+                color: AppTheme.colors.primaryColor,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               ),
               child: Row(
@@ -80,8 +81,7 @@ class ButtonPickupBarangWidget extends StatelessWidget {
                   Text(
                     'Ambil',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.mukta(
-                      color: Colors.white,
+                    style: AppTheme.textStyle.blackTextStyle.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),

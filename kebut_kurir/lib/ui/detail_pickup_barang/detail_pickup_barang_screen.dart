@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
+import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/core/widgets/dialogs/custom_dialog.dart';
 import 'package:kebut_kurir/features/detail_pickup_barang/presentation/detail_pickup_barang_controller.dart';
@@ -48,29 +48,39 @@ class DetailPickupBarangScreen extends GetView<DetailPickupBarangController> {
           Obx(
             () => controller.afterPickupBarang.value
                 ? controller.fromScanQR.value
-                    ? Container(
-                        width: size.width,
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                        margin: const EdgeInsets.all(16),
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFF00B050),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Pickup Barang',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.mukta(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                    ? InkWell(
+                        onTap: () {
+                          controller.dialogUtils.showToastMessage("Barang berhasil di pickup");
+                        },
+                        child: Container(
+                          width: size.width,
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                          margin: const EdgeInsets.all(16),
+                          decoration: ShapeDecoration(
+                            color: AppTheme.colors.primaryColor,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Pickup Barang',
+                                textAlign: TextAlign.center,
+                                style: AppTheme.textStyle.blackTextStyle.copyWith(
+                                  color: AppTheme.colors.blackColor2,
+                                  fontSize: AppTheme.textConfig.size.n,
+                                  fontWeight: AppTheme.textConfig.weight.semiBold,
+                                ),
+                                // style: GoogleFonts.mukta(
+                                //   color: Colors.white,
+                                //   fontSize: 16,
+                                //   fontWeight: FontWeight.w600,
+                                // ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       )
                     : Container()
@@ -80,6 +90,7 @@ class DetailPickupBarangScreen extends GetView<DetailPickupBarangController> {
                       controller.dialogUtils.showCustomDialog(
                         title: 'Pickup Barang',
                         context: context,
+                        asset: "assets/icon_popup_konfirmasi.png",
                         subTitle: 'Apakah anda yakin ini pickup barang ini?',
                         primaryButtonText: 'Ya, Ambil',
                         secondaryButtonText: 'Batal',

@@ -39,7 +39,13 @@ class AfterPickupBarangScreen extends GetView<AfterPickupBarangController> {
                 children: [
                   Expanded(
                     child: Container(
-                      color: Colors.red,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        image: DecorationImage(
+                          image: AssetImage("assets/bg_example_after_pickup.png"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -56,11 +62,6 @@ class AfterPickupBarangScreen extends GetView<AfterPickupBarangController> {
                   SizedBox(
                     height: size.height / 3.5,
                   ),
-                  // Expanded(
-                  //   child: Container(
-                  //     color: Colors.blue,
-                  //   ),
-                  // )
                   Expanded(
                     child: CardAfterPickupWidget(
                       size: size,

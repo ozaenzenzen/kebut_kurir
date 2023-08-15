@@ -46,7 +46,7 @@ class ChatScreen extends GetView<ChatController> {
                       Container(
                         padding: const EdgeInsets.all(4),
                         decoration: ShapeDecoration(
-                          color: const Color(0xFFE6F7EE),
+                          color: const Color(0xFFFFFFE6),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100),
                           ),
@@ -56,12 +56,12 @@ class ChatScreen extends GetView<ChatController> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
+                            Image.asset(
+                              'assets/icon_perusahaan.png',
                               width: 16,
                               height: 16,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(),
-                            ),
+                              color: AppTheme.colors.blackColor2,
+                            )
                           ],
                         ),
                       ),
@@ -136,13 +136,13 @@ class ChatScreen extends GetView<ChatController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.r),
                             // border: Border.all(width: 1, color: AppTheme.colors.primaryColor),
-                            color: const Color(0xFFD9F3E5),
+                            color: const Color(0xFFFFFFD9),
                           ),
                           padding: EdgeInsets.all(12.w),
                           child: Text(
                             'Testing Chat halo bro',
-                            style: AppTheme.textStyle.primaryTextStyle.copyWith(
-                              fontSize: AppTheme.textConfig.size.m,
+                            style: AppTheme.textStyle.blackTextStyle.copyWith(
+                              fontSize: AppTheme.textConfig.size.ml,
                             ),
                           ),
                         ),
@@ -159,7 +159,7 @@ class ChatScreen extends GetView<ChatController> {
                           child: Text(
                             'Testong Chat halo bro',
                             style: AppTheme.textStyle.blackTextStyle.copyWith(
-                              fontSize: AppTheme.textConfig.size.m,
+                              fontSize: AppTheme.textConfig.size.n,
                             ),
                           ),
                         ),
@@ -186,7 +186,7 @@ class ChatScreen extends GetView<ChatController> {
                         child: ConstrainedBox(
                           constraints: BoxConstraints(maxHeight: 44.h),
                           child: const UnderlineTextFieldWidget(
-                            hintText: 'Tulis Pesan...',
+                            hintText: 'Masukkan pesan disini...',
                             filled: true,
                             withBorder: false,
                             isDense: true,
@@ -204,10 +204,10 @@ class ChatScreen extends GetView<ChatController> {
                             color: AppTheme.colors.primaryColor,
                             borderRadius: BorderRadius.circular(6.r),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Icon(
                               Icons.send_outlined,
-                              color: Colors.white,
+                              color: AppTheme.colors.blackColor2,
                               size: 20,
                             ),
                           ),

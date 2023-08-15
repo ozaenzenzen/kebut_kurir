@@ -35,12 +35,18 @@ class ItemInfoDriverWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(),
-                  ),
+                  imagePath.isNotEmpty
+                      ? Image.asset(
+                          imagePath,
+                          width: 40,
+                          height: 40,
+                        )
+                      : Container(
+                          width: 40,
+                          height: 40,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(),
+                        ),
                   const SizedBox(width: 8),
                   Container(
                     child: Column(

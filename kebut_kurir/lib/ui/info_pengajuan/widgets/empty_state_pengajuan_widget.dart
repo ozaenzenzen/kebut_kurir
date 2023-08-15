@@ -23,10 +23,10 @@ class EmptyStateInfoPengajuanWidget extends GetView<InfoPengajuanController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 120,
-              height: 50,
-              color: Colors.red,
+            Image.asset(
+              'assets/ic_info_pengajuan.png',
+              width: 161,
+              height: 118,
             ),
             SizedBox(
               height: 16.h,

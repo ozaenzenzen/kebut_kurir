@@ -28,7 +28,13 @@ class AbsenScreen extends GetView<AbsenController> {
               children: [
                 Expanded(
                   child: Container(
-                    color: Colors.red,
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      image: DecorationImage(
+                        image: AssetImage("assets/bg_example_absensi.png"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(

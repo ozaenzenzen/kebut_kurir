@@ -3,6 +3,8 @@ import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/features/absen/presentation/absen_binding.dart';
 import 'package:kebut_kurir/features/afterpickup_detailpickup_barang/presentation/after_pickup_barang_binding.dart';
 import 'package:kebut_kurir/features/chat/presentation/chat_binding.dart';
+import 'package:kebut_kurir/features/delivery_barang/presentation/delivery_barang_binding.dart';
+import 'package:kebut_kurir/features/detail_delivery/presentation/detail_delivery_binding.dart';
 import 'package:kebut_kurir/features/detail_pickup_barang/presentation/detail_pickup_barang_binding.dart';
 import 'package:kebut_kurir/features/edit_profile/presentation/edit_profile_binding.dart';
 import 'package:kebut_kurir/features/home/presentation/home_binding.dart';
@@ -19,6 +21,8 @@ import 'package:kebut_kurir/features/volume_barang/presentation/volume_barang_bi
 import 'package:kebut_kurir/ui/absen/absen_screen.dart';
 import 'package:kebut_kurir/ui/afterpickup_detailpickup_barang/after_pickup_barang_screen.dart';
 import 'package:kebut_kurir/ui/chat/chat_screen.dart';
+import 'package:kebut_kurir/ui/delivery_barang/delivery_barang_screen.dart';
+import 'package:kebut_kurir/ui/detail_delivery_barang/detail_delivery_barang_screen.dart';
 import 'package:kebut_kurir/ui/detail_pickup_barang/detail_pickup_barang_screen.dart';
 import 'package:kebut_kurir/ui/edit_profile/edit_profile_screen.dart';
 import 'package:kebut_kurir/ui/home/home_screen.dart';
@@ -122,6 +126,18 @@ class AppPages {
       page: () => const ScanQRScreen(),
       transition: Transition.rightToLeftWithFade,
       binding: VolumeBarangBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.deliveryBarangScreen,
+      page: () => const DeliveryBarangScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: DeliveryBarangBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.detailDeliveryBarangScreen,
+      page: () => const DetailDeliveryBarangScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: DetailDeliveryBinding(),
     ),
   ];
 }

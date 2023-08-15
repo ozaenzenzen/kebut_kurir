@@ -3,16 +3,16 @@ part of '../app_theme.dart';
 class _ThemeColors {
   const _ThemeColors();
 
-  Color get primaryColor2 => const Color(0xff00843C);
-  Color get primaryColor => const Color(0xff00B050);
+  Color get primaryColor => const Color(0xFFFFFF00);
+  Color get primaryColor2 => const Color(0xFFCCCC00);
   Color get softPrimaryColor => const Color(0xffE6F7EE);
   Color get softPrimaryColor2 => const Color(0xffB0E7C9);
-  Color get secondaryColor => const Color(0xffFFFF3C);
+  Color get secondaryColor => const Color(0xFF00B050);
   Color get secondaryColor2 => const Color(0xff1E1E1E);
   Color get secondaryColor3 => const Color(0xff00A6B5);
-  Color get blackColor1 => const Color(0xff323232);
-  Color get blackColor2 => const Color(0xff5F5C5C);
-  Color get blackColor3 => const Color(0xff43474D);
+  Color get blackColor1 => const Color(0xFF121419);
+  Color get blackColor2 => const Color(0xFF42526D);
+  Color get blackColor3 => const Color(0xFF43474D);
   Color get accentColor => const Color(0xff3283BF);
   Color get accentColor2 => const Color(0xff0082CC);
   Color get accentColor3 => const Color(0xffEDF6FF);

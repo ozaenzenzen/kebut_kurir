@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/features/detail_pickup_barang/presentation/detail_pickup_barang_controller.dart';
 import 'package:kebut_kurir/features/volume_barang/presentation/volume_barang_binding.dart';
 import 'package:kebut_kurir/ui/volume_barang/volume_barang_screen.dart';
@@ -198,74 +197,64 @@ class DetailBarangLacakPesananWidget extends GetView<DetailPickupBarangControlle
                               controller.volumeDone.value = false;
                             }
                           },
-                          child: Container(
-                            width: size.width,
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                            decoration: ShapeDecoration(
-                              color: Color(0xFFE6F7EE),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                    child: Obx(
-                                  () => controller.volumeDone.value
-                                      ? Row(
-                                          children: [
-                                            Container(
-                                              width: 16,
-                                              height: 16,
-                                              child: Stack(
-                                                children: [
-                                                  Positioned(
-                                                    left: 0,
-                                                    top: 0,
-                                                    child: Container(
-                                                      width: 16,
-                                                      height: 16,
-                                                      decoration: const BoxDecoration(color: Color(0xFFD9D9D9)),
-                                                    ),
-                                                  ),
-                                                ],
+                          child: Obx(
+                            () => Container(
+                              width: size.width,
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                              decoration: ShapeDecoration(
+                                color: controller.volumeDone.value ? const Color(0xFFE6F6FF) : const Color(0xFFFFFFE6),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                      child: Obx(
+                                    () => controller.volumeDone.value
+                                        ? Row(
+                                            children: [
+                                              Image.asset(
+                                                "assets/thumb_up.png",
+                                                width: 16.w,
+                                                height: 16.h,
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: 6.w,
-                                            ),
-                                            SizedBox(
-                                              child: Text(
-                                                'Sudah Sesuai',
-                                                style: GoogleFonts.mukta(
-                                                  color: const Color(0xFF121419),
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w400,
+                                              SizedBox(
+                                                width: 10.w,
+                                              ),
+                                              SizedBox(
+                                                child: Text(
+                                                  'Sudah Sesuai',
+                                                  style: GoogleFonts.mukta(
+                                                    color: const Color(0xFF121419),
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        )
-                                      : SizedBox(
-                                          child: Text(
-                                            'Validasi Volume Barang',
-                                            style: GoogleFonts.mukta(
-                                              color: const Color(0xFF121419),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                              height: 1,
+                                            ],
+                                          )
+                                        : SizedBox(
+                                            child: Text(
+                                              'Validasi Volume Barang',
+                                              style: GoogleFonts.mukta(
+                                                color: const Color(0xFF121419),
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                                height: 1,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                )),
-                                const SizedBox(width: 12),
-                                const Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 18,
-                                  color: Color(0xFF42526D),
-                                )
-                              ],
+                                  )),
+                                  const SizedBox(width: 12),
+                                  const Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 18,
+                                    color: Color(0xFF42526D),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

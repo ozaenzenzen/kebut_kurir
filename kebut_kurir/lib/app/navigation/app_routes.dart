@@ -69,5 +69,7 @@ class Routes {
   static const String afterPickupBarang = '/after_pickup_barang_screen';
   static const String scanQRScreen = '/scan_qr_screen';
   static const String volumeBarangScreen = '/volume_barang_screen';
+  static const String deliveryBarangScreen = '/delivery_barang_screen';
+  static const String detailDeliveryBarangScreen = '/detail_delivery_barang_screen';
 
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kebut_kurir/core/theme/app_theme.dart';
 
 class PesanItemWidget extends StatelessWidget {
   final Function() onTapItem;
@@ -41,7 +42,7 @@ class PesanItemWidget extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(4),
                           decoration: ShapeDecoration(
-                            color: Color(0xFFE6F7EE),
+                            color: Color(0xFFFFFFE6),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100),
                             ),
@@ -51,12 +52,18 @@ class PesanItemWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
+                              Image.asset(
+                                'assets/icon_perusahaan.png',
                                 width: 16,
                                 height: 16,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(),
-                              ),
+                                color: AppTheme.colors.blackColor2,
+                              )
+                              // Container(
+                              //   width: 16,
+                              //   height: 16,
+                              //   clipBehavior: Clip.antiAlias,
+                              //   decoration: BoxDecoration(),
+                              // ),
                             ],
                           ),
                         ),

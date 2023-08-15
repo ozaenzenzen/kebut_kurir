@@ -17,10 +17,10 @@ class EmptyStatePickupBarangWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            Image.asset(
+              "assets/pickup_empty.png",
               width: 120,
               height: 50,
-              color: Colors.red,
             ),
             SizedBox(
               height: 16.h,

@@ -37,7 +37,7 @@ class HomeScreenDailySchedule extends StatelessWidget {
           HomeScreenItemDailyScheduleWidget(
             title: "Pickup Barang",
             preffixValue: "2",
-            imagePath: "",
+            imagePath: "assets/ic_pickup.png",
             onTapItem: () {
               Get.toNamed(Routes.pickupBarangScreen);
             },
@@ -46,8 +46,10 @@ class HomeScreenDailySchedule extends StatelessWidget {
           HomeScreenItemDailyScheduleWidget(
             title: "Delivery Barang",
             preffixValue: "0",
-            imagePath: "",
-            onTapItem: () {},
+            imagePath: "assets/ic_delivery.png",
+            onTapItem: () {
+              Get.toNamed(Routes.deliveryBarangScreen);
+            },
           ),
         ],
       ),

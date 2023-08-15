@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
+import 'package:kebut_kurir/core/theme/app_theme.dart';
 
 class HomeScreenAbsensi extends StatelessWidget {
   const HomeScreenAbsensi({super.key});
@@ -68,17 +69,13 @@ class HomeScreenAbsensi extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: ShapeDecoration(
-                color: const Color(0xFF00B050),
+                color: AppTheme.colors.primaryColor,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               ),
               child: Center(
                 child: Text(
                   'Absensi',
-                  style: GoogleFonts.mukta(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: AppTheme.textStyle.blackTextStyle,
                 ),
               ),
             ),
