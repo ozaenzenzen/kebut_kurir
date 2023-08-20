@@ -10,12 +10,17 @@ import 'package:kebut_kurir/features/edit_profile/presentation/edit_profile_bind
 import 'package:kebut_kurir/features/home/presentation/home_binding.dart';
 import 'package:kebut_kurir/features/info_driver/presentation/info_driver_binding.dart';
 import 'package:kebut_kurir/features/info_pengajuan/presentation/info_pengajuan_binding.dart';
+import 'package:kebut_kurir/features/ktp_liveness/presentation/ktp_liveness_binding.dart';
+import 'package:kebut_kurir/features/ktp_liveness_result/presentation/ktp_liveness_result_binding.dart';
+import 'package:kebut_kurir/features/ktp_ocr_confirm/presentation/ktp_ocr_confirm_binding.dart';
+import 'package:kebut_kurir/features/ktp_ocr_result/presentation/ktp_ocr_result_binding.dart';
 import 'package:kebut_kurir/features/login/presentation/login_binding.dart';
 import 'package:kebut_kurir/features/main/presentation/main_screen_binding.dart';
 import 'package:kebut_kurir/features/pesan/presentation/pesan_binding.dart';
 import 'package:kebut_kurir/features/pick_up_barang/presentation/pick_up_barang_binding.dart';
 import 'package:kebut_kurir/features/profile/presentation/profile_binding.dart';
 import 'package:kebut_kurir/features/register/presentation/register_binding.dart';
+import 'package:kebut_kurir/features/register_upload_document/presentation/register_upload_document_binding.dart';
 import 'package:kebut_kurir/features/scan_qr/presentation/scan_qr_binding.dart';
 import 'package:kebut_kurir/features/volume_barang/presentation/volume_barang_binding.dart';
 import 'package:kebut_kurir/ui/absen/absen_screen.dart';
@@ -28,10 +33,15 @@ import 'package:kebut_kurir/ui/edit_profile/edit_profile_screen.dart';
 import 'package:kebut_kurir/ui/home/home_screen.dart';
 import 'package:kebut_kurir/ui/info_driver/info_driver_screen.dart';
 import 'package:kebut_kurir/ui/info_pengajuan/info_pengajuan_screen.dart';
+import 'package:kebut_kurir/ui/ktp_liveness/ktp_liveness_screen.dart';
+import 'package:kebut_kurir/ui/ktp_liveness_result/ktp_liveness_result_screen.dart';
+import 'package:kebut_kurir/ui/ktp_ocr_confirm/ktp_ocr_confirm_screen.dart';
+import 'package:kebut_kurir/ui/ktp_ocr_result/ktp_ocr_result_screen.dart';
 import 'package:kebut_kurir/ui/login/login_screen.dart';
 import 'package:kebut_kurir/ui/main/main_screen.dart';
 import 'package:kebut_kurir/ui/pick_up_barang/pick_up_barang_screen.dart';
 import 'package:kebut_kurir/ui/register/register_screen.dart';
+import 'package:kebut_kurir/ui/register_upload_document/register_upload_document_screen.dart';
 import 'package:kebut_kurir/ui/scan_qr/scan_qr_screen.dart';
 
 class AppPages {
@@ -138,6 +148,36 @@ class AppPages {
       page: () => const DetailDeliveryBarangScreen(),
       transition: Transition.rightToLeftWithFade,
       binding: DetailDeliveryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.registerUploadDocumentScreen,
+      page: () => const RegisterUploadDocumentScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: RegisterUploadDocumentBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.ocrKtpResult,
+      page: () => const KTPOcrResultScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: KTPOcrResultBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.ocrKtpConfirm,
+      page: () => const KTPOcrConfirmScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: KTPOcrConfirmBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.livenessScreen,
+      page: () => const KTPLivenessScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: KTPLivenessBinding(),
+    ),
+     GetPage<dynamic>(
+      name: Routes.livenessResult,
+      page: () => const KTPLivenessResultScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: KTPLivenessResultBinding(),
     ),
   ];
 }

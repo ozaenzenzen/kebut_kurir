@@ -20,7 +20,7 @@ class LoadingDialog extends StatelessWidget {
           children: <Widget>[
             CircularProgressIndicator(
               strokeWidth: 3,
-              color: AppTheme.colors.primaryColor,
+              color: AppTheme.colors.secondaryColor,
             ),
             const SizedBox(
               height: 16,
@@ -29,7 +29,9 @@ class LoadingDialog extends StatelessWidget {
               type: MaterialType.transparency,
               child: Text(
                 'Harap tunggu...',
-                style: AppTheme.textStyle.primaryTextStyle,
+                style: AppTheme.textStyle.primaryTextStyle.copyWith(
+                  color: AppTheme.colors.blackColor2
+                ),
               ),
             ),
           ],

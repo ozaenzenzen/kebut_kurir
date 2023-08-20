@@ -71,5 +71,6 @@ class Routes {
   static const String volumeBarangScreen = '/volume_barang_screen';
   static const String deliveryBarangScreen = '/delivery_barang_screen';
   static const String detailDeliveryBarangScreen = '/detail_delivery_barang_screen';
+  static const String registerUploadDocumentScreen = '/register_upload_document_screen';
 
 }
