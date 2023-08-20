@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/enums/ocr_enum.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
@@ -11,7 +12,10 @@ import 'package:kebut_kurir/features/ktp_liveness/presentation/ktp_liveness_bind
 import 'package:kebut_kurir/features/ktp_ocr/presentation/ktp_ocr_binding.dart';
 import 'package:kebut_kurir/features/register_upload_document/args/ktp_liveness_args.dart';
 import 'package:kebut_kurir/features/register_upload_document/args/sim_args.dart';
+import 'package:kebut_kurir/features/register_upload_document/args/stnk_result_args.dart';
 import 'package:kebut_kurir/features/register_upload_document/presentation/register_upload_document_controller.dart';
+import 'package:kebut_kurir/features/static_page/presentation/static_page_binding.dart';
+import 'package:kebut_kurir/features/stnk_liveness/presentation/stnk_liveness_binding.dart';
 import 'package:kebut_kurir/ui/ktp_liveness/ktp_liveness_screen.dart';
 import 'package:kebut_kurir/ui/ktp_ocr/ktp_ocr_screen.dart';
 import 'package:kebut_kurir/ui/register_upload_document/widgets/ktp/ktp_bottom_sheet_guide.dart';
@@ -19,6 +23,8 @@ import 'package:kebut_kurir/ui/register_upload_document/widgets/register_upload_
 import 'package:kebut_kurir/ui/register_upload_document/widgets/selfie_ktp/liveness_guide_bottom_sheet.dart';
 import 'package:kebut_kurir/ui/register_upload_document/widgets/sim/sim_guide_bottom_sheet.dart';
 import 'package:kebut_kurir/ui/register_upload_document/widgets/stnk/stnk_guide_bttom_sheet.dart';
+import 'package:kebut_kurir/ui/static_page/static_page_screen.dart';
+import 'package:kebut_kurir/ui/stnk_liveness/stnk_liveness_screen.dart';
 
 class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentController> {
   const RegisterUploadDocumentScreen({super.key});
@@ -450,6 +456,53 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                                       fit: BoxFit.fitWidth,
                                     ),
                                   ),
+                                ),
+                                SizedBox(
+                                  height: 6.h,
+                                ),
+                                InkWell(
+                                  onTap: () async {
+                                    controller.guideDialog.showBottomSheet(
+                                      withStrip: true,
+                                      radius: 20.r,
+                                      padding: EdgeInsets.all(16.w),
+                                      content: STNKGuideBottomSheet(
+                                        nextStep: () async {
+                                          STNKResultArgs? result = await Get.to(
+                                            const STNKLivenessScreen(),
+                                            binding: STNKLivenessBinding(),
+                                            transition: Transition.rightToLeftWithFade,
+                                          );
+                                          print("SELFIE RESULT : $result");
+                                          if (result != null) {
+                                            controller.stnk.value = result.stnk;
+                                            controller.kendaraanBelakang.value = result.kendaraanBelakang;
+                                            controller.kendaraanDepan.value = result.kendaraanDepan;
+                                            controller.kendaraansampingKanan.value = result.kendaraansampingKanan;
+                                            controller.kendaraanSampingKiri.value = result.kendaraanSampingKiri;
+                                          }
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: size.width,
+                                    // height: 100,
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    decoration: const BoxDecoration(color: Color(0x7F7F848E)),
+                                    child: Center(
+                                      child: Text(
+                                        'Ketuk untuk mengambil ulang foto',
+                                        textAlign: TextAlign.center,
+                                        style: AppTheme.textStyle.blackTextStyle.copyWith(
+                                          fontSize: AppTheme.textConfig.size.ml,
+                                          color: Colors.white,
+                                          fontWeight: AppTheme.textConfig.weight.regular,
+                                          height: 1.33,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 )
                               ],
                             )
@@ -464,7 +517,21 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                                   radius: 20.r,
                                   padding: EdgeInsets.all(16.w),
                                   content: STNKGuideBottomSheet(
-                                    nextStep: () {},
+                                    nextStep: () async {
+                                      STNKResultArgs? result = await Get.to(
+                                        const STNKLivenessScreen(),
+                                        binding: STNKLivenessBinding(),
+                                        transition: Transition.rightToLeftWithFade,
+                                      );
+                                      print("SELFIE RESULT : $result");
+                                      if (result != null) {
+                                        controller.stnk.value = result.stnk;
+                                        controller.kendaraanBelakang.value = result.kendaraanBelakang;
+                                        controller.kendaraanDepan.value = result.kendaraanDepan;
+                                        controller.kendaraansampingKanan.value = result.kendaraansampingKanan;
+                                        controller.kendaraanSampingKiri.value = result.kendaraanSampingKiri;
+                                      }
+                                    },
                                   ),
                                 );
                               },
@@ -495,19 +562,21 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    // Obx(
-                    //   () => Checkbox(
-                    //     value: controller.isAgree.value,
-                    //     onChanged: (bool? value) async {
-                    //       StaticPageController staticPageController = Get.put<StaticPageController>(StaticPageController());
-                    //       await staticPageController.getStaticData('term');
-                    //       Get.toNamed(Routes.static);
-                    //       if (value != null) {
-                    //         controller.isAgree.value = value;
-                    //       }
-                    //     },
-                    //   ),
-                    // ),
+                    Obx(
+                      () => Checkbox(
+                        value: controller.isAgree.value,
+                        onChanged: (bool? value) async {
+                          bool? result = await Get.to(
+                            const StaticPageScreen(),
+                            binding: StaticPageBinding(),
+                            transition: Transition.rightToLeftWithFade,
+                          );
+                          if (result != null) {
+                            controller.isAgree.value = result;
+                          }
+                        },
+                      ),
+                    ),
                     Expanded(
                       child: Text(
                         'Saya menyetujui Syarat Ketentuan Layanan dan Kebijakan Privasi Kebut Express.',

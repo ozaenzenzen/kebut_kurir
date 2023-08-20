@@ -3,20 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
-import 'package:kebut_kurir/features/ktp_liveness/presentation/ktp_liveness_controller.dart';
-import 'package:kebut_kurir/ui/ktp_liveness/widgets/ktp_ocr_button_widget.dart';
+import 'package:kebut_kurir/features/stnk_liveness/presentation/stnk_liveness_controller.dart';
+import 'package:kebut_kurir/ui/stnk_liveness/widgets/stnk_liveness_button.dart';
 
-class KTPLivenessScreen extends GetView<KTPLivenessController> {
-  const KTPLivenessScreen({super.key});
+class STNKLivenessScreen extends GetView<STNKLivenessController> {
+  const STNKLivenessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // if (controller.cameraController == null) {
-    //   return Container();
-    // }
-    // if (!controller.cameraController!.value.isInitialized) {
-    //   return Container();
-    // }
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
@@ -98,7 +92,7 @@ class KTPLivenessScreen extends GetView<KTPLivenessController> {
                       child: Container(
                         padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
                         child: Text(
-                          controller.isSim.value ? 'Scan SIM kamu, pastikan SIM kamu berada di di area yang sudah ditentukan' : 'Pastikan wajah dan KTP kamu tepat berada di area yang sudah ditentukan',
+                          'Scan STNK kamu, pastikan STNK kamu berada di di area yang sudah ditentukan',
                           textAlign: TextAlign.center,
                           style: AppTheme.textStyle.blackTextStyle.copyWith(
                             color: Colors.white,
@@ -122,7 +116,7 @@ class KTPLivenessScreen extends GetView<KTPLivenessController> {
                       width: MediaQuery.of(context).size.width,
                       color: Colors.black.withOpacity(0.4),
                       child: UnconstrainedBox(
-                        child: KtpOcrButtonWidget(
+                        child: STNKLivenessButtonWidget(
                           onTap: () => controller.onTakePictureButtonPressed(),
                         ),
                       ),

@@ -72,5 +72,9 @@ class Routes {
   static const String deliveryBarangScreen = '/delivery_barang_screen';
   static const String detailDeliveryBarangScreen = '/detail_delivery_barang_screen';
   static const String registerUploadDocumentScreen = '/register_upload_document_screen';
+  static const String stnkLivenessScreen = '/stnk_liveness_screen';
+  static const String stnkLivenessResultScreen = '/stnk_liveness_result_screen';
+  static const String stnkLivenessConfirmScreen = '/stnk_liveness_confirm_screen';
+  static const String stnkKendaraanLivenessResultScreen = '/stnk_kendaraan_liveness_result_screen';
 
 }

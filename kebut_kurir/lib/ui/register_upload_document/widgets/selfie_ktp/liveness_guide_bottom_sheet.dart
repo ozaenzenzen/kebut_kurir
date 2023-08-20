@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:kebut_kurir/app/navigation/app_routes.dart';
-import 'package:kebut_kurir/core/enums/ocr_enum.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/button_custom_widget.dart';
-import 'package:kebut_kurir/features/register_upload_document/args/ktp_liveness_args.dart';
-import 'package:kebut_kurir/features/register_upload_document/args/sim_args.dart';
 import 'package:kebut_kurir/features/register_upload_document/presentation/register_upload_document_controller.dart';
 
 class LivenessGuideBottomSheet extends GetView<RegisterUploadDocumentController> {

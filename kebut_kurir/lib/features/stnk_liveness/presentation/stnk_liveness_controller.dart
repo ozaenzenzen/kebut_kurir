@@ -7,21 +7,17 @@ import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
-import 'package:kebut_kurir/features/register_upload_document/args/ktp_liveness_args.dart';
-import 'package:kebut_kurir/features/register_upload_document/args/ktp_liveness_result_args.dart';
-import 'package:kebut_kurir/features/register_upload_document/args/sim_args.dart';
+import 'package:kebut_kurir/features/register_upload_document/args/stnk_args.dart';
 
-class KTPLivenessController extends GetxController {
+class STNKLivenessController extends GetxController {
   final DialogsUtils dialogsUtils = DialogsUtils();
   List<CameraDescription>? cameras;
   CameraController? cameraController;
   GlobalKey cameraKey = GlobalKey();
   GlobalKey cameraWidgetKey = GlobalKey();
-  KtpLivenessArgs? data;
-  SimArgs? data2;
+
   RxBool isCameraInit = false.obs;
   RxBool isCameraFlashOn = false.obs;
-  RxBool isSim = false.obs;
 
   initCamera() async {
     cameras = await availableCameras();
@@ -69,63 +65,13 @@ class KTPLivenessController extends GetxController {
           percentage: 100,
         );
         dialogsUtils.hideLoading();
-        if (data != null) {
-          Get.toNamed(
-            Routes.livenessResult,
-            arguments: KtpLivenessResultArgs(
-              card: data!.card,
-              nik: data!.nik,
-              name: data!.name,
-              address: data!.address,
-              rtRw: data!.rtRw,
-              subDistrict: data!.subDistrict,
-              district: data!.district,
-              city: data!.city,
-              province: data!.province,
-              pob: data!.pob,
-              dob: data!.dob,
-              height: data!.height,
-              profession: data!.profession,
-              expired: data!.expired,
-              bloodType: data!.bloodType,
-              citizenship: data!.citizenship,
-              maritalStatus: data!.maritalStatus,
-              religion: data!.religion,
-              gender: data!.gender,
-              ktpImage: tempImage,
-              croppedKtpImage: tempImage,
-              liveness: compressedFile,
-            ),
-          );
-        } else {
-          Get.toNamed(
-            Routes.livenessResult,
-            arguments: KtpLivenessResultArgs(
-              card: data2!.card,
-              nik: '',
-              name: '',
-              address: '',
-              rtRw: '',
-              subDistrict: '',
-              district: '',
-              city: '',
-              province: '',
-              pob: '',
-              dob: '',
-              height: '',
-              profession: '',
-              expired: '',
-              bloodType: '',
-              citizenship: '',
-              maritalStatus: '',
-              religion: '',
-              gender: '',
-              ktpImage: tempImage,
-              croppedKtpImage: tempImage,
-              liveness: compressedFile,
-            ),
-          );
-        }
+        Get.toNamed(
+          Routes.stnkLivenessResultScreen,
+          arguments: STNKArgs(
+            stnk: tempImage,
+            compressedFile: compressedFile,
+          ),
+        );
       },
     );
   }
@@ -160,32 +106,6 @@ class KTPLivenessController extends GetxController {
   void onInit() async {
     initCamera();
     super.onInit();
-    if (Get.arguments != null) {
-      if (Get.arguments is KtpLivenessArgs) {
-        final KtpLivenessArgs? args = Get.arguments as KtpLivenessArgs?;
-        if (args != null) {
-          data = args;
-        }
-      }
-      if (Get.arguments is SimArgs) {
-        final SimArgs? args = Get.arguments as SimArgs?;
-        if (args != null) {
-          data2 = args;
-        }
-      }
-    }
-
-    if (data != null && data2 == null) {
-      isSim.value = false;
-    } else if (data == null && data2 != null) {
-      isSim.value = true;
-    } else {
-      if (data2 != null) {
-        isSim.value = true;
-      } else {
-        isSim.value = false;
-      }
-    }
   }
 
   @override

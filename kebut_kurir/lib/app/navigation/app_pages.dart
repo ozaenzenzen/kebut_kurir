@@ -22,6 +22,11 @@ import 'package:kebut_kurir/features/profile/presentation/profile_binding.dart';
 import 'package:kebut_kurir/features/register/presentation/register_binding.dart';
 import 'package:kebut_kurir/features/register_upload_document/presentation/register_upload_document_binding.dart';
 import 'package:kebut_kurir/features/scan_qr/presentation/scan_qr_binding.dart';
+import 'package:kebut_kurir/features/static_page/presentation/static_page_binding.dart';
+import 'package:kebut_kurir/features/stnk_kendaraan_liveness_result/presentation/stnk_kendaraan_liveness_result_binding.dart';
+import 'package:kebut_kurir/features/stnk_liveness/presentation/stnk_liveness_binding.dart';
+import 'package:kebut_kurir/features/stnk_liveness_confirm/presentation/stnk_liveness_confirm_binding.dart';
+import 'package:kebut_kurir/features/stnk_liveness_result/presentation/stnk_liveness_result_binding.dart';
 import 'package:kebut_kurir/features/volume_barang/presentation/volume_barang_binding.dart';
 import 'package:kebut_kurir/ui/absen/absen_screen.dart';
 import 'package:kebut_kurir/ui/afterpickup_detailpickup_barang/after_pickup_barang_screen.dart';
@@ -43,6 +48,11 @@ import 'package:kebut_kurir/ui/pick_up_barang/pick_up_barang_screen.dart';
 import 'package:kebut_kurir/ui/register/register_screen.dart';
 import 'package:kebut_kurir/ui/register_upload_document/register_upload_document_screen.dart';
 import 'package:kebut_kurir/ui/scan_qr/scan_qr_screen.dart';
+import 'package:kebut_kurir/ui/static_page/static_page_screen.dart';
+import 'package:kebut_kurir/ui/stnk_kendaraan_liveness_result/stnk_kendaraan_liveness_result_screen.dart';
+import 'package:kebut_kurir/ui/stnk_liveness/stnk_liveness_screen.dart';
+import 'package:kebut_kurir/ui/stnk_liveness_confirm/stnk_liveness_confirm_screen.dart';
+import 'package:kebut_kurir/ui/stnk_liveness_result/stnk_liveness_result_screen.dart';
 
 class AppPages {
   AppPages._();
@@ -173,11 +183,41 @@ class AppPages {
       transition: Transition.rightToLeftWithFade,
       binding: KTPLivenessBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: Routes.livenessResult,
       page: () => const KTPLivenessResultScreen(),
       transition: Transition.rightToLeftWithFade,
       binding: KTPLivenessResultBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.stnkLivenessScreen,
+      page: () => const STNKLivenessScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: STNKLivenessBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.stnkLivenessResultScreen,
+      page: () => const STNKLivenessResultScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: STNKLivenessResultBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.stnkLivenessConfirmScreen,
+      page: () => const STNKLivenessConfirmScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: STNKLivenessConfirmBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.stnkKendaraanLivenessResultScreen,
+      page: () => const STNKKendaraanLivenessResultScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: STNKKendaraanLivenessResultBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.static,
+      page: () => const StaticPageScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: StaticPageBinding(),
     ),
   ];
 }

@@ -63,6 +63,7 @@ class CustomDialog extends StatelessWidget {
               ],
               Text(
                 title,
+                textAlign: TextAlign.center,
                 style: AppTheme.textStyle.blackTextStyle.copyWith(
                   fontSize: AppTheme.textConfig.size.l,
                   fontWeight: AppTheme.textConfig.weight.semiBold,
