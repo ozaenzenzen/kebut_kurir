@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/enums/ocr_enum.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
+import 'package:kebut_kurir/core/utils/toast_custom.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/core/widgets/button_custom_widget.dart';
+import 'package:kebut_kurir/core/widgets/dialogs/custom_dialog.dart';
 import 'package:kebut_kurir/features/ktp_liveness/presentation/ktp_liveness_binding.dart';
 import 'package:kebut_kurir/features/ktp_ocr/presentation/ktp_ocr_binding.dart';
 import 'package:kebut_kurir/features/register_upload_document/args/ktp_liveness_args.dart';
@@ -480,6 +482,7 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                                             controller.kendaraanDepan.value = result.kendaraanDepan;
                                             controller.kendaraansampingKanan.value = result.kendaraansampingKanan;
                                             controller.kendaraanSampingKiri.value = result.kendaraanSampingKiri;
+                                            Get.back();
                                           }
                                         },
                                       ),
@@ -530,6 +533,7 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                                         controller.kendaraanDepan.value = result.kendaraanDepan;
                                         controller.kendaraansampingKanan.value = result.kendaraansampingKanan;
                                         controller.kendaraanSampingKiri.value = result.kendaraanSampingKiri;
+                                        Get.back();
                                       }
                                     },
                                   ),
@@ -569,6 +573,7 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                           bool? result = await Get.to(
                             const StaticPageScreen(),
                             binding: StaticPageBinding(),
+                            arguments: 'term',
                             transition: Transition.rightToLeftWithFade,
                           );
                           if (result != null) {
@@ -590,14 +595,15 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                 SizedBox(height: 16.h),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  child: ButtonCustom(
-                    text: 'Daftar',
-                    isActive: false,
-                    textColor: Colors.white,
-                    textSize: 18,
-                    onTap: () async {
-                      /* controller.registerUser(
-                          onSucces: () async {
+                  child: Obx(
+                    () => ButtonCustom(
+                      text: 'Daftar',
+                      isActive: controller.ocrKtp.value != null && controller.isAgree.value && controller.stnk.value != null && controller.liveness.value != null && controller.sim.value != null,
+                      textColor: Colors.white,
+                      textSize: 18,
+                      onTap: () async {
+                        await controller.uploadAllSingle(
+                          onSuccess: () async {
                             await showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -616,44 +622,12 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                           onFailed: (value) {
                             showToast(value);
                           },
-                        ); */
-                    },
-                    borderRadius: 6.r,
-                    paddingVer: 13,
+                        );
+                      },
+                      borderRadius: 6.r,
+                      paddingVer: 13,
+                    ),
                   ),
-                  // child: Obx(
-                  //   () => ButtonCustom(
-                  //     text: 'Daftar',
-                  //     isActive: controller.isAgree.value && controller.ocrKtp != null && controller.liveness != null,
-                  //     textColor: Colors.white,
-                  //     textSize: 18,
-                  //     onTap: () async {
-                  //       /* controller.registerUser(
-                  //         onSucces: () async {
-                  //           await showDialog(
-                  //             context: context,
-                  //             builder: (BuildContext context) {
-                  //               return CustomDialog(
-                  //                 title: 'Pendaftaran Berhasil',
-                  //                 primaryButtonText: 'Masuk',
-                  //                 asset: 'assets/check_img.png',
-                  //                 subTitle: 'Selamat, akun anda akan telah didaftarkan.',
-                  //                 onTapPrimary: () {
-                  //                   Get.offNamed(Routes.login);
-                  //                 },
-                  //               );
-                  //             },
-                  //           );
-                  //         },
-                  //         onFailed: (value) {
-                  //           showToast(value);
-                  //         },
-                  //       ); */
-                  //     },
-                  //     borderRadius: 6.r,
-                  //     paddingVer: 13,
-                  //   ),
-                  // ),
                 ),
               ],
             ),

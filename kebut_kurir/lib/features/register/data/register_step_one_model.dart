@@ -6,8 +6,7 @@ class RegisterStepOneModel {
 
   RegisterStepOneModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    result =
-        json['result'] != null ? new Result.fromJson(json['result']) : null;
+    result = json['result'] != null ? new Result.fromJson(json['result']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -43,16 +42,22 @@ class Result {
 
 class Data {
   String? uuid;
+  String? courier;
 
-  Data({this.uuid});
+  Data({
+    this.uuid,
+    this.courier,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     uuid = json['uuid'];
+    courier = json['courier'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['uuid'] = this.uuid;
+    data['courier'] = this.courier;
     return data;
   }
 }

@@ -25,7 +25,10 @@ class KTPLivenessController extends GetxController {
 
   initCamera() async {
     cameras = await availableCameras();
-    CameraDescription camera = cameras!.firstWhere((CameraDescription cam) => cam.lensDirection == CameraLensDirection.front);
+
+    CameraDescription camera = cameras!.firstWhere(
+      (CameraDescription cam) => isSim.value ? cam.lensDirection == CameraLensDirection.back : cam.lensDirection == CameraLensDirection.front,
+    );
     cameraController = CameraController(
       camera,
       ResolutionPreset.max,
@@ -158,7 +161,6 @@ class KTPLivenessController extends GetxController {
 
   @override
   void onInit() async {
-    initCamera();
     super.onInit();
     if (Get.arguments != null) {
       if (Get.arguments is KtpLivenessArgs) {
@@ -186,6 +188,7 @@ class KTPLivenessController extends GetxController {
         isSim.value = false;
       }
     }
+    initCamera();
   }
 
   @override

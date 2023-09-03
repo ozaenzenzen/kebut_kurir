@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,13 +8,18 @@ import 'package:get/get.dart';
 import 'package:kebut_kurir/core/enums/ocr_enum.dart';
 import 'package:kebut_kurir/core/utils/bottomsheet_utils.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
+import 'package:kebut_kurir/core/utils/prefs.dart';
 import 'package:kebut_kurir/features/ktp_ocr_confirm/args/ktp_ocr_confirm_args.dart';
+import 'package:kebut_kurir/features/ktp_ocr_confirm/data/gender_model.dart';
+import 'package:kebut_kurir/features/ktp_ocr_confirm/data/marital_status_model.dart';
+import 'package:kebut_kurir/features/ktp_ocr_confirm/data/religion_model.dart';
 import 'package:kebut_kurir/features/register/data/districts_model.dart';
 import 'package:kebut_kurir/features/register/data/postal_code_model.dart';
 import 'package:kebut_kurir/features/register/data/province_model.dart';
 import 'package:kebut_kurir/features/register/data/regencies_model.dart';
 import 'package:kebut_kurir/features/register/data/verify_ktp_model.dart';
 import 'package:kebut_kurir/features/register/data/villages_model.dart';
+import 'package:kebut_kurir/features/register/domain/register_repository.dart';
 
 class KTPOcrConfirmController extends GetxController {
   OcrEnum card = OcrEnum.KTP;
@@ -61,13 +67,63 @@ class KTPOcrConfirmController extends GetxController {
   RxString valueStatusPerkawinan = ''.obs;
   RxString valueAgama = ''.obs;
 
-  // final RegisterRepository _registerRepository = RegisterRepository();
+  final RegisterRepository _registerRepository = RegisterRepository();
+
+  RxList<String> listGenders = RxList<String>();
+  RxList<String> listMaritalStatus = RxList<String>();
+  RxList<String> listReligions = RxList<String>();
+
+  Rx<GenderModel?> genderModels = Rx<GenderModel?>(null);
+  Rx<MaritalStatusModel?> martialStatusModels = Rx<MaritalStatusModel?>(null);
+  Rx<ReligionModel?> religionsModel = Rx<ReligionModel?>(null);
+
+  Future<List<String>> getListGenders() async {
+    List<String> listName = [];
+    List<String> list = [];
+
+    genderModels.value = await _registerRepository.getGender();
+    for (GenderData i in genderModels.value!.result!.data!) {
+      list.add(i.name ?? '');
+    }
+    listGenders.clear();
+    listName.addAll(list);
+    listGenders.addAll(list);
+    return listName;
+  }
+
+  Future<List<String>> getListMaritalStatus() async {
+    List<String> listName = [];
+    List<String> list = [];
+
+    martialStatusModels.value = await _registerRepository.getMaritalStatus();
+    for (MaritalStatusData i in martialStatusModels.value!.result!.data!) {
+      list.add(i.name ?? '');
+    }
+    listGenders.clear();
+    listName.addAll(list);
+    listMaritalStatus.addAll(list);
+    return listName;
+  }
+
+  Future<List<String>> getReligions() async {
+    List<String> listName = [];
+    List<String> list = [];
+
+    religionsModel.value = await _registerRepository.getReligions();
+    for (ReligionData i in religionsModel.value!.result!.data!) {
+      list.add(i.name ?? '');
+    }
+    listGenders.clear();
+    listName.addAll(list);
+    listGenders.addAll(list);
+    return listName;
+  }
 
   Future<List<String>> getListProvince(String query) async {
     List<String> listName = [];
     List<String> list = [];
 
-    // listProvinsi.value = await _registerRepository.getProvince();
+    listProvinsi.value = await _registerRepository.getProvince();
     for (ProvinceData i in listProvinsi.value!.result!.data!) {
       list.add(i.name ?? '');
     }
@@ -81,7 +137,7 @@ class KTPOcrConfirmController extends GetxController {
     List<String> list = [];
     selectedProvince = listProvinsi.value!.result!.data!.firstWhere((ProvinceData element) => element.name == tecProvinsi.text).uuid ?? '';
     print('UUID PROINVCE SELECTED $selectedProvince');
-    // listRegencies.value = await _registerRepository.getRegencies(selectedProvince);
+    listRegencies.value = await _registerRepository.getRegencies(selectedProvince);
     for (var i in listRegencies.value!.result!.data!) {
       list.add(i.name ?? '');
     }
@@ -94,7 +150,7 @@ class KTPOcrConfirmController extends GetxController {
     List<String> listName = [];
     List<String> list = [];
     selectedRegencies = listRegencies.value!.result!.data!.firstWhere((element) => element.name == tecKota.text).uuid ?? '';
-    // listDistricts.value = await _registerRepository.getDistricts(selectedRegencies);
+    listDistricts.value = await _registerRepository.getDistricts(selectedRegencies);
     for (var i in listDistricts.value!.result!.data!) {
       list.add(i.name ?? '');
     }
@@ -107,7 +163,7 @@ class KTPOcrConfirmController extends GetxController {
     List<String> listName = [];
     List<String> list = [];
     selectedDistricts = listDistricts.value!.result!.data!.firstWhere((element) => element.name == tecKecamatan.text).uuid ?? '';
-    // listVillages.value = await _registerRepository.getVillages(selectedDistricts);
+    listVillages.value = await _registerRepository.getVillages(selectedDistricts);
     for (var i in listVillages.value!.result!.data!) {
       list.add(i.name ?? '');
     }
@@ -120,7 +176,7 @@ class KTPOcrConfirmController extends GetxController {
     List<String> listName = [];
     List<String> list = [];
     selectedVillages = listVillages.value!.result!.data!.firstWhere((element) => element.name == tecKelurahan.text).uuid ?? '';
-    // listPostalCode.value = await _registerRepository.getPostalCode(selectedVillages);
+    listPostalCode.value = await _registerRepository.getPostalCode(selectedVillages);
     for (var i in listPostalCode.value!.result!.data!) {
       list.add(i.name ?? '');
     }
@@ -129,20 +185,131 @@ class KTPOcrConfirmController extends GetxController {
     return listName;
   }
 
+  String uuidGender() {
+    String result = '';
+    for (var i in genderModels.value!.result!.data!) {
+      if (i.name != null) {
+        if (i.name!.toLowerCase() == selectedGender.toLowerCase()) {
+          if (i.uuid != null) {
+            result = i.uuid!;
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  String uuidMartialStatus() {
+    String result = '';
+    for (var i in martialStatusModels.value!.result!.data!) {
+      if (i.name != null) {
+        if (i.name!.toLowerCase() == valueStatusPerkawinan.toLowerCase()) {
+          if (i.uuid != null) {
+            result = i.uuid!;
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  String uuidReligions() {
+    String result = '';
+    for (var i in religionsModel.value!.result!.data!) {
+      if (i.name != null) {
+        if (i.name!.toLowerCase() == valueAgama.toLowerCase()) {
+          if (i.uuid != null) {
+            result = i.uuid!;
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  String uuidProvince() {
+    String result = '';
+    for (var i in listProvinsi.value!.result!.data!) {
+      if (i.name != null) {
+        if (i.name!.toLowerCase() == selectedProvince.toLowerCase()) {
+          if (i.uuid != null) {
+            result = i.uuid!;
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  String uuidRegencies() {
+    String result = '';
+    for (var i in listRegencies.value!.result!.data!) {
+      if (i.name != null) {
+        if (i.name!.toLowerCase() == selectedRegencies.toLowerCase()) {
+          if (i.uuid != null) {
+            result = i.uuid!;
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  String uuidDistrict() {
+    String result = '';
+    for (var i in listDistricts.value!.result!.data!) {
+      if (i.name != null) {
+        if (i.name!.toLowerCase() == selectedDistricts.toLowerCase()) {
+          if (i.uuid != null) {
+            result = i.uuid!;
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  String uuidVilage() {
+    String result = '';
+    for (var i in listVillages.value!.result!.data!) {
+      if (i.name != null) {
+        if (i.name!.toLowerCase() == selectedVillages.toLowerCase()) {
+          if (i.uuid != null) {
+            result = i.uuid!;
+          }
+        }
+      }
+    }
+    return result;
+  }
+
   Future<void> verifyKtpData({
     required VerifyKtpBodyModel body,
     required Function() onSucces,
     required Function(String value) onFailed,
   }) async {
     dialogUtils.showLoading();
-    // final bool result = await _registerRepository.registerVerifyKtp(body: body, uuid: await Prefs.userId);
-   /*  if (result) {
+    log("body verify data KTP : ${body.toJson()} ");
+    final bool result = await _registerRepository.registerVerifyKtp(body: body, uuid: await Prefs.userId);
+    if (result) {
       dialogUtils.hideLoading();
+
       return onSucces();
     } else {
       dialogUtils.hideLoading();
       return onFailed('Proses Gagal');
-    } */
+    }
+  }
+
+  @override
+  void onReady() async {
+    List<Future> futures = [
+      getListGenders(),
+      getListMaritalStatus(),
+      getReligions(),
+    ];
+    await Future.wait(futures);
+    super.onReady();
   }
 
   @override

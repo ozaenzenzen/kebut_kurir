@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 
-
 class ButtonCustom extends StatelessWidget {
   final String? text;
   final Color? buttonColor;
@@ -30,7 +29,8 @@ class ButtonCustom extends StatelessWidget {
     this.textSize = 17,
     this.withBorder = false,
     this.child,
-    this.paddingHor = 0,  this.isActive = true,
+    this.paddingHor = 0,
+    this.isActive = true,
   });
 
   @override
@@ -40,11 +40,13 @@ class ButtonCustom extends StatelessWidget {
       child: Container(
         width: width.w,
         height: height != null ? 48.w : null,
-        padding: EdgeInsets.symmetric(
-            vertical: paddingVer.sp, horizontal: paddingHor.w),
+        padding: EdgeInsets.symmetric(vertical: paddingVer.sp, horizontal: paddingHor.w),
         decoration: BoxDecoration(
-            color:
-                withBorder ? null : isActive ? buttonColor ?? AppTheme.colors.primaryColor : AppTheme.colors.greyColor,
+            color: withBorder
+                ? null
+                : isActive
+                    ? buttonColor ?? AppTheme.colors.primaryColor
+                    : AppTheme.colors.greyColor,
             borderRadius: BorderRadius.circular(borderRadius.r),
             border: withBorder
                 ? Border.all(
@@ -60,7 +62,7 @@ class ButtonCustom extends StatelessWidget {
                 style: AppTheme.textStyle.whiteTextStyle.copyWith(
                   fontSize: textSize.sp,
                   fontWeight: AppTheme.textConfig.weight.bold,
-                  color: textColor ?? AppTheme.colors.whiteColor,
+                  color: isActive ? AppTheme.colors.blackColor2 : textColor ?? AppTheme.colors.whiteColor,
                 ),
               ),
             ),

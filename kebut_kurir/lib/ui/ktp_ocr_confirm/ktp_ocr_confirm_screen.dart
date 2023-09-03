@@ -10,6 +10,7 @@ import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/core/widgets/button_custom_widget.dart';
 import 'package:kebut_kurir/core/widgets/dialogs/custom_dialog.dart';
 import 'package:kebut_kurir/features/ktp_ocr_confirm/presentation/ktp_ocr_confirm_controller.dart';
+import 'package:kebut_kurir/features/register/data/verify_ktp_model.dart';
 import 'package:kebut_kurir/ui/ktp_ocr_confirm/widgets/confirm_data_drop_down_widget.dart';
 import 'package:kebut_kurir/ui/ktp_ocr_confirm/widgets/confirm_data_field_widget.dart';
 import 'package:kebut_kurir/ui/ktp_ocr_confirm/widgets/confirm_data_loc_widget.dart';
@@ -114,7 +115,12 @@ class KTPOcrConfirmScreen extends GetView<KTPOcrConfirmController> {
                     padding: EdgeInsets.all(24.w),
                     child: Column(
                       children: <Widget>[
-                        ConfirmDataFieldWidget(label: 'Nomor KTP (NIK)', hint: 'NIK anda', controller: controller.tecNik),
+                        ConfirmDataFieldWidget(
+                          label: 'Nomor KTP (NIK)',
+                          hint: 'NIK anda',
+                          controller: controller.tecNik,
+                          inputType: TextInputType.number,
+                        ),
                         SizedBox(height: 16.h),
                         ConfirmDataFieldWidget(label: 'Nama Lengkap (Sesuai KTP)', hint: 'Nama lengkap anda', controller: controller.tecNama),
                         SizedBox(height: 16.h),
@@ -149,51 +155,81 @@ class KTPOcrConfirmScreen extends GetView<KTPOcrConfirmController> {
                           ),
                         ),
                         SizedBox(height: 16.h),
-                        const ConfirmDataRadioWidget(
-                          label: 'Jenis Kelamin',
-                          value1: 'Pria',
-                          value2: 'Wanita',
+                        Obx(
+                          () => controller.listGenders.isEmpty
+                              ? const ConfirmDataRadioWidget(
+                                  label: 'Jenis Kelamin',
+                                  listValue: ['Pria', 'Wanita'],
+                                )
+                              : ConfirmDataRadioWidget(
+                                  label: 'Jenis Kelamin',
+                                  listValue: controller.listGenders,
+                                ),
                         ),
                         SizedBox(height: 16.h),
                         Obx(
-                          () => ConfirmDataDropDownWidget(
-                            label: 'Status Perkawinan',
-                            listMenu: const [
-                              'Lajang',
-                              'Menikah',
-                              'Cerai Hidup',
-                              'Cerai Mati',
-                            ],
-                            valueList: controller.valueStatusPerkawinan.value,
-                            hint: 'Status',
-                            onChanged: (String? v) {
-                              if (v != null) {
-                                controller.valueStatusPerkawinan.value = v;
-                              }
-                            },
-                          ),
+                          () => controller.listGenders.isEmpty
+                              ? ConfirmDataDropDownWidget(
+                                  label: 'Status Perkawinan',
+                                  listMenu: const [
+                                    'Lajang',
+                                    'Menikah',
+                                    'Cerai Hidup',
+                                    'Cerai Mati',
+                                  ],
+                                  valueList: controller.valueStatusPerkawinan.value,
+                                  hint: 'Status',
+                                  onChanged: (String? v) {
+                                    if (v != null) {
+                                      controller.valueStatusPerkawinan.value = v;
+                                    }
+                                  },
+                                )
+                              : ConfirmDataDropDownWidget(
+                                  label: 'Status Perkawinan',
+                                  listMenu: controller.listMaritalStatus,
+                                  valueList: controller.valueStatusPerkawinan.value,
+                                  hint: 'Status',
+                                  onChanged: (String? v) {
+                                    if (v != null) {
+                                      controller.valueStatusPerkawinan.value = v;
+                                    }
+                                  },
+                                ),
                         ),
                         SizedBox(height: 16.h),
                         Obx(
-                          () => ConfirmDataDropDownWidget(
-                            label: 'Agama',
-                            listMenu: const [
-                              'Islam',
-                              'Protestan',
-                              'Katolik',
-                              'Hindu',
-                              'Buddha',
-                              'Khonghucu',
-                              'Lainnya',
-                            ],
-                            valueList: controller.valueAgama.value,
-                            hint: 'Agama',
-                            onChanged: (String? v) {
-                              if (v != null) {
-                                controller.valueAgama.value = v;
-                              }
-                            },
-                          ),
+                          () => controller.listGenders.isEmpty
+                              ? ConfirmDataDropDownWidget(
+                                  label: 'Agama',
+                                  listMenu: const [
+                                    'Islam',
+                                    'Protestan',
+                                    'Katolik',
+                                    'Hindu',
+                                    'Buddha',
+                                    'Khonghucu',
+                                    'Lainnya',
+                                  ],
+                                  valueList: controller.valueAgama.value,
+                                  hint: 'Agama',
+                                  onChanged: (String? v) {
+                                    if (v != null) {
+                                      controller.valueAgama.value = v;
+                                    }
+                                  },
+                                )
+                              : ConfirmDataDropDownWidget(
+                                  label: 'Agama',
+                                  listMenu: controller.listReligions,
+                                  valueList: controller.valueAgama.value,
+                                  hint: 'Agama',
+                                  onChanged: (String? v) {
+                                    if (v != null) {
+                                      controller.valueAgama.value = v;
+                                    }
+                                  },
+                                ),
                         ),
                         SizedBox(height: 16.h),
                         ConfirmDataFieldWidget(
@@ -286,33 +322,58 @@ class KTPOcrConfirmScreen extends GetView<KTPOcrConfirmController> {
               textColor: AppTheme.colors.blackColor2,
               height: 48,
               onTap: () async {
-                await showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return CustomDialog(
-                      title: 'Data KTP Berhasil Disimpan',
-                      primaryButtonText: 'Lanjut',
-                      asset: 'assets/check_img.png',
-                      subTitle: 'Silahkan melanjutkan proses Pendaftaraan. ',
-                      onTapPrimary: () {
-                        // print("OCR VALUE : ${ controller.ocr.value!.path}");
-                        // Get.offNamedUntil(Routes.registerUploadDocumentScreen, (route) => false);
-                        Get.back();
-                        Get.back();
-                        Get.back();
-                        Get.back();
-                        Get.back(result: controller.ocr.value!.path);
-                        // Get.offAndToNamed(
-                        //   Routes.ktpGuide,
-                        //   arguments: KtpOcrArgs(
-                        //     card: controller.card,
-                        //     ocr: controller.ocr!,
-                        //     ocrCropped: controller.ocrCropped!,
-                        //   ),
-                        // );
+                await controller.verifyKtpData(
+                  body: VerifyKtpBodyModel(
+                    addressAccordingToId: controller.tecAlamat.text,
+                    bloodType: controller.tecGolDarah.text,
+                    dateOfBirth: controller.tecTglLahir.text,
+                    fullname: controller.tecNama.text,
+                    national: 'Indonesia',
+                    nik: controller.tecNik.text,
+                    placeOfBirth: controller.tecTmptLahir.text,
+                    rt: controller.tecRt.text,
+                    rw: controller.tecRt.text,
+                    state: 'verify-ktp',
+                    uuidDistricts: controller.selectedDistricts,
+                    uuidGenders: controller.uuidGender(),
+                    uuidMaritalStatus: controller.uuidMartialStatus(),
+                    uuidProvinces: controller.selectedProvince,
+                    uuidRegencies: controller.selectedRegencies,
+                    uuidReligions: controller.uuidReligions(),
+                    uuidVillages: controller.selectedVillages,
+                    work: controller.tecPekerjaan.text,
+                  ),
+                  onSucces: () async {
+                    await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CustomDialog(
+                          title: 'Data KTP Berhasil Disimpan',
+                          primaryButtonText: 'Lanjut',
+                          asset: 'assets/check_img.png',
+                          subTitle: 'Silahkan melanjutkan proses Pendaftaraan. ',
+                          onTapPrimary: () {
+                            // print("OCR VALUE : ${ controller.ocr.value!.path}");
+                            // Get.offNamedUntil(Routes.registerUploadDocumentScreen, (route) => false);
+                            Get.back();
+                            Get.back();
+                            Get.back();
+                            Get.back();
+                            Get.back(result: controller.ocr.value!.path);
+                            // Get.offAndToNamed(
+                            //   Routes.ktpGuide,
+                            //   arguments: KtpOcrArgs(
+                            //     card: controller.card,
+                            //     ocr: controller.ocr!,
+                            //     ocrCropped: controller.ocrCropped!,
+                            //   ),
+                            // );
+                          },
+                        );
                       },
                     );
                   },
+                  onFailed: (value) {},
                 );
               },
               width: MediaQuery.of(context).size.width,

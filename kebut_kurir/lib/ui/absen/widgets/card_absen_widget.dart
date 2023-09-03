@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/features/absen/presentation/absen_controller.dart';
 
@@ -65,7 +66,8 @@ class CardAbsenWidget extends GetView<AbsenController> {
                   Expanded(
                     child: SizedBox(
                       child: Text(
-                        '24 Juli 2024 | 07:09 PM',
+                        // '24 Juli 2024 | 07:09 PM',
+                        '${DateFormat('dd MMMM yyyy').format(DateTime.now())} | ${DateFormat('hh:mm a').format(DateTime.now())} ',
                         style: GoogleFonts.mukta(
                           color: const Color(0xFF121419),
                           fontSize: 16,
@@ -93,8 +95,10 @@ class CardAbsenWidget extends GetView<AbsenController> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: SizedBox(
-                      child: Text(
-                        'Jl. Kalibata tengah no 100, RT.10/RW.07, Kalibata, Kec. Pancoran, Kota Jakarta Selatan, DKI Jakarta, 12820',
+                        child: Obx(
+                      () => Text(
+                        // 'Jl. Kalibata tengah no 100, RT.10/RW.07, Kalibata, Kec. Pancoran, Kota Jakarta Selatan, DKI Jakarta, 12820',
+                       '${controller.userLocation.value}',
                         style: GoogleFonts.mukta(
                           color: const Color(0xFF121419),
                           fontSize: 16,
@@ -102,7 +106,7 @@ class CardAbsenWidget extends GetView<AbsenController> {
                           height: 1.25,
                         ),
                       ),
-                    ),
+                    )),
                   ),
                 ],
               ),
@@ -127,10 +131,7 @@ class CardAbsenWidget extends GetView<AbsenController> {
                     Text(
                       'Presensi',
                       textAlign: TextAlign.center,
-                      style: AppTheme.textStyle.blackTextStyle.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18
-                      ),
+                      style: AppTheme.textStyle.blackTextStyle.copyWith(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
                   ],
                 ),

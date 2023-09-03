@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/features/absen/presentation/absen_controller.dart';
 import 'package:kebut_kurir/ui/absen/widgets/card_absen_widget.dart';
+import 'package:kebut_kurir/ui/absen/widgets/map_widget.dart';
 
 class AbsenScreen extends GetView<AbsenController> {
   const AbsenScreen({super.key});
@@ -27,6 +28,10 @@ class AbsenScreen extends GetView<AbsenController> {
             child: Column(
               children: [
                 Expanded(
+                  //     child: MapSample(
+                  //   lat: 106.8799387,
+                  //   long: -6.1849587,
+                  // )
                   child: Container(
                     decoration: const BoxDecoration(
                       color: Colors.red,

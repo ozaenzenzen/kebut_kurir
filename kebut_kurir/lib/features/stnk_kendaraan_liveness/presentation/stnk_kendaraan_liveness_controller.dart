@@ -21,7 +21,7 @@ class STNKKendaraanLivenessController extends GetxController {
 
   initCamera() async {
     cameras = await availableCameras();
-    CameraDescription camera = cameras!.firstWhere((CameraDescription cam) => cam.lensDirection == CameraLensDirection.front);
+    CameraDescription camera = cameras!.firstWhere((CameraDescription cam) => cam.lensDirection == CameraLensDirection.back);
     cameraController = CameraController(
       camera,
       ResolutionPreset.max,

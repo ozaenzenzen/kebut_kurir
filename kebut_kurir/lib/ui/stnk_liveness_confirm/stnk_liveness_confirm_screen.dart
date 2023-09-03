@@ -8,6 +8,7 @@ import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/core/widgets/button_custom_widget.dart';
 import 'package:kebut_kurir/core/widgets/dialogs/custom_dialog.dart';
+import 'package:kebut_kurir/features/register/data/verify_stnk_model.dart';
 import 'package:kebut_kurir/features/register_upload_document/args/stnk_result_args.dart';
 import 'package:kebut_kurir/features/stnk_kendaraan_liveness/presentation/stnk_kendaraan_liveness_binding.dart';
 import 'package:kebut_kurir/features/stnk_liveness_confirm/presentation/stnk_liveness_confirm_controller.dart';
@@ -115,10 +116,16 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                     padding: EdgeInsets.all(24.w),
                     child: Column(
                       children: <Widget>[
-                        const ConfirmDataRadioWidget(
-                          label: 'Jenis Kendaraan',
-                          value1: 'Roda 2',
-                          value2: 'Roda 4',
+                        Obx(
+                          () => controller.listTransportationTypes.isEmpty
+                              ? const ConfirmDataRadioWidget(
+                                  label: 'Jenis Kendaraan',
+                                  listValue: ['Roda 2', 'Roda 4'],
+                                )
+                              : ConfirmDataRadioWidget(
+                                  label: 'Jenis Kendaraan',
+                                  listValue: controller.listTransportationTypes,
+                                ),
                         ),
                         SizedBox(height: 16.h),
                         ConfirmDataFieldWidget(label: 'Merk Kendaraan', hint: 'Merk Kendaraan anda', controller: controller.tecMerkKendaraan),
@@ -127,11 +134,16 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                         SizedBox(height: 16.h),
                         ConfirmDataFieldWidget(label: 'Plat No Kendaraan', hint: 'Plat no Kendaraan anda', controller: controller.tecPlatnoKendaraan),
                         SizedBox(height: 16.h),
-                        ConfirmDataFieldWidget(label: 'Tahun Kendaraan', hint: 'Tahun Kendaraan anda', controller: controller.tecTahunKendaraan),
+                        ConfirmDataFieldWidget(
+                          label: 'Tahun Kendaraan',
+                          hint: 'Tahun Kendaraan anda',
+                          controller: controller.tecTahunKendaraan,
+                          inputType: TextInputType.number,
+                        ),
                         SizedBox(height: 16.h),
                         ConfirmDataFieldWidget(label: 'Tanggal Pajak Kendaraan', hint: 'Tanggal Pajak Kendaraan anda', controller: controller.tecPajakKendaraan),
                         SizedBox(height: 16.h),
-                         SizedBox(
+                        SizedBox(
                           width: size.width,
                           child: Text(
                             'Status Kepemilikan Kendaraan',
@@ -610,7 +622,6 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                         Get.back();
                         Get.back();
                         Get.back();
-                        Get.back();
                         Get.back(
                           result: STNKResultArgs(
                             kendaraanBelakang: controller.kendaraanBelakang.value,
@@ -632,6 +643,62 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                     );
                   },
                 );
+                // await controller.verifyDataStnk(
+                //   body: VerifyStnkBodyModel(
+                //     uuidTransportationTypes: controller.uuidTransportationType(),
+                //     uuidVehicleOwnershipsUser: controller.uuidVehicleOwnership(),
+                //     dateVehicles: controller.tecPajakKendaraan.text,
+                //     merk: controller.tecMerkKendaraan.text,
+                //     platNumber: controller.tecPlatnoKendaraan.text,
+                //     type: controller.tecTypeKendaraan.text,
+                //     yearVehicles: controller.tecTahunKendaraan.text,
+                //   ),
+                //   onSucces: () async {
+                //     await showDialog(
+                //       context: context,
+                //       barrierDismissible: false,
+                //       builder: (BuildContext context) {
+                //         return CustomDialog(
+                //           title: 'Apakah data kamu sudah benar?',
+                //           primaryButtonText: 'Lanjut',
+                //           secondaryButtonText: 'Periksa Kembali',
+                //           reverseButton: true,
+                //           onTapSecondary: (data) {
+                //             Get.back();
+                //           },
+                //           buttonDirection: ButtonDirection.HORIZONTAL,
+                //           asset: 'assets/ic_confirm.png',
+                //           subTitle: 'Pastikan data kamu telah sesuai',
+                //           onTapPrimary: () {
+                //             // print("OCR VALUE : ${ controller.ocr.value!.path}");
+                //             // Get.offNamedUntil(Routes.registerUploadDocumentScreen, (route) => false);
+                //             Get.back();
+                //             Get.back();
+                //             Get.back();
+                //             Get.back(
+                //               result: STNKResultArgs(
+                //                 kendaraanBelakang: controller.kendaraanBelakang.value,
+                //                 kendaraanDepan: controller.kendaraanDepan.value,
+                //                 kendaraanSampingKiri: controller.kendaraanSampingKiri.value,
+                //                 kendaraansampingKanan: controller.kendaraansampingKanan.value,
+                //                 stnk: controller.stnk.value,
+                //               ),
+                //             );
+                //             // Get.offAndToNamed(
+                //             //   Routes.ktpGuide,
+                //             //   arguments: KtpOcrArgs(
+                //             //     card: controller.card,
+                //             //     ocr: controller.ocr!,
+                //             //     ocrCropped: controller.ocrCropped!,
+                //             //   ),
+                //             // );
+                //           },
+                //         );
+                //       },
+                //     );
+                //   },
+                //   onFailed: (value) {},
+                // );
               },
               width: MediaQuery.of(context).size.width,
               borderRadius: 6,

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
+import 'package:kebut_kurir/core/utils/toast_custom.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/core/widgets/button_custom_widget.dart';
 import 'package:kebut_kurir/features/register/presentation/register_controller.dart';
@@ -61,6 +62,12 @@ class RegisterScreen extends GetView<RegisterController> {
                       ),
                       SizedBox(height: 16.h),
                       RegisterTextField(
+                        controller: controller.tecEmail,
+                        label: 'Email',
+                        hint: 'Masukkan Email',
+                      ),
+                      SizedBox(height: 16.h),
+                      RegisterTextField(
                         controller: controller.tecNoHp,
                         inputType: TextInputType.phone,
                         label: 'No Handphone',
@@ -100,17 +107,17 @@ class RegisterScreen extends GetView<RegisterController> {
               textColor: AppTheme.colors.blackColor2,
               textSize: 18,
               onTap: () {
-                Get.toNamed(Routes.registerUploadDocumentScreen);
-                // controller.registerStepOne(
-                //   onSucces: () {
-                //     Get.toNamed(Routes.ktpGuide);
-                //   },
-                //   onFailed: (String value) {
-                //     showToast(value);
-                //   },
-                // );
+                // Get.toNamed(Routes.registerUploadDocumentScreen);
+                controller.registerStepOne(
+                  onSucces: () {
+                    Get.toNamed(Routes.registerUploadDocumentScreen);
+                  },
+                  onFailed: (String value) {
+                    showToast(value);
+                  },
+                );
               },
-              isActive: true,
+              isActive: controller.buttonNextActive(),
               borderRadius: 6.r,
               paddingVer: 13,
             ),

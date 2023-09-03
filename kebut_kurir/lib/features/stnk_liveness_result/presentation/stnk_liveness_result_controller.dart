@@ -31,6 +31,7 @@ class STNKLivenessResultController extends GetxController {
   void onPressToNextStep() async {
     dialogsUtils.showLoading();
     if (stnk.value != null && stnkCropped.value != null) {
+       dialogsUtils.hideLoading();
       Get.toNamed(
         Routes.stnkLivenessConfirmScreen,
         arguments: STNKArgs(

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/textfield_widget/underline_textfield_widget.dart';
 
-
 class ConfirmDataFieldWidget extends StatelessWidget {
   final String label;
   final String hint;
@@ -14,17 +13,7 @@ class ConfirmDataFieldWidget extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextEditingController controller;
-  const ConfirmDataFieldWidget(
-      {super.key,
-      required this.label,
-      required this.hint,
-      required this.controller,
-      this.isObscure = false,
-      this.inputType,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.readOnly = false,
-      this.onTap});
+  const ConfirmDataFieldWidget({super.key, required this.label, required this.hint, required this.controller, this.isObscure = false, this.inputType, this.prefixIcon, this.suffixIcon, this.readOnly = false, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +43,8 @@ class ConfirmDataFieldWidget extends StatelessWidget {
             controller: controller,
             isDense: true,
             hintText: hint,
+          
+            maxLength: label == "Nomor KTP (NIK)" ? 16 : null,
           ),
         ),
       ],

@@ -34,6 +34,7 @@ class ConfirmDataLocWidget extends StatelessWidget {
           child: TypeAheadFormField(
             textFieldConfiguration: TextFieldConfiguration(
               controller: controller,
+              keyboardType: label == "Kode Pos" ? TextInputType.number : TextInputType.text,
               decoration: InputDecoration(
                 filled: true,
                 isCollapsed: true,
