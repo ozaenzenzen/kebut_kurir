@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kebut_kurir/app/navigation/app_routes.dart';
+import 'package:intl/intl.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
+import 'package:kebut_kurir/core/utils/toast_custom.dart';
+import 'package:kebut_kurir/features/absen/presentation/absen_binding.dart';
+import 'package:kebut_kurir/features/home/presentation/home_controller.dart';
+import 'package:kebut_kurir/ui/absen/absen_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeScreenAbsensi extends StatelessWidget {
+class HomeScreenAbsensi extends GetView<HomeController> {
   const HomeScreenAbsensi({super.key});
 
   @override
@@ -49,7 +54,8 @@ class HomeScreenAbsensi extends StatelessWidget {
                 ),
                 SizedBox(
                   child: Text(
-                    'Senin, 24 Juli 2024\n07:09 PM',
+                    // 'Senin, 24 Juli 2024\n07:09 PM',
+                    '${DateFormat('EEE, dd MMM yyyy').format(DateTime.now())}\n${DateFormat('HH:mm a').format(DateTime.now())}',
                     style: GoogleFonts.mukta(
                       color: const Color(0xFF121419),
                       fontSize: 16,
@@ -63,8 +69,43 @@ class HomeScreenAbsensi extends StatelessWidget {
           ),
           SizedBox(width: 8.w),
           InkWell(
-            onTap: () {
-              Get.toNamed(Routes.absenScreen);
+            onTap: () async {
+              // Get.toNamed(Routes.absenScreen);
+              // String? result =
+              // String? result = await Get.to(
+              //   const AbsenScreen(),
+              //   binding: AbsenBinding(),
+              //   transition: Transition.rightToLeftWithFade,
+              // );
+              // if (result != null) {
+              //   if (result.isNotEmpty) {
+              //     if (result == "Already Absen") {
+              //       Future.delayed(Duration.zero, () async {
+              //         controller.isAlreadyAbsen();
+              //       });
+              //     }
+              //   }
+              // }
+              if (controller.isAlreadyPresent.value) {
+                showToast('Sudah absen');
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.clear();
+              } else {
+                String? result = await Get.to(
+                  const AbsenScreen(),
+                  binding: AbsenBinding(),
+                  transition: Transition.rightToLeftWithFade,
+                );
+                if (result != null) {
+                  if (result.isNotEmpty) {
+                    if (result == "Already Absen") {
+                      Future.delayed(Duration.zero, () async {
+                        controller.isAlreadyAbsen();
+                      });
+                    }
+                  }
+                }
+              }
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

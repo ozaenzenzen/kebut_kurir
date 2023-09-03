@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fimber/fimber.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -64,6 +66,7 @@ class LocationUtils {
       );
       return position;
     } catch (e) {
+      log("Erro getcurrent location : $e");
       Fimber.e('Error: $e');
       return null;
     }

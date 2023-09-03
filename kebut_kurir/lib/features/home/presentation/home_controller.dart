@@ -9,21 +9,23 @@ class HomeController extends GetxController {
   RxInt activeIndex = 0.obs;
   RxList<HomeMenuData> listMenu = RxList<HomeMenuData>();
 
+  RxBool isAlreadyPresent = false.obs;
+
   final HomeRepository _homeRepository = HomeRepository();
 
-  Future<void> fetchListMenu() async {
-    final HomeMenuModel? result = await _homeRepository.getListMenu(uuid: await Prefs.userId);
-    if (result != null) {
-      listMenu.value = result.result!.data!;
-    }
-  }
+  // Future<void> fetchListMenu() async {
+  //   final HomeMenuModel? result = await _homeRepository.getListMenu(uuid: await Prefs.userId);
+  //   if (result != null) {
+  //     listMenu.value = result.result!.data!;
+  //   }
+  // }
 
-  Future<void> fetchHomeBanner() async {
-    final HomeBannerModel? result = await _homeRepository.getHomeBanner();
-    if (result != null) {
-      homeBanner = result.result!.data!;
-    }
-  }
+  // Future<void> fetchHomeBanner() async {
+  //   final HomeBannerModel? result = await _homeRepository.getHomeBanner();
+  //   if (result != null) {
+  //     homeBanner = result.result!.data!;
+  //   }
+  // }
 
   void onBannerChanged(int index) {
     activeIndex.value = index;
@@ -42,8 +44,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    fetchHomeBanner();
-    fetchListMenu();
+    // fetchHomeBanner();
+    // fetchListMenu();
     // getUserDataRemote(
     //   onSuccess: (GetUserDataResponseModel data) {
     //     update();
@@ -51,6 +53,25 @@ class HomeController extends GetxController {
     //   onFailed: (String errorMessage) {},
     // );
     super.onInit();
+    Future.delayed(Duration.zero, () async {
+      await isAlreadyAbsen();
+    });
+  }
+
+  Future<void> isAlreadyAbsen() async {
+    String presentDatetime = await Prefs.isAlreadyAbsen;
+    if (presentDatetime.isNotEmpty) {
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      final dateToCheck = DateTime.parse(await Prefs.isAlreadyAbsen);
+      final aDate = DateTime(dateToCheck.year, dateToCheck.month, dateToCheck.day);
+      if (aDate == today) {
+        isAlreadyPresent.value = true;
+      } else {
+        isAlreadyPresent.value = false;
+      }
+      update();
+    }
   }
 
   RxString imageProfile = ''.obs;

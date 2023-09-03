@@ -28,18 +28,13 @@ class AbsenScreen extends GetView<AbsenController> {
             child: Column(
               children: [
                 Expanded(
-                  //     child: MapSample(
-                  //   lat: 106.8799387,
-                  //   long: -6.1849587,
-                  // )
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      image: DecorationImage(
-                        image: AssetImage("assets/bg_example_absensi.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                  child: Obx(
+                    () => controller.userPosition.value != null
+                        ? MapSample(
+                            lat: controller.userPosition.value!.latitude,
+                            long: controller.userPosition.value!.longitude,
+                          )
+                        : Container(),
                   ),
                 ),
                 SizedBox(

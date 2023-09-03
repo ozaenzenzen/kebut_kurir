@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:kebut_kurir/core/utils/api_function.dart';
 import 'package:kebut_kurir/features/absen/data/absen_model.dart';
@@ -8,6 +10,7 @@ class AbsenRepository {
   Future<AbsenModel?> postAbsen({required AbsenRequestModel body}) async {
     AbsenModel? result;
     try {
+      log("Isi request postAbsen : ${body.toJson()}");
       await apiClient.postRequest(
         'api/web/common/presensi-kurir',
         data: body.toJson(),

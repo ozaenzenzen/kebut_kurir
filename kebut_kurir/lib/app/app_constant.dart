@@ -5,6 +5,7 @@ class AppConstant {
   static const String USER_PROFILE_PICTURE = 'userProfilePicture';
   static const String ROLE = 'role';
   static const String IS_LOGIN = 'isLogin';
+  static const String DATE_TIME_ABSEN = 'dateTimeAbsen';
   static const String LANGUAGE = 'language';
   static const String REMEMBER_CREDENTIAL = 'rememberCredentials';
   static const String EMAIL = 'userEmail';

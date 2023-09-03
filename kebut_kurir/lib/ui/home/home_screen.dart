@@ -7,7 +7,7 @@ import 'package:kebut_kurir/features/home/presentation/home_controller.dart';
 import 'package:kebut_kurir/ui/home/widgets/home_screen_banner.dart';
 import 'package:kebut_kurir/ui/home/widgets/home_screen_daily_schedule_widget.dart';
 import 'package:kebut_kurir/ui/home/widgets/home_screen_header.dart';
-import 'package:kebut_kurir/ui/home/widgets/home_screen_saldo.dart';
+import 'package:kebut_kurir/ui/home/widgets/home_screen_absensi.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});

@@ -98,7 +98,7 @@ class CardAbsenWidget extends GetView<AbsenController> {
                         child: Obx(
                       () => Text(
                         // 'Jl. Kalibata tengah no 100, RT.10/RW.07, Kalibata, Kec. Pancoran, Kota Jakarta Selatan, DKI Jakarta, 12820',
-                       '${controller.userLocation.value}',
+                        '${controller.userLocation.value}',
                         style: GoogleFonts.mukta(
                           color: const Color(0xFF121419),
                           fontSize: 16,
@@ -113,8 +113,22 @@ class CardAbsenWidget extends GetView<AbsenController> {
             ),
             const SizedBox(height: 16),
             InkWell(
-              onTap: () {
-                controller.dialogUtils.showSuccessDialog(title: 'Presensi Berhasil', context: context);
+              onTap: () async {
+                // controller.dialogUtils.showSuccessDialog(title: 'Presensi Berhasil', context: context);
+                await controller.absenUser(
+                  onSuccess: () {
+                    controller.dialogUtils.showSuccessDialog(
+                        title: 'Presensi Berhasil',
+                        context: context,
+                        isDismissible: false,
+                        primaryButtonText: 'Lanjut',
+                        primaryOnTap: () {
+                          Get.back();
+                          Get.back(result: 'Already Absen');
+                        });
+                  },
+                  onFailed: (val) {},
+                );
               },
               child: Container(
                 width: size.width,

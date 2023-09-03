@@ -11,6 +11,9 @@ class Prefs {
   static Future<bool> get isLogin => PreferencesHelper.getBool(AppConstant.IS_LOGIN);
   static Future<dynamic> setIsLogin(bool value) => PreferencesHelper.setBool(AppConstant.IS_LOGIN, value);
 
+  static Future<String> get isAlreadyAbsen => PreferencesHelper.getString(AppConstant.DATE_TIME_ABSEN);
+  static Future<dynamic> setIsAlreadyAbsen(String value) => PreferencesHelper.setString(AppConstant.DATE_TIME_ABSEN, value);
+
   static Future<String> get language => PreferencesHelper.getString(AppConstant.LANGUAGE);
   static Future<dynamic> setLanguage(String value) => PreferencesHelper.setString(AppConstant.LANGUAGE, value);
 

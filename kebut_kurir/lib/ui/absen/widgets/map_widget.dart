@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapSample extends StatefulWidget {
@@ -22,19 +21,15 @@ class MapSampleState extends State<MapSample> {
   void initState() {
     super.initState();
     print('SCREEN MAPS');
-    Future.delayed(Duration.zero,()async{
+    Future.delayed(Duration.zero, () async {
       await _getCurrentLocation();
     });
   }
 
   Future<void> _getCurrentLocation() async {
     try {
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
-
       setState(() {
-        _currentLocation = LatLng(position.latitude, position.longitude);
+        _currentLocation = LatLng(widget.lat, widget.long);
         _addMarker(_currentLocation);
         _getAddressFromCoordinates(_currentLocation);
       });
@@ -92,7 +87,7 @@ class MapSampleState extends State<MapSample> {
       mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
         target: LatLng(widget.lat, widget.long),
-        zoom: 14.4746,
+        zoom: 18,
       ),
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);

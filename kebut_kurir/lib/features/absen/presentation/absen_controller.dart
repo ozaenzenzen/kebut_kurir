@@ -15,14 +15,15 @@ class AbsenController extends GetxController {
   final DialogsUtils dialogUtils = Get.find();
   final AbsenRepository _absenRepository = AbsenRepository();
 
-  Rx<Position>? userPosition;
+  // Rx<Position>? userPosition =;
+  Rx<Position?> userPosition = Rx<Position?>(null);
   RxString userLocation = ''.obs;
   AbsenModel? absenData;
 
   @override
   void onInit() async {
     super.onInit();
-    Future.delayed(Duration.zero,()async{
+    Future.delayed(Duration.zero, () async {
       await getUserLocation();
     });
   }
@@ -52,7 +53,8 @@ class AbsenController extends GetxController {
         latitude: _locationInstance.latitude ?? 0,
         longitude: _locationInstance.longitude ?? 0,
       );
-      userPosition!.value = _userPosition;
+
+      userPosition.value = _userPosition;
       userLocation.value = _userLocation;
       update();
       print('ISI LOKASI USER ${userLocation.value}');
@@ -62,25 +64,40 @@ class AbsenController extends GetxController {
     }
   }
 
-  Future<AbsenModel?> absenUser() async {
+  Future<void> absenUser({
+    required Function() onSuccess,
+    required Function(String) onFailed,
+  }) async {
     dialogUtils.showLoading();
     await getUserLocation();
-    if (userPosition != null) {
+    if (userPosition.value != null) {
       String uuid = await Prefs.userId;
-      absenData = await _absenRepository.postAbsen(
-        body: AbsenRequestModel(
-          address: userLocation.value,
-          uuidUsers: uuid,
-          attendanceDatetime: DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now()).toString(),
-          latitude: userPosition!.value.latitude.toString(),
-          longitude: userPosition!.value.longitude.toString(),
-        ),
-      );
-      dialogUtils.hideLoading();
-      return absenData;
+      String attendanceDatetime = DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now()).toString();
+      try {
+        absenData = await _absenRepository.postAbsen(
+          body: AbsenRequestModel(
+            address: userLocation.value,
+            uuidUsers: uuid.isEmpty ? 'JKxrBEn6C638kFa' : uuid,
+            attendanceDatetime: attendanceDatetime,
+            latitude: userPosition.value!.latitude.toString(),
+            longitude: userPosition.value!.longitude.toString(),
+          ),
+        );
+
+        dialogUtils.hideLoading();
+        if (absenData != null) {
+          await Prefs.setIsAlreadyAbsen(attendanceDatetime);
+          return onSuccess();
+        } else {
+          return onFailed('Gagal');
+        }
+      } catch (e) {
+        dialogUtils.hideLoading();
+        return onFailed('Gagal');
+      }
     } else {
       dialogUtils.hideLoading();
-      return absenData;
+      return onFailed('Gagal');
     }
   }
 }
