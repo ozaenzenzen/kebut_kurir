@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:kebut_kurir/core/utils/prefs.dart';
 import 'package:kebut_kurir/features/home/data/home_banner_model.dart';
 import 'package:kebut_kurir/features/home/data/home_menu_model.dart';
+import 'package:kebut_kurir/features/home/data/total_delivery_daily_model.dart';
+import 'package:kebut_kurir/features/home/data/total_pickup_daily_model.dart';
 import 'package:kebut_kurir/features/home/domain/home_repository.dart';
 
 class HomeController extends GetxController {
@@ -9,23 +11,30 @@ class HomeController extends GetxController {
   RxInt activeIndex = 0.obs;
   RxList<HomeMenuData> listMenu = RxList<HomeMenuData>();
 
+  RxInt totalPickupDaily = 0.obs;
+  RxInt totalDeliveryDaily = 0.obs;
+
   RxBool isAlreadyPresent = false.obs;
 
   final HomeRepository _homeRepository = HomeRepository();
 
-  // Future<void> fetchListMenu() async {
-  //   final HomeMenuModel? result = await _homeRepository.getListMenu(uuid: await Prefs.userId);
-  //   if (result != null) {
-  //     listMenu.value = result.result!.data!;
-  //   }
-  // }
+  Future<void> fetchTotalPickupDaily() async {
+    final ResultTotalPickupDailyModel? result = await _homeRepository.getTotalPickupDaily(uuid: await Prefs.userId);
+    if (result != null) {
+      if (result.result != null) {
+        totalPickupDaily.value = result.result!.total!;
+      }
+    }
+  }
 
-  // Future<void> fetchHomeBanner() async {
-  //   final HomeBannerModel? result = await _homeRepository.getHomeBanner();
-  //   if (result != null) {
-  //     homeBanner = result.result!.data!;
-  //   }
-  // }
+  Future<void> fetchTotalDelivertDaily() async {
+    final ResultTotalDeliveryDailyModel? result = await _homeRepository.getTotalDelivertDaily(uuid: await Prefs.userId);
+    if (result != null) {
+      if (result.result != null) {
+        totalDeliveryDaily.value = result.result!.total!;
+      }
+    }
+  }
 
   void onBannerChanged(int index) {
     activeIndex.value = index;
@@ -53,9 +62,11 @@ class HomeController extends GetxController {
     //   onFailed: (String errorMessage) {},
     // );
     super.onInit();
-    Future.delayed(Duration.zero, () async {
-      await isAlreadyAbsen();
-    });
+    Future.wait([
+      isAlreadyAbsen(),
+      fetchTotalDelivertDaily(),
+      fetchTotalPickupDaily(),
+    ]);
   }
 
   Future<void> isAlreadyAbsen() async {

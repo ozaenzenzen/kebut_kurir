@@ -2,9 +2,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
+import 'package:kebut_kurir/core/utils/prefs.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/core/widgets/textfield_widget/underline_textfield_widget.dart';
+import 'package:kebut_kurir/features/chat/data/send_chat_req.dart';
 import 'package:kebut_kurir/features/chat/presentation/chat_controller.dart';
 
 class ChatScreen extends GetView<ChatController> {
@@ -12,13 +15,16 @@ class ChatScreen extends GetView<ChatController> {
 
   @override
   Widget build(BuildContext context) {
+    // if (Get.isRegistered<ChatController>()) {
+    //   controller.fetchChat(receiptNumber: Get.arguments, read: 2);
+    // }
     return Scaffold(
       backgroundColor: AppTheme.colors.whiteColor,
       appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56.h),
         child: const AppBarWidget(
           title: 'Chat Admin',
         ),
-        preferredSize: Size.fromHeight(56.h),
       ),
       body: Column(
         children: [
@@ -123,50 +129,48 @@ class ChatScreen extends GetView<ChatController> {
           ),
           Expanded(
             child: Container(
-              child: ListView(
-                shrinkWrap: true,
-                padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
-                children: [
-                  Column(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            // border: Border.all(width: 1, color: AppTheme.colors.primaryColor),
-                            color: const Color(0xFFFFFFD9),
-                          ),
-                          padding: EdgeInsets.all(12.w),
-                          child: Text(
-                            'Testing Chat halo bro',
-                            style: AppTheme.textStyle.blackTextStyle.copyWith(
-                              fontSize: AppTheme.textConfig.size.ml,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            color: Colors.white,
-                          ),
-                          padding: EdgeInsets.all(12.w),
-                          child: Text(
-                            'Testong Chat halo bro',
-                            style: AppTheme.textStyle.blackTextStyle.copyWith(
-                              fontSize: AppTheme.textConfig.size.n,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+              child: SingleChildScrollView(
+                controller: controller.controller,
+                child: Obx(
+                  () => Column(
+                    children: controller.listChat.isEmpty
+                        ? []
+                        : controller.listChat.map((element) {
+                            // var index = controller.listChat.indexOf(element);
+
+                            return Align(
+                              alignment: element.position == null
+                                  ? Alignment.topRight
+                                  : element.position == "right"
+                                      ? Alignment.topRight
+                                      : Alignment.topLeft,
+                              child: Container(
+                                // width: double.infinity,
+                                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  // border: Border.all(width: 1, color: AppTheme.colors.primaryColor),
+                                  color: const Color(0xFFFFFFD9),
+                                ),
+                                padding: EdgeInsets.all(12.w),
+                                // alignment: Alignment.topRight,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      // element.message ?? '',
+                                      element.message == null && element.date == null ? '' : '${element.message}\n${DateFormat('HH:mm').format(DateTime.parse(element.date!))}',
+                                      textAlign: TextAlign.right,
+                                      style: AppTheme.textStyle.blackTextStyle.copyWith(
+                                        fontSize: AppTheme.textConfig.size.ml,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList(),
                   ),
-                ],
+                ),
               ),
             ),
           ),
@@ -185,11 +189,12 @@ class ChatScreen extends GetView<ChatController> {
                       Expanded(
                         child: ConstrainedBox(
                           constraints: BoxConstraints(maxHeight: 44.h),
-                          child: const UnderlineTextFieldWidget(
+                          child: UnderlineTextFieldWidget(
                             hintText: 'Masukkan pesan disini...',
                             filled: true,
                             withBorder: false,
                             isDense: true,
+                            controller: controller.sendMessage,
                           ),
                         ),
                       ),
@@ -197,7 +202,24 @@ class ChatScreen extends GetView<ChatController> {
                         width: 15,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          String uuid = await Prefs.userId;
+                          controller.sendChat(
+                            req: SendChatReq(
+                              message: controller.sendMessage.text,
+                              receiptNumber: Get.arguments,
+                              uuidUsers: uuid,
+                              uuidUsersAdmin: "tlFfvxasdf2C410",
+                            ),
+                          );
+                          controller.sendMessage.text = "";
+                          FocusScope.of(context).unfocus();
+                          controller.controller.animateTo(
+                            controller.controller.position.maxScrollExtent,
+                            duration: Duration(seconds: 0),
+                            curve: Curves.fastOutSlowIn,
+                          );
+                        },
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: 12.w, horizontal: 14.w),
                           decoration: BoxDecoration(

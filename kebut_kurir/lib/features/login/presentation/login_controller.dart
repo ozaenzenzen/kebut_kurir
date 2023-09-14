@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
@@ -36,38 +34,51 @@ class LoginController extends GetxController {
     if (userData != null) {
       if (userData!.result!.token != null) {
         await Prefs.setUserId(userData!.result!.user!.uuid ?? '');
-        GetUserDataResponseModel? getUserDataResponseModel = await _loginRepo.getUserDataRemote(
-          uuid: userData!.result!.user!.uuid.toString(),
-        );
-        if (getUserDataResponseModel != null) {
-          if (getUserDataResponseModel.status == 200) {
-            if (getUserDataResponseModel.result!.isNotEmpty) {
-              await Prefs.setUserData(
-                json.encode(
-                  getUserDataResponseModel.result!.first.toJson(),
-                ),
-              );
-              resultUserData = getUserDataResponseModel.result!.first;
-              isError.value = false;
-            } else {
-              errorText.value = getUserDataResponseModel.status.toString();
-              isError.value = true;
-            }
-          } else {
-            errorText.value = getUserDataResponseModel.status.toString();
-            isError.value = true;
-          }
-        } else {
-          errorText.value = getUserDataResponseModel?.status.toString() ?? 'Error From Server';
-          isError.value = true;
-        }
+        // GetUserDataResponseModel? getUserDataResponseModel = await _loginRepo.getUserDataRemote(
+        //   uuid: userData!.result!.user!.uuid.toString(),
+        // );
+        // if (getUserDataResponseModel != null) {
+        //   if (getUserDataResponseModel.status == 200) {
+        //     if (getUserDataResponseModel.result!.isNotEmpty) {
+        //       await Prefs.setUserData(
+        //         json.encode(
+        //           getUserDataResponseModel.result!.first.toJson(),
+        //         ),
+        //       );
+        //       resultUserData = getUserDataResponseModel.result!.first;
+        //       isError.value = false;
+        //     } else {
+        //       errorText.value = getUserDataResponseModel.status.toString();
+        //       isError.value = true;
+        //     }
+        //   } else {
+        //     errorText.value = getUserDataResponseModel.status.toString();
+        //     isError.value = true;
+        //     userData = null;
+        //   }
+        // } else {
+        //   errorText.value = getUserDataResponseModel?.status.toString() ?? 'Error From Server';
+        //   isError.value = true;
+        //   userData = null;
+        // }
       } else {
         errorText.value = userData!.result!.message ?? 'Error From Server';
         isError.value = true;
+        userData = null;
       }
     } else {
-      errorText.value = 'Error From Server';
+      if (userData!.result != null) {
+        if (userData!.result!.message != null) {
+          errorText.value = userData!.result!.message!;
+        } else {
+          errorText.value = 'Error From Server';
+        }
+      } else {
+        errorText.value = 'Error From Server';
+      }
+
       isError.value = true;
+      userData = null;
     }
     dialogsUtils.hideLoading();
     return userData;

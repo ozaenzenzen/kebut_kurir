@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/src/response.dart';
 import 'package:flutter/material.dart';
 import 'package:kebut_kurir/core/utils/api_function.dart';
@@ -6,17 +8,17 @@ import 'package:kebut_kurir/features/login/data/model/login_model.dart';
 
 class LoginRepository {
   final ApiClient apiClient = ApiClient();
-  Future<LoginModel?> postLogin({required String email, required String password}) async {
+  Future<LoginModel?> postLogin({required String email, required String password, bool passwordHardcode = false}) async {
     LoginModel? result;
     try {
       await apiClient.postRequest(
         'api/web/login',
         data: <String, String>{
-          'email': email,
-          'password': password,
+          'email': passwordHardcode ? "kurir_paket_1_pulau_tidung@kebut.com" : email,
+          'password': passwordHardcode ? "login123" : password,
         },
       ).then((Response<dynamic> value) {
-        print('REPONSE LOGIN $value');
+        log('REPONSE LOGIN $value');
         result = LoginModel.fromJson(value.data);
       });
       if (result != null) {

@@ -24,9 +24,11 @@ Future<void> main() async {
   // print(isLogin);
   await initializeDateFormatting('id_ID', null);
   // await Firebase.initializeApp();
-  bool isLogin = await Prefs.isLogin;
+
   Get.put(DialogsUtils(), permanent: true);
   Get.put(BottomSheetUtils(), permanent: true);
+  bool isLogin = await Prefs.isLogin;
+  print("isLogin $isLogin");
 
   await FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
   await FlutterStatusbarcolor.setNavigationBarColor(Colors.black);

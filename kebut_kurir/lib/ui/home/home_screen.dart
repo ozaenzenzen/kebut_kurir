@@ -53,12 +53,10 @@ class HomeScreen extends GetView<HomeController> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          // await controller.getUserDataRemote(
-          //   onSuccess: (GetUserDataResponseModel data) {
-          //     controller.update();
-          //   },
-          //   onFailed: (String errorMessage) {},
-          // );
+          Future.wait([
+            controller.fetchTotalDelivertDaily(),
+            controller.fetchTotalPickupDaily(),
+          ]);
         },
         child: ListView(
           children: [

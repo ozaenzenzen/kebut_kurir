@@ -34,23 +34,27 @@ class HomeScreenDailySchedule extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          HomeScreenItemDailyScheduleWidget(
-            title: "Pickup Barang",
-            preffixValue: "2",
-            imagePath: "assets/ic_pickup.png",
-            onTapItem: () {
-              Get.toNamed(Routes.pickupBarangScreen);
-            },
+          Obx(
+            () => HomeScreenItemDailyScheduleWidget(
+              title: "Pickup Barang",
+              preffixValue: controller.totalPickupDaily.value.toString(),
+              imagePath: "assets/ic_pickup.png",
+              onTapItem: () {
+                Get.toNamed(Routes.pickupBarangScreen);
+              },
+            ),
           ),
           const SizedBox(height: 12),
-          HomeScreenItemDailyScheduleWidget(
-            title: "Delivery Barang",
-            preffixValue: "0",
-            imagePath: "assets/ic_delivery.png",
-            onTapItem: () {
-              Get.toNamed(Routes.deliveryBarangScreen);
-            },
-          ),
+          Obx(
+            () => HomeScreenItemDailyScheduleWidget(
+              title: "Delivery Barang",
+              preffixValue: controller.totalDeliveryDaily.value.toString(),
+              imagePath: "assets/ic_delivery.png",
+              onTapItem: () {
+                Get.toNamed(Routes.deliveryBarangScreen);
+              },
+            ),
+          )
         ],
       ),
     );

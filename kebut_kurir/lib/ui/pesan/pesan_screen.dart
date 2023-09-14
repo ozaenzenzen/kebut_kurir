@@ -25,7 +25,7 @@ class PesanScreen extends GetView<PesanController> {
           children: [
             PesanItemWidget(
               onTapItem: () {
-                Get.toNamed(Routes.chat);
+                Get.toNamed(Routes.chat, arguments: "KBT12384");
               },
             ),
             SizedBox(
@@ -33,7 +33,7 @@ class PesanScreen extends GetView<PesanController> {
             ),
             PesanItemWidget(
               onTapItem: () {
-                Get.toNamed(Routes.chat);
+                Get.toNamed(Routes.chat, arguments: "KBT12384");
               },
             ),
             SizedBox(
@@ -41,7 +41,7 @@ class PesanScreen extends GetView<PesanController> {
             ),
             PesanItemWidget(
               onTapItem: () {
-                Get.toNamed(Routes.chat);
+                Get.toNamed(Routes.chat, arguments: "KBT12384");
               },
             ),
           ],

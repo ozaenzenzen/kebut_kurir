@@ -165,19 +165,19 @@ class LoginScreen extends GetView<LoginController> {
                           textSize: 18,
                           buttonColor: AppTheme.colors.primaryColor,
                           onTap: () async {
-                            // if (controller.tecEmail.text.isNotEmpty && controller.tecPass.text.isNotEmpty) {
-                            //   // await controller.loginUser().then(
-                            //   //   (value) {
-                            //   //     if (value != null) {
-                            //   //       Get.offNamed(Routes.main);
-                            //   //     }
-                            //   //   },
-                            //   // );
-                            //   Get.offNamed(Routes.main);
-                            // } else {
-                            //   controller.dialogsUtils.showToastMessage('Lengkapi email dan password kamu');
-                            // }
-                            Get.offNamed(Routes.main);
+                            if (controller.tecEmail.text.isNotEmpty && controller.tecPass.text.isNotEmpty) {
+                              await controller.loginUser().then(
+                                (value) {
+                                  if (value != null) {
+                                    Get.offNamed(Routes.main);
+                                  }
+                                },
+                              );
+                              // Get.offNamed(Routes.main);
+                            } else {
+                              controller.dialogsUtils.showToastMessage('Lengkapi email dan password kamu');
+                            }
+                            // Get.offNamed(Routes.main);
                           },
                           borderRadius: 6,
                           textColor: AppTheme.colors.blackColor1,

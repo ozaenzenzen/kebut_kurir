@@ -5,6 +5,6 @@ import 'package:kebut_kurir/features/profile/presentation/profile_controller.dar
 class ProfileBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ProfileController());
+    Get.put(() => ProfileController());
   }
 }
