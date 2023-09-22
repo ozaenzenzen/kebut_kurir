@@ -20,44 +20,43 @@ class ListPickupBarangWidget extends GetView<PickupBarangController> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Column(
-              children: [
-                ItemPickupBarangWidget(
-                  name: "Pelanggan 1",
-                  noPhone: "62811223344",
-                  addresss: "Jl. Kalibata tengah no 100, RT.10/RW.07, Kalibata, Kec. Pancoran, Kota Jakarta Selatan, DKI Jakarta, 12820",
-                  onTapItem: () async {
-                    if (!controller.pickupBarang.value) {
-                      // bool? pickupBarang = await Get.toNamed(Routes.detailPickupBarangScreen);
-                      bool? pickupBarang = await Get.to(() => const DetailPickupBarangScreen(), binding: DetailPickupBarangBindng(), transition: Transition.rightToLeftWithFade);
-                      if (pickupBarang != null) {
-                        controller.pickupBarang.value = pickupBarang;
-                      }
-                    } else {
-                      Get.toNamed(Routes.afterPickupBarang);
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
-                ItemPickupBarangWidget(
-                  name: "Pelanggan 2",
-                  noPhone: "62811223344",
-                  addresss: "Jl. Kalibata tengah no 100, RT.10/RW.07, Kalibata, Kec. Pancoran, Kota Jakarta Selatan, DKI Jakarta, 12820",
-                  onTapItem: () async {
-                    if (!controller.pickupBarang.value) {
-                      // bool? pickupBarang = await Get.toNamed(Routes.detailPickupBarangScreen);
-                      bool? pickupBarang = await Get.to(() => const DetailPickupBarangScreen(), binding: DetailPickupBarangBindng(), transition: Transition.rightToLeftWithFade);
-                      if (pickupBarang != null) {
-                        controller.pickupBarang.value = pickupBarang;
-                      }
-                    } else {
-                      Get.toNamed(Routes.afterPickupBarang);
-                    }
-                  },
-                ),
-              ],
+            Obx(
+              () => Column(
+                children: controller.pickupData.value!.result!.data!.map((e) {
+                  return Column(
+                    children: [
+                      e.detailPickup.value == null
+                          ? Container()
+                          : ItemPickupBarangWidget(
+                              // name: "Pelanggan 1",
+                              type: e.type!,
+                              name: e.detailPickup.value!.senderDetails!.nameSender!,
+                              noPhone: e.detailPickup.value!.senderDetails!.phone!,
+                              addresss: e.detailPickup.value!.senderDetails!.address!,
+                              onTapItem: () async {
+                                if (!controller.pickupBarang.value) {
+                                  // bool? pickupBarang = await Get.toNamed(Routes.detailPickupBarangScreen);
+                                  bool? pickupBarang = await Get.to(
+                                    () => const DetailPickupBarangScreen(),
+                                    binding: DetailPickupBarangBindng(),
+                                    arguments: e.detailPickup.value,
+                                    transition: Transition.rightToLeftWithFade,
+                                  );
+                                  if (pickupBarang != null) {
+                                    controller.pickupBarang.value = pickupBarang;
+                                  }
+                                } else {
+                                  Get.toNamed(Routes.afterPickupBarang);
+                                }
+                              },
+                            ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                    ],
+                  );
+                }).toList(),
+              ),
             )
           ],
         ),

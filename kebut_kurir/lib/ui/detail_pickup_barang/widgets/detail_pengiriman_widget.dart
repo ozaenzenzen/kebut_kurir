@@ -2,7 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailPengirimanLacakPesananWidget extends StatelessWidget {
-  const DetailPengirimanLacakPesananWidget({super.key});
+  final String senderName, senderPhone, senderAddress;
+  final String recipientName, recipientPhone, recipientAddress;
+  const DetailPengirimanLacakPesananWidget({
+    super.key,
+    required this.senderAddress,
+    required this.senderName,
+    required this.senderPhone,
+    required this.recipientAddress,
+    required this.recipientName,
+    required this.recipientPhone,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +111,7 @@ class DetailPengirimanLacakPesananWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Agung Azhari',
+                        senderName,
                         style: GoogleFonts.mukta(
                           color: const Color(0xFF121419),
                           fontSize: 16,
@@ -109,7 +119,7 @@ class DetailPengirimanLacakPesananWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '62811223344',
+                        senderPhone,
                         style: GoogleFonts.mukta(
                           color: const Color(0xFF121419),
                           fontSize: 14,
@@ -119,7 +129,7 @@ class DetailPengirimanLacakPesananWidget extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: Text(
-                          'Jl. Kalibata tengah no 100, RT.10/RW.07, Kalibata, Kec. Pancoran, Kota Jakarta Selatan, DKI Jakarta, 12820',
+                          senderAddress,
                           style: GoogleFonts.mukta(
                             color: const Color(0xFF7C7E83),
                             fontSize: 12,
@@ -188,7 +198,7 @@ class DetailPengirimanLacakPesananWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Izmi Istiqamah',
+                              recipientName,
                               style: GoogleFonts.mukta(
                                 color: const Color(0xFF121419),
                                 fontSize: 16,
@@ -196,7 +206,7 @@ class DetailPengirimanLacakPesananWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '628111222333444',
+                              recipientPhone,
                               style: GoogleFonts.mukta(
                                 color: const Color(0xFF121419),
                                 fontSize: 14,
@@ -206,7 +216,7 @@ class DetailPengirimanLacakPesananWidget extends StatelessWidget {
                             SizedBox(
                               width: double.infinity,
                               child: Text(
-                                'Jl. Kalibata tengah no 100, RT.10/RW.07, Kalibata, Kec. Pancoran, Kota Jakarta Selatan, DKI Jakarta, 12820',
+                                recipientAddress,
                                 style: GoogleFonts.mukta(
                                   color: const Color(0xFF7C7E83),
                                   fontSize: 12,

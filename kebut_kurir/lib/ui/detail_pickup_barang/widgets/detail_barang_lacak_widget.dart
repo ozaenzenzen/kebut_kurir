@@ -75,7 +75,7 @@ class DetailBarangLacakPesananWidget extends GetView<DetailPickupBarangControlle
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Pakaian Muslim',
+                  controller.detailPickup.value!.descPackage!,
                   style: GoogleFonts.mukta(
                     color: const Color(0xFF121419),
                     fontSize: 16,
@@ -83,7 +83,7 @@ class DetailBarangLacakPesananWidget extends GetView<DetailPickupBarangControlle
                   ),
                 ),
                 Text(
-                  'Ukuran : Kecil',
+                  'Ukuran : ${controller.detailPickup.value!.packageSizeName}',
                   style: GoogleFonts.mukta(
                     color: const Color(0xFF121419),
                     fontSize: 14,
@@ -109,7 +109,8 @@ class DetailBarangLacakPesananWidget extends GetView<DetailPickupBarangControlle
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              '3.0 Kg',
+                              // '3.0 Kg',  
+                              controller.detailPickup.value!.packageWeight!,
                               style: GoogleFonts.mukta(
                                 color: const Color(0xFF121419),
                                 fontSize: 12,
@@ -133,7 +134,8 @@ class DetailBarangLacakPesananWidget extends GetView<DetailPickupBarangControlle
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              '1000cm3',
+                              // '1000cm3',
+                              controller.detailPickup.value!.packageVolume!,
                               style: GoogleFonts.mukta(
                                 color: const Color(0xFF121419),
                                 fontSize: 12,

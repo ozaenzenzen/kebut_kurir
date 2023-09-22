@@ -87,6 +87,7 @@ class HomeRepository {
       ).then(
         (Response<dynamic> value) {
           print('HASIL GET TOTAL DAILY ====>>> ${value.data}');
+          print('UUID ====>>> $uuid');
           result = ResultTotalDeliveryDailyModel.fromJson(value.data);
         },
       );

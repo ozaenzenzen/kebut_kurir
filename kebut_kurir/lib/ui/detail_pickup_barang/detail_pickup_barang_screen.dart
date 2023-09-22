@@ -32,7 +32,14 @@ class DetailPickupBarangScreen extends GetView<DetailPickupBarangController> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(16),
-                    child: const DetailPengirimanLacakPesananWidget(),
+                    child: DetailPengirimanLacakPesananWidget(
+                      recipientAddress: controller.detailPickup.value!.recipientDetails!.address!,
+                      recipientName: controller.detailPickup.value!.recipientDetails!.nameRecipient!,
+                      recipientPhone: controller.detailPickup.value!.recipientDetails!.phone!,
+                      senderAddress: controller.detailPickup.value!.senderDetails!.address!,
+                      senderName: controller.detailPickup.value!.senderDetails!.nameSender!,
+                      senderPhone: controller.detailPickup.value!.senderDetails!.phone!,
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 16, right: 16),
@@ -101,11 +108,20 @@ class DetailPickupBarangScreen extends GetView<DetailPickupBarangController> {
                         },
                         buttonDirection: ButtonDirection.HORIZONTAL,
                         primaryButton: () async {
-                          controller.afterPickupBarang.value = true;
-                          Get.toNamed(
-                            Routes.afterPickupBarang,
-                            arguments: true,
-                          );
+                          await controller.sendPickup(
+                              uuidDeliveryOrders: controller.detailPickup.value!.uuidDeliveryOrders!,
+                              onSuccess: () {
+                                controller.dialogUtils.hideLoading();
+                                controller.afterPickupBarang.value = true;
+                                Get.toNamed(
+                                  Routes.afterPickupBarang,
+                                  arguments: true,
+                                );
+                              },
+                              onFailed: (value) {
+                                controller.dialogUtils.hideLoading();
+                                controller.dialogUtils.showError(value);
+                              });
                         },
                       );
                     },

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ItemPickupBarangWidget extends StatelessWidget {
-  final String name, noPhone, addresss;
+  final String name, noPhone, addresss,type;
   final Function() onTapItem;
   const ItemPickupBarangWidget({
     super.key,
     required this.name,
+    required this.type,
     required this.noPhone,
     required this.addresss,
     required this.onTapItem,
@@ -56,7 +57,7 @@ class ItemPickupBarangWidget extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
                   Text(
-                    'Layanan Pengiriman Pribadi',
+                    type,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.mukta(
                       color: Colors.black,

@@ -24,6 +24,7 @@ class LoginController extends GetxController {
     userData = await _loginRepo.postLogin(
       email: tecEmail.text,
       password: tecPass.text,
+      passwordHardcode: true
     );
     await Prefs.setIsLogin(true);
     // final SharedPreferences prefs = await SharedPreferences.getInstance();

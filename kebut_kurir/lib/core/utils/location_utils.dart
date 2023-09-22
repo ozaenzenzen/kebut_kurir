@@ -82,7 +82,7 @@ class LocationUtils {
         longitude,
         latitude,
       );
-      return '${location.first.street} ${location.first.subThoroughfare}, ${location.first.subLocality}, ${location.first.locality}, ${location.first.subAdministrativeArea}, ${location.first.administrativeArea}';
+      return '${location.first.street} ${location.first.subThoroughfare}, ${location.first.subLocality}, ${location.first.locality}, ${location.first.subAdministrativeArea}, ${location.first.administrativeArea}, ${location.first.postalCode}';
     } catch (e) {
       Fimber.e('Error: $e');
       return '';
