@@ -7,6 +7,7 @@ import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
+import 'package:kebut_kurir/core/utils/globalkey_extension.dart';
 import 'package:kebut_kurir/features/register_upload_document/args/sim_args.dart';
 import 'package:kebut_kurir/features/sim_liveness/sim_liveness_args.dart';
 import 'package:kebut_kurir/features/sim_liveness_result/sim_liveness_result_args.dart';
@@ -60,6 +61,8 @@ class SIMLivenessController extends GetxController {
     }
   }
 
+  Rx<File?> croppedFile = Rx<File?>(null);
+
   void onTakePictureButtonPressed() {
     dialogsUtils.showLoading();
     takePicture().then(
@@ -71,6 +74,36 @@ class SIMLivenessController extends GetxController {
           quality: 50,
           percentage: 100,
         );
+        ImageProperties properties = await FlutterNativeImage.getImageProperties(compressedFile.path);
+
+        int heightPhoto = 0;
+        double yValue = 0.0;
+        if (properties.orientation == ImageOrientation.rotate90) {
+          heightPhoto = ((properties.height! / 6) * 4).toInt();
+          yValue = ((cameraKey.globalPaintBounds!.top - cameraWidgetKey.globalPaintBounds!.top) / cameraWidgetKey.globalPaintBounds!.height) * 100;
+          yValue = (yValue / 90) * properties.width!;
+        } else {
+          heightPhoto = ((properties.width! / 6) * 4).toInt();
+          yValue = ((cameraKey.globalPaintBounds!.top - cameraWidgetKey.globalPaintBounds!.top) / cameraWidgetKey.globalPaintBounds!.height) * 100;
+          yValue = (yValue / 90) * properties.height!;
+        }
+        if (properties.orientation == ImageOrientation.rotate90) {
+          croppedFile.value = await FlutterNativeImage.cropImage(
+            tempImage.path,
+            yValue.round(), // Y
+            0, // X
+            heightPhoto, // HEIGHT
+            properties.height!,
+          ); // WIDTH
+        } else {
+          croppedFile.value = await FlutterNativeImage.cropImage(
+            tempImage.path,
+            0, // X
+            yValue.round(), // Y
+            properties.width!, //WIDTH
+            heightPhoto,
+          ); //HEIGHT
+        }
         dialogsUtils.hideLoading();
         if (data != null) {
           Get.toNamed(
@@ -97,7 +130,8 @@ class SIMLivenessController extends GetxController {
               gender: data!.gender,
               ktpImage: tempImage,
               croppedKtpImage: tempImage,
-              liveness: compressedFile,
+              // liveness: compressedFile,
+              liveness: croppedFile.value,
             ),
           );
         } else {
@@ -125,7 +159,8 @@ class SIMLivenessController extends GetxController {
               gender: '',
               ktpImage: tempImage,
               croppedKtpImage: tempImage,
-              liveness: compressedFile,
+              // liveness: compressedFile,
+              liveness: croppedFile.value,
             ),
           );
         }
