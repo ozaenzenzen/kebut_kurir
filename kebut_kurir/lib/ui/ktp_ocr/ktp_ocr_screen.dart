@@ -84,7 +84,8 @@ class KTPOcrScreen extends GetView<KTPOcrController> {
                       child: Container(
                         width: double.infinity,
                         key: controller.headerKey,
-                        padding: const EdgeInsets.fromLTRB(20, 130, 20, 0),
+                        padding: const EdgeInsets.fromLTRB(20, 130, 20, 100),
+                        color: Colors.black.withOpacity(0.4),
                         child: Text(
                           'Mohon posisikan kartu ${controller.digitalCard.name} sesuai dengan, garis bantu yang disediakan.',
                           textAlign: TextAlign.center,
@@ -95,40 +96,92 @@ class KTPOcrScreen extends GetView<KTPOcrController> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 100.h),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: DottedBorder(
-                        child: AspectRatio(
-                          key: controller.cameraKey,
-                          aspectRatio: 6 / 4,
-                          child: Container(
-                            width: 315.w,
-                            height: 205.h,
-                            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 37),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                DottedBorder(
-                                  child: SizedBox(
-                                    width: 170.w,
-                                    height: 18.h,
-                                  ),
+                    // SizedBox(height: 50.h),
+                    AspectRatio(
+                      aspectRatio: 5 / 4,
+                      key: controller.cameraKey,
+                      child: ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.4),
+                          BlendMode.srcOut,
+                        ),
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                color: Colors.transparent,
+                              ),
+                              child: Container(
+                                width: double.infinity,
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 30,
+                                  vertical: 40,
                                 ),
-                                const SizedBox(width: 25),
-                                Column(
-                                  children: [
-                                    const SizedBox(height: 20),
-                                    DottedBorder(
-                                      child: SizedBox(
-                                        width: 75.w,
-                                        height: 104.h,
-                                      ),
-                                    ),
-                                  ],
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                              ],
+                              ),
                             ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    // AspectRatio(
+                    //   aspectRatio: 6 / 4,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.symmetric(
+                    //       horizontal: 20,
+                    //       vertical: 20,
+                    //     ),
+                    //     child: DottedBorder(
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.all(10),
+                    //         child: Container(
+                    //           key: controller.cameraKey,
+                    //           width: 315.w,
+                    //           height: 205.h,
+                    //           padding: const EdgeInsets.symmetric(
+                    //             horizontal: 15,
+                    //             vertical: 37,
+                    //           ),
+                    //           child: Row(
+                    //             crossAxisAlignment: CrossAxisAlignment.start,
+                    //             children: <Widget>[
+                    //               DottedBorder(
+                    //                 child: SizedBox(
+                    //                   width: 170.w,
+                    //                   height: 18.h,
+                    //                 ),
+                    //               ),
+                    //               const SizedBox(width: 25),
+                    //               Column(
+                    //                 children: [
+                    //                   const SizedBox(height: 20),
+                    //                   DottedBorder(
+                    //                     child: SizedBox(
+                    //                       width: 75.w,
+                    //                       height: 104.h,
+                    //                     ),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(height: 50.h),
+                    Expanded(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.black.withOpacity(0.4),
+                        child: UnconstrainedBox(
+                          child: KtpOcrButtonWidget(
+                            onTap: () => controller.onTakePictureButtonPressed(),
                           ),
                         ),
                       ),
@@ -136,16 +189,16 @@ class KTPOcrScreen extends GetView<KTPOcrController> {
                   ],
                 ),
               ),
-              Positioned(
-                bottom: 80,
-                left: 0,
-                right: 0,
-                child: UnconstrainedBox(
-                  child: KtpOcrButtonWidget(
-                    onTap: () => controller.onTakePictureButtonPressed(),
-                  ),
-                ),
-              )
+              // Positioned(
+              //   bottom: 80,
+              //   left: 0,
+              //   right: 0,
+              //   child: UnconstrainedBox(
+              //     child: KtpOcrButtonWidget(
+              //       onTap: () => controller.onTakePictureButtonPressed(),
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),

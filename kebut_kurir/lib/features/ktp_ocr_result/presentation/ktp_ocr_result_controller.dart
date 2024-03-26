@@ -2,7 +2,8 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:get/get.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
+// import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/enums/ocr_enum.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
@@ -262,7 +263,8 @@ class KTPOcrResultController extends GetxController {
     //   var textRecognizer = GoogleMlKit.vision.textRecognizer();
     //   final visionImage = InputImage.fromFilePath(pickedImage);
     // var visionText = await textRecognizer.processImage(visionImage);
-    var textRecognizer = GoogleMlKit.vision.textRecognizer();
+    // var textRecognizer = GoogleMlKit.vision.textRecognizer();
+    var textRecognizer = TextRecognizer();
     final visionImage = InputImage.fromFilePath(pickedImage!);
     final visionText = await textRecognizer.processImage(visionImage);
 

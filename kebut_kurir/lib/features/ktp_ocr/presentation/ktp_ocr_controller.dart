@@ -77,13 +77,13 @@ class KTPOcrController extends GetxController {
       int heightPhoto = 0;
       double yValue = 0.0;
       if (properties.orientation == ImageOrientation.rotate90) {
-        heightPhoto = ((properties.height! / 5) * 4).toInt();
+        heightPhoto = ((properties.height! / 6) * 4).toInt();
         yValue = ((cameraKey.globalPaintBounds!.top - cameraWidgetKey.globalPaintBounds!.top) / cameraWidgetKey.globalPaintBounds!.height) * 100;
-        yValue = (yValue / 100) * properties.width!;
+        yValue = (yValue / 90) * properties.width!;
       } else {
-        heightPhoto = ((properties.width! / 5) * 4).toInt();
+        heightPhoto = ((properties.width! / 6) * 4).toInt();
         yValue = ((cameraKey.globalPaintBounds!.top - cameraWidgetKey.globalPaintBounds!.top) / cameraWidgetKey.globalPaintBounds!.height) * 100;
-        yValue = (yValue / 100) * properties.height!;
+        yValue = (yValue / 90) * properties.height!;
       }
       try {
         if (properties.orientation == ImageOrientation.rotate90) {
