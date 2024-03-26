@@ -22,6 +22,7 @@ import 'package:kebut_kurir/features/profile/presentation/profile_binding.dart';
 import 'package:kebut_kurir/features/register/presentation/register_binding.dart';
 import 'package:kebut_kurir/features/register_upload_document/presentation/register_upload_document_binding.dart';
 import 'package:kebut_kurir/features/scan_qr/presentation/scan_qr_binding.dart';
+import 'package:kebut_kurir/features/sim_liveness_result/sim_liveness_result_binding.dart';
 import 'package:kebut_kurir/features/static_page/presentation/static_page_binding.dart';
 import 'package:kebut_kurir/features/stnk_kendaraan_liveness_result/presentation/stnk_kendaraan_liveness_result_binding.dart';
 import 'package:kebut_kurir/features/stnk_liveness/presentation/stnk_liveness_binding.dart';
@@ -48,6 +49,8 @@ import 'package:kebut_kurir/ui/pick_up_barang/pick_up_barang_screen.dart';
 import 'package:kebut_kurir/ui/register/register_screen.dart';
 import 'package:kebut_kurir/ui/register_upload_document/register_upload_document_screen.dart';
 import 'package:kebut_kurir/ui/scan_qr/scan_qr_screen.dart';
+import 'package:kebut_kurir/ui/sim_liveness/sim_liveness_result_screen.dart';
+import 'package:kebut_kurir/ui/sim_liveness/sim_liveness_screen.dart';
 import 'package:kebut_kurir/ui/static_page/static_page_screen.dart';
 import 'package:kebut_kurir/ui/stnk_kendaraan_liveness_result/stnk_kendaraan_liveness_result_screen.dart';
 import 'package:kebut_kurir/ui/stnk_liveness/stnk_liveness_screen.dart';
@@ -188,6 +191,12 @@ class AppPages {
       page: () => const KTPLivenessResultScreen(),
       transition: Transition.rightToLeftWithFade,
       binding: KTPLivenessResultBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.simLivenessResult,
+      page: () => const SIMLivenessResultScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: SIMLivenessResultBinding(),
     ),
     GetPage<dynamic>(
       name: Routes.stnkLivenessScreen,

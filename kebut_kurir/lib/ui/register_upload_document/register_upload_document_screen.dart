@@ -16,6 +16,7 @@ import 'package:kebut_kurir/features/register_upload_document/args/ktp_liveness_
 import 'package:kebut_kurir/features/register_upload_document/args/sim_args.dart';
 import 'package:kebut_kurir/features/register_upload_document/args/stnk_result_args.dart';
 import 'package:kebut_kurir/features/register_upload_document/presentation/register_upload_document_controller.dart';
+import 'package:kebut_kurir/features/sim_liveness/sim_liveness_binding.dart';
 import 'package:kebut_kurir/features/static_page/presentation/static_page_binding.dart';
 import 'package:kebut_kurir/features/stnk_liveness/presentation/stnk_liveness_binding.dart';
 import 'package:kebut_kurir/ui/ktp_liveness/ktp_liveness_screen.dart';
@@ -25,6 +26,7 @@ import 'package:kebut_kurir/ui/register_upload_document/widgets/register_upload_
 import 'package:kebut_kurir/ui/register_upload_document/widgets/selfie_ktp/liveness_guide_bottom_sheet.dart';
 import 'package:kebut_kurir/ui/register_upload_document/widgets/sim/sim_guide_bottom_sheet.dart';
 import 'package:kebut_kurir/ui/register_upload_document/widgets/stnk/stnk_guide_bttom_sheet.dart';
+import 'package:kebut_kurir/ui/sim_liveness/sim_liveness_screen.dart';
 import 'package:kebut_kurir/ui/static_page/static_page_screen.dart';
 import 'package:kebut_kurir/ui/stnk_liveness/stnk_liveness_screen.dart';
 
@@ -357,8 +359,8 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                                       padding: EdgeInsets.all(16.w),
                                       content: SIMGuideBottomSheet(
                                         nextStep: () async {
-                                          String? result = await Get.to(const KTPLivenessScreen(),
-                                              binding: KTPLivenessBinding(),
+                                          String? result = await Get.to(const SIMLivenessScreen(),
+                                              binding: SIMLivenessBinding(),
                                               transition: Transition.rightToLeftWithFade,
                                               arguments: SimArgs(
                                                 // ktpImage: controller.ocrKtp.value!,
@@ -409,8 +411,8 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                                   padding: EdgeInsets.all(16.w),
                                   content: SIMGuideBottomSheet(
                                     nextStep: () async {
-                                      String? result = await Get.to(const KTPLivenessScreen(),
-                                          binding: KTPLivenessBinding(),
+                                      String? result = await Get.to(const SIMLivenessScreen(),
+                                          binding: SIMLivenessBinding(),
                                           transition: Transition.rightToLeftWithFade,
                                           arguments: SimArgs(
                                             // ktpImage: controller.ocrKtp.value!,

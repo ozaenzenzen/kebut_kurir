@@ -14,6 +14,7 @@ class Routes {
   static const String ocrKtpConfirm = '/ocr_ktp_confirm';
   static const String livenessScreen = '/liveness_screen';
   static const String livenessResult = '/liveness_result';
+  static const String simLivenessResult = '/sim_liveness_result';
   static const String forgotPassword = '/forgot_password';
   static const String changePassword = '/change_password';
   static const String chat = '/chat';
