@@ -160,7 +160,8 @@ class RegisterController extends GetxController {
 
     RegisterStepOneModel? result = await _registerRepository.registerStepOne(
       body: RegisterStepOneBodyModel(
-        email: 'kurir2@kebut.com',
+        // email: 'kurir2@kebut.com',
+        email: tecEmail.text,
         handphone: tecNoHp.text,
         fullName: tecNama.text,
         deviceId: deviceId,
