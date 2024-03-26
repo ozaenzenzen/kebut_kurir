@@ -106,9 +106,33 @@ class STNKLivenessScreen extends GetView<STNKLivenessController> {
                   ),
                   AspectRatio(
                     key: controller.cameraKey,
-                    aspectRatio: 3 / 4,
+                    aspectRatio: 4 / 4,
                     child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.srcOut),
+                      colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.4),
+                        BlendMode.srcOut,
+                      ),
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            child: Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 40,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
