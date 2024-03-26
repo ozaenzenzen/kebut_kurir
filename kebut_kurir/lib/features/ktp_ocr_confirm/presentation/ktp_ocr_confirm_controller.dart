@@ -99,7 +99,7 @@ class KTPOcrConfirmController extends GetxController {
     for (MaritalStatusData i in martialStatusModels.value!.result!.data!) {
       list.add(i.name ?? '');
     }
-    listGenders.clear();
+    listMaritalStatus.clear();
     listName.addAll(list);
     listMaritalStatus.addAll(list);
     return listName;
@@ -113,9 +113,9 @@ class KTPOcrConfirmController extends GetxController {
     for (ReligionData i in religionsModel.value!.result!.data!) {
       list.add(i.name ?? '');
     }
-    listGenders.clear();
+    listReligions.clear();
     listName.addAll(list);
-    listGenders.addAll(list);
+    listReligions.addAll(list);
     return listName;
   }
 
@@ -178,7 +178,7 @@ class KTPOcrConfirmController extends GetxController {
     selectedVillages = listVillages.value!.result!.data!.firstWhere((element) => element.name == tecKelurahan.text).uuid ?? '';
     listPostalCode.value = await _registerRepository.getPostalCode(selectedVillages);
     for (var i in listPostalCode.value!.result!.data!) {
-      list.add(i.name ?? '');
+      list.add(i.postalCode ?? '');
     }
     listName.addAll(list);
     listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));

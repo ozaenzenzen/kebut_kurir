@@ -156,7 +156,7 @@ class KTPOcrConfirmScreen extends GetView<KTPOcrConfirmController> {
                         ),
                         SizedBox(height: 16.h),
                         Obx(
-                          () => controller.listGenders.isEmpty
+                          () => controller.listGenders.isEmpty 
                               ? const ConfirmDataRadioWidget(
                                   label: 'Jenis Kelamin',
                                   listValue: ['Pria', 'Wanita'],
@@ -168,7 +168,7 @@ class KTPOcrConfirmScreen extends GetView<KTPOcrConfirmController> {
                         ),
                         SizedBox(height: 16.h),
                         Obx(
-                          () => controller.listGenders.isEmpty
+                          () => controller.listMaritalStatus.isEmpty
                               ? ConfirmDataDropDownWidget(
                                   label: 'Status Perkawinan',
                                   listMenu: const [
