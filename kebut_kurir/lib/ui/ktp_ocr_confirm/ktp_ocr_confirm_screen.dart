@@ -199,7 +199,7 @@ class KTPOcrConfirmScreen extends GetView<KTPOcrConfirmController> {
                         ),
                         SizedBox(height: 16.h),
                         Obx(
-                          () => controller.listGenders.isEmpty
+                          () => controller.listReligions.isEmpty
                               ? ConfirmDataDropDownWidget(
                                   label: 'Agama',
                                   listMenu: const [
