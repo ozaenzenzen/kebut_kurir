@@ -92,10 +92,13 @@ class LoginScreen extends GetView<LoginController> {
                             () => UnderlineTextFieldWidget(
                               withBorder: false,
                               filled: true,
-                              isObstruct: controller.viewPass.value,
+                              isObstruct: !controller.viewPass.value,
                               controller: controller.tecPass,
+                              onTapSuffixIcon: () {
+                                controller.viewPass.value = !controller.viewPass.value;
+                              },
                               suffixIcon: Icon(
-                                controller.viewPass.value ? Icons.visibility : Icons.visibility_off,
+                                controller.viewPass.value ? Icons.visibility_off : Icons.visibility,
                                 color: Colors.black,
                               ),
                               hintText: 'Masukkan password anda',

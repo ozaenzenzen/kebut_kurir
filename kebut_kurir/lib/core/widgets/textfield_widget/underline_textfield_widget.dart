@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 
-
 class UnderlineTextFieldWidget extends StatelessWidget {
   final String hintText;
   final TextStyle? hintTextStyle;
@@ -15,6 +14,7 @@ class UnderlineTextFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final void Function()? onTap;
+  final void Function()? onTapSuffixIcon;
   final bool readOnly;
   final bool withBorder;
   final String? label;
@@ -45,6 +45,7 @@ class UnderlineTextFieldWidget extends StatelessWidget {
     this.textFieldStyle,
     this.label,
     this.onTap,
+    this.onTapSuffixIcon,
     this.maxLines,
     this.readOnly = false,
     this.prefixIcon,
@@ -85,7 +86,14 @@ class UnderlineTextFieldWidget extends StatelessWidget {
               fontSize: AppTheme.textConfig.size.n,
             ),
         contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-        suffixIcon: suffixIcon,
+        suffixIcon: onTapSuffixIcon != null
+            ? InkWell(
+                onTap: () {
+                  onTapSuffixIcon?.call();
+                },
+                child: suffixIcon,
+              )
+            : suffixIcon,
         suffixIconConstraints: suffixIconConstraints ?? BoxConstraints(minHeight: 24.h, minWidth: 48.h),
         prefixIcon: prefixIcon,
         isDense: isDense,
