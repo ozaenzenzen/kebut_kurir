@@ -35,6 +35,8 @@ class RegisterController extends GetxController {
   TextEditingController tecPass = TextEditingController();
   TextEditingController tecPassConfirm = TextEditingController();
 
+  RxBool isButtonRegistActive = false.obs;
+
   RxBool viewPass = false.obs;
   RxBool viewPassConfirm = false.obs;
 
@@ -56,14 +58,16 @@ class RegisterController extends GetxController {
 
   final RegisterRepository _registerRepository = RegisterRepository();
 
-  bool buttonNextActive() {
+  RxBool buttonNextActive() {
     bool result = false;
     if (tecNama.text.isNotEmpty && tecNoHp.text.isNotEmpty && tecAlamat.text.isNotEmpty && tecEmail.text.isNotEmpty) {
       result = true;
-    }else{
+      isButtonRegistActive.value = true;
+    } else{
       result = false;
+      isButtonRegistActive.value = false;
     }
-    return result;
+    return isButtonRegistActive;
   }
 
   Future<List<String>> getListProvince(String query) async {

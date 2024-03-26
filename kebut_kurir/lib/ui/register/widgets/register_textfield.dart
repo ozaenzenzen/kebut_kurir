@@ -10,6 +10,7 @@ class RegisterTextField extends StatelessWidget {
   final TextInputType? inputType;
   final Widget? prefixIcon;
   final TextEditingController? controller;
+  final Function(String value)? onChanged;
   const RegisterTextField({
     super.key,
     required this.label,
@@ -18,6 +19,7 @@ class RegisterTextField extends StatelessWidget {
     this.controller,
     this.inputType,
     this.prefixIcon,
+    this.onChanged,
   });
 
   @override
@@ -39,6 +41,7 @@ class RegisterTextField extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width,
           child: UnderlineTextFieldWidget(
+            onChanged: onChanged,
             keyboardType: inputType,
             isObstruct: isObscure,
             prefixIcon: prefixIcon,
