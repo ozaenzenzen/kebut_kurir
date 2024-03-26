@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
+import 'package:kebut_kurir/core/widgets/dash_widget/dotted_border_widget.dart';
 import 'package:kebut_kurir/features/stnk_kendaraan_liveness/presentation/stnk_kendaraan_liveness_controller.dart';
 import 'package:kebut_kurir/ui/stnk_liveness/widgets/stnk_liveness_button.dart';
 
@@ -105,10 +106,34 @@ class STNKKEndaraanLivenessScreen extends GetView<STNKKendaraanLivenessControlle
                     ),
                   ),
                   AspectRatio(
-                    key: controller.cameraKey,
                     aspectRatio: 3 / 4,
                     child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.srcOut),
+                      colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.4),
+                        BlendMode.srcOut,
+                      ),
+                      child: Stack(
+                        children: [
+                          Container(
+                            key: controller.cameraKey,
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            child: Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 40,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
