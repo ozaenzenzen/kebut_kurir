@@ -71,6 +71,7 @@ class STNKLivenessScreen extends GetView<STNKLivenessController> {
                 );
                 controller.cameraController!.initialize().then((_) {
                   controller.onSetFlashModeButtonPressed(FlashMode.off);
+                  controller.update();
                 });
               },
             )
@@ -156,8 +157,8 @@ class STNKLivenessScreen extends GetView<STNKLivenessController> {
   }
 
   Widget _cameraPreview() {
-    return Obx(
-      () => !controller.isCameraInit.value
+    return GetBuilder<STNKLivenessController>(
+      builder: (controller) => !controller.isCameraInit.value
           ? Container()
           : SizedBox(
               width: double.infinity,
