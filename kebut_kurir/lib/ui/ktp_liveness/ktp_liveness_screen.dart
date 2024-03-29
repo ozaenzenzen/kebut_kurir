@@ -11,12 +11,6 @@ class KTPLivenessScreen extends GetView<KTPLivenessController> {
 
   @override
   Widget build(BuildContext context) {
-    // if (controller.cameraController == null) {
-    //   return Container();
-    // }
-    // if (!controller.cameraController!.value.isInitialized) {
-    //   return Container();
-    // }
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
@@ -61,23 +55,7 @@ class KTPLivenessScreen extends GetView<KTPLivenessController> {
                 color: Colors.white,
               ),
               onPressed: () async {
-                final lensDirection = controller.cameraController?.description.lensDirection;
-                CameraDescription? newDescription;
-                if (lensDirection == CameraLensDirection.front) {
-                  newDescription = controller.cameras!.firstWhere((description) => description.lensDirection == CameraLensDirection.back);
-                } else {
-                  newDescription = controller.cameras!.firstWhere((description) => description.lensDirection == CameraLensDirection.front);
-                }
-                controller.cameras = await availableCameras();
-
-                controller.cameraController = CameraController(
-                  newDescription,
-                  ResolutionPreset.max,
-                  imageFormatGroup: ImageFormatGroup.jpeg,
-                );
-                controller.cameraController!.initialize().then((_) {
-                  controller.onSetFlashModeButtonPressed(FlashMode.off);
-                });
+                controller.flipCamera();
               },
             )
           ],
@@ -98,7 +76,9 @@ class KTPLivenessScreen extends GetView<KTPLivenessController> {
                       child: Container(
                         padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
                         child: Text(
-                          controller.isSim.value ? 'Scan SIM kamu, pastikan SIM kamu berada di di area yang sudah ditentukan' : 'Pastikan wajah dan KTP kamu tepat berada di area yang sudah ditentukan',
+                          controller.isSim.value
+                              ? 'Scan SIM kamu, pastikan SIM kamu berada di di area yang sudah ditentukan'
+                              : 'Pastikan wajah dan KTP kamu tepat berada di area yang sudah ditentukan',
                           textAlign: TextAlign.center,
                           style: AppTheme.textStyle.blackTextStyle.copyWith(
                             color: Colors.white,
@@ -162,8 +142,8 @@ class KTPLivenessScreen extends GetView<KTPLivenessController> {
   }
 
   Widget _cameraPreview() {
-    return Obx(
-      () => !controller.isCameraInit.value
+    return GetBuilder<KTPLivenessController>(
+      builder: (controller) => !controller.isCameraInit.value
           ? Container()
           : SizedBox(
               width: double.infinity,

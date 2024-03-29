@@ -37,6 +37,7 @@ class KTPLivenessController extends GetxController {
     cameraController!.initialize().then((_) {
       onSetFlashModeButtonPressed(FlashMode.off);
       isCameraInit.value = true;
+      update();
     });
   }
 
@@ -146,6 +147,36 @@ class KTPLivenessController extends GetxController {
     });
   }
 
+  Future<void> flipCamera() async {
+    if (cameraController == null) {
+      return;
+    }
+    try {
+      final lensDirection = cameraController?.description.lensDirection;
+      CameraDescription? newDescription;
+      if (lensDirection == CameraLensDirection.front) {
+        newDescription = cameras!.firstWhere((description) => description.lensDirection == CameraLensDirection.back);
+      } else {
+        newDescription = cameras!.firstWhere((description) => description.lensDirection == CameraLensDirection.front);
+      }
+      cameras = await availableCameras();
+
+      cameraController = CameraController(
+        newDescription,
+        ResolutionPreset.max,
+        imageFormatGroup: ImageFormatGroup.jpeg,
+      );
+      cameraController!.initialize().then((_) {
+        onSetFlashModeButtonPressed(FlashMode.off);
+        update();
+      });
+    } catch (e) {
+      Fimber.e('$e');
+      debugPrint('$e');
+      rethrow;
+    }
+  }
+
   Future<void> setFlashMode(FlashMode mode) async {
     if (cameraController == null) {
       return;
@@ -189,11 +220,6 @@ class KTPLivenessController extends GetxController {
       }
     }
     initCamera();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
   }
 
   @override
