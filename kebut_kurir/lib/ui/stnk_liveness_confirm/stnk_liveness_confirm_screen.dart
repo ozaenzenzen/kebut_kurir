@@ -615,7 +615,7 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                     builder: (BuildContext context) {
                       return CustomDialog(
                         title: 'Apakah data kamu sudah benar?',
-                        primaryButtonText: 'Lanjut',
+                        primaryButtonText: 'Simpan',
                         secondaryButtonText: 'Periksa Kembali',
                         reverseButton: true,
                         onTapSecondary: (data) {
