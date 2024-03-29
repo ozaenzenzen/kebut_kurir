@@ -30,6 +30,7 @@ class STNKKendaraanLivenessController extends GetxController {
     cameraController!.initialize().then((_) {
       onSetFlashModeButtonPressed(FlashMode.off);
       isCameraInit.value = true;
+      update();
     });
   }
 

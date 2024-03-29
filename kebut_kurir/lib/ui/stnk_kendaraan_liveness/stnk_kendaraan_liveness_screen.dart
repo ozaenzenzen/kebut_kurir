@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
-import 'package:kebut_kurir/core/widgets/dash_widget/dotted_border_widget.dart';
 import 'package:kebut_kurir/features/stnk_kendaraan_liveness/presentation/stnk_kendaraan_liveness_controller.dart';
 import 'package:kebut_kurir/ui/stnk_liveness/widgets/stnk_liveness_button.dart';
 
@@ -72,6 +71,7 @@ class STNKKEndaraanLivenessScreen extends GetView<STNKKendaraanLivenessControlle
                 );
                 controller.cameraController!.initialize().then((_) {
                   controller.onSetFlashModeButtonPressed(FlashMode.off);
+                  controller.update();
                 });
               },
             )
@@ -157,8 +157,8 @@ class STNKKEndaraanLivenessScreen extends GetView<STNKKendaraanLivenessControlle
   }
 
   Widget _cameraPreview() {
-    return Obx(
-      () => !controller.isCameraInit.value
+    return GetBuilder<STNKKendaraanLivenessController>(
+      builder: (controller) => !controller.isCameraInit.value
           ? Container()
           : SizedBox(
               width: double.infinity,
