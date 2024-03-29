@@ -77,6 +77,7 @@ class SIMLivenessScreen extends GetView<SIMLivenessController> {
                 );
                 controller.cameraController!.initialize().then((_) {
                   controller.onSetFlashModeButtonPressed(FlashMode.off);
+                  controller.update();
                 });
               },
             )
@@ -164,8 +165,8 @@ class SIMLivenessScreen extends GetView<SIMLivenessController> {
   }
 
   Widget _cameraPreview() {
-    return Obx(
-      () => !controller.isCameraInit.value
+    return GetBuilder<SIMLivenessController>(
+      builder: (controller) => !controller.isCameraInit.value
           ? Container()
           : SizedBox(
               width: double.infinity,
