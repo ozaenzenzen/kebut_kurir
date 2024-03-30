@@ -717,7 +717,7 @@ class KTPOcrResultController extends GetxController {
             nama: name,
             nik: nik,
           ),
-        )?.then((value) => dialogsUtils.hideLoading());
+        );
       } else {
         dialogsUtils.showError('Terjadi Kesalahan');
       }
