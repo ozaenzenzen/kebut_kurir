@@ -96,6 +96,22 @@ class STNKLivenessConfirmController extends GetxController {
     return result;
   }
 
+  // RxList<String?> listVehicle = RxList<String?>();
+  // String selectedVehicle = '';
+
+  // Future<List<String>> getListVehicle(String query) async {
+  //   List<String> listName = [];
+  //   List<String> list = [];
+  //   selectedVehicle = listVehicle.firstWhere((element) => element == query);
+  //   listVehicle.value = await _registerRepository.getVillages(selectedDistricts);
+  //   for (var i in listVehicle.value!.result!.data!) {
+  //     list.add(i.name ?? '');
+  //   }
+  //   listName.addAll(list);
+  //   listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
+  //   return listName;
+  // }
+
   Future<void> verifyDataStnk({
     required VerifyStnkBodyModel body,
     required Function() onSucces,

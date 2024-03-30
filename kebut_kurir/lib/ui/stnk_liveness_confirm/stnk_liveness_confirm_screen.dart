@@ -13,6 +13,7 @@ import 'package:kebut_kurir/features/register/data/verify_stnk_model.dart';
 import 'package:kebut_kurir/features/register_upload_document/args/stnk_result_args.dart';
 import 'package:kebut_kurir/features/stnk_kendaraan_liveness/presentation/stnk_kendaraan_liveness_binding.dart';
 import 'package:kebut_kurir/features/stnk_liveness_confirm/presentation/stnk_liveness_confirm_controller.dart';
+import 'package:kebut_kurir/ui/ktp_ocr_confirm/widgets/confirm_data_loc_widget.dart';
 import 'package:kebut_kurir/ui/stnk_kendaraan_liveness/stnk_kendaraan_liveness_screen.dart';
 import 'package:kebut_kurir/ui/stnk_liveness_confirm/widgets/confirm_data_field_widget.dart';
 import 'package:kebut_kurir/ui/stnk_liveness_confirm/widgets/confirm_data_radio_widget.dart';
@@ -134,6 +135,13 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                           ),
                           SizedBox(height: 16.h),
                           ConfirmDataFieldWidget(label: 'Merk Kendaraan', hint: 'Merk Kendaraan anda', controller: controller.tecMerkKendaraan),
+                          // ConfirmDataLocWidget(
+                          //   controller: controller.tecMerkKendaraan,
+                          //   suggestionsCallback: (String v) async {
+                          //     return ;
+                          //   },
+                          //   label: "Merk Kendaraan",
+                          // ),
                           SizedBox(height: 16.h),
                           ConfirmDataFieldWidget(label: 'Type Kendaraan', hint: 'Type Kendaraan anda', controller: controller.tecTypeKendaraan),
                           SizedBox(height: 16.h),
@@ -177,26 +185,31 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                                   );
                                 },
                               );
-                              // await showDatePicker(
-                              //   context: context,
-                              //   initialDatePickerMode: DatePickerMode.year,
-                              //   initialEntryMode: DatePickerEntryMode.calendarOnly,
-                              //   initialDate: DateTime.now(),
-                              //   firstDate: DateTime(1800),
-                              //   lastDate: DateTime.now(),
-                              // ).then(
-                              //   (DateTime? value) {
-                              //     if (value != null) {
-                              //       controller.tecTahunKendaraan.text = DateFormat('yyyy-MM-dd').format(value);
-                              //     }
-                              //   },
-                              // );
                             },
                             readOnly: true,
                             inputType: TextInputType.number,
                           ),
                           SizedBox(height: 16.h),
-                          ConfirmDataFieldWidget(label: 'Pajak Kendaraan Berlaku Sampai', hint: 'Pajak Kendaraan Berlaku Sampai', controller: controller.tecPajakKendaraan),
+                          ConfirmDataFieldWidget(
+                            label: 'Pajak Kendaraan Berlaku Sampai',
+                            hint: 'Pajak Kendaraan Berlaku Sampai',
+                            controller: controller.tecPajakKendaraan,
+                            readOnly: true,
+                            onTap: () async {
+                              await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1800),
+                                lastDate: DateTime.now(),
+                              ).then(
+                                (DateTime? value) {
+                                  if (value != null) {
+                                    controller.tecPajakKendaraan.text = DateFormat('yyyy-MM-dd').format(value);
+                                  }
+                                },
+                              );
+                            },
+                          ),
                           SizedBox(height: 16.h),
                           SizedBox(
                             width: size.width,
