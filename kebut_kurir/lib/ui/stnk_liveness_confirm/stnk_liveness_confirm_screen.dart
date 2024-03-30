@@ -145,7 +145,7 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                             inputType: TextInputType.number,
                           ),
                           SizedBox(height: 16.h),
-                          ConfirmDataFieldWidget(label: 'Tanggal Pajak Kendaraan', hint: 'Tanggal Pajak Kendaraan anda', controller: controller.tecPajakKendaraan),
+                          ConfirmDataFieldWidget(label: 'Pajak Kendaraan Berlaku Sampai', hint: 'Pajak Kendaraan Berlaku Sampai', controller: controller.tecPajakKendaraan),
                           SizedBox(height: 16.h),
                           SizedBox(
                             width: size.width,
