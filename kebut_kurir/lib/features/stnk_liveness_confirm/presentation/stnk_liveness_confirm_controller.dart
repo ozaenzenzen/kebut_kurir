@@ -28,6 +28,8 @@ class STNKLivenessConfirmController extends GetxController {
   TextEditingController tecTahunKendaraan = TextEditingController();
   TextEditingController tecPajakKendaraan = TextEditingController();
 
+  DateTime selectedDateTahunKendaraan = DateTime.now();
+
   TextEditingController tecKepemilikanKendaraan = TextEditingController();
 
   var selectedJenisRoda = 'Roda 2'.obs;

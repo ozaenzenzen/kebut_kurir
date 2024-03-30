@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
@@ -142,6 +143,56 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                             label: 'Tahun Kendaraan',
                             hint: 'Tahun Kendaraan anda',
                             controller: controller.tecTahunKendaraan,
+                            onTap: () async {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Select Year"),
+                                    content: Container(
+                                      // Need to use container to add size constraint.
+                                      width: 300,
+                                      height: 300,
+                                      child: YearPicker(
+                                        firstDate: DateTime(DateTime.now().year - 100, 1),
+                                        lastDate: DateTime(DateTime.now().year + 100, 1),
+                                        initialDate: DateTime.now(),
+                                        currentDate: controller.selectedDateTahunKendaraan,
+                                        // save the selected date to _selectedDate DateTime variable.
+                                        // It's used to set the previous selected date when
+                                        // re-showing the dialog.
+                                        selectedDate: controller.selectedDateTahunKendaraan,
+                                        onChanged: (DateTime dateTime) {
+                                          // close the dialog when year is selected.
+                                          controller.tecTahunKendaraan.text = DateFormat('yyyy').format(dateTime);
+                                          controller.selectedDateTahunKendaraan = dateTime;
+                                          controller.update();
+                                          Navigator.pop(context);
+
+                                          // Do something with the dateTime selected.
+                                          // Remember that you need to use dateTime.year to get the year
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                              // await showDatePicker(
+                              //   context: context,
+                              //   initialDatePickerMode: DatePickerMode.year,
+                              //   initialEntryMode: DatePickerEntryMode.calendarOnly,
+                              //   initialDate: DateTime.now(),
+                              //   firstDate: DateTime(1800),
+                              //   lastDate: DateTime.now(),
+                              // ).then(
+                              //   (DateTime? value) {
+                              //     if (value != null) {
+                              //       controller.tecTahunKendaraan.text = DateFormat('yyyy-MM-dd').format(value);
+                              //     }
+                              //   },
+                              // );
+                            },
+                            readOnly: true,
                             inputType: TextInputType.number,
                           ),
                           SizedBox(height: 16.h),
@@ -202,7 +253,7 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                             ),
                           ),
                           SizedBox(height: 16.h),
-      
+
                           SizedBox(
                             width: size.width,
                             child: Text(
