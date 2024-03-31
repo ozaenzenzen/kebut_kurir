@@ -135,53 +135,69 @@ class KTPOcrConfirmController extends GetxController {
   Future<List<String>> getListRegencies(String query) async {
     List<String> listName = [];
     List<String> list = [];
-    selectedProvince = listProvinsi.value!.result!.data!.firstWhere((ProvinceData element) => element.name == tecProvinsi.text).uuid ?? '';
-    print('UUID PROINVCE SELECTED $selectedProvince');
-    listRegencies.value = await _registerRepository.getRegencies(selectedProvince);
-    for (var i in listRegencies.value!.result!.data!) {
-      list.add(i.name ?? '');
+    if (listProvinsi.value != null) {
+      selectedProvince = listProvinsi.value!.result!.data!.firstWhere(
+            (ProvinceData element) {
+              return element.name == tecProvinsi.text;
+            },
+            orElse: () {
+              return ProvinceData();
+            },
+          ).uuid ??
+          '';
+      print('UUID PROINVCE SELECTED $selectedProvince');
+      listRegencies.value = await _registerRepository.getRegencies(selectedProvince);
+      for (var i in listRegencies.value!.result!.data!) {
+        list.add(i.name ?? '');
+      }
+      listName.addAll(list);
+      listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
     }
-    listName.addAll(list);
-    listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
     return listName;
   }
 
   Future<List<String>> getListDistricts(String query) async {
     List<String> listName = [];
     List<String> list = [];
-    selectedRegencies = listRegencies.value!.result!.data!.firstWhere((element) => element.name == tecKota.text).uuid ?? '';
-    listDistricts.value = await _registerRepository.getDistricts(selectedRegencies);
-    for (var i in listDistricts.value!.result!.data!) {
-      list.add(i.name ?? '');
+    if (listRegencies.value != null) {
+      selectedRegencies = listRegencies.value!.result!.data!.firstWhere((element) => element.name == tecKota.text).uuid ?? '';
+      listDistricts.value = await _registerRepository.getDistricts(selectedRegencies);
+      for (var i in listDistricts.value!.result!.data!) {
+        list.add(i.name ?? '');
+      }
+      listName.addAll(list);
+      listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
     }
-    listName.addAll(list);
-    listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
     return listName;
   }
 
   Future<List<String>> getListVillages(String query) async {
     List<String> listName = [];
     List<String> list = [];
-    selectedDistricts = listDistricts.value!.result!.data!.firstWhere((element) => element.name == tecKecamatan.text).uuid ?? '';
-    listVillages.value = await _registerRepository.getVillages(selectedDistricts);
-    for (var i in listVillages.value!.result!.data!) {
-      list.add(i.name ?? '');
+    if (listDistricts.value != null) {
+      selectedDistricts = listDistricts.value!.result!.data!.firstWhere((element) => element.name == tecKecamatan.text).uuid ?? '';
+      listVillages.value = await _registerRepository.getVillages(selectedDistricts);
+      for (var i in listVillages.value!.result!.data!) {
+        list.add(i.name ?? '');
+      }
+      listName.addAll(list);
+      listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
     }
-    listName.addAll(list);
-    listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
     return listName;
   }
 
   Future<List<String>> getPostalCode(String query) async {
     List<String> listName = [];
     List<String> list = [];
-    selectedVillages = listVillages.value!.result!.data!.firstWhere((element) => element.name == tecKelurahan.text).uuid ?? '';
-    listPostalCode.value = await _registerRepository.getPostalCode(selectedVillages);
-    for (var i in listPostalCode.value!.result!.data!) {
-      list.add(i.postalCode ?? '');
+    if (listVillages.value != null) {
+      selectedVillages = listVillages.value!.result!.data!.firstWhere((element) => element.name == tecKelurahan.text).uuid ?? '';
+      listPostalCode.value = await _registerRepository.getPostalCode(selectedVillages);
+      for (var i in listPostalCode.value!.result!.data!) {
+        list.add(i.postalCode ?? '');
+      }
+      listName.addAll(list);
+      listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
     }
-    listName.addAll(list);
-    listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
     return listName;
   }
 
