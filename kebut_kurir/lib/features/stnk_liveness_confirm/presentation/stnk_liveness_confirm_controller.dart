@@ -96,21 +96,49 @@ class STNKLivenessConfirmController extends GetxController {
     return result;
   }
 
-  // RxList<String?> listVehicle = RxList<String?>();
-  // String selectedVehicle = '';
+  Rx<List<String>?> listVehicleMotor = Rx<List<String>?>(null);
+  Rx<List<String>?> listVehicleMobil = Rx<List<String>?>(null);
 
-  // Future<List<String>> getListVehicle(String query) async {
-  //   List<String> listName = [];
-  //   List<String> list = [];
-  //   selectedVehicle = listVehicle.firstWhere((element) => element == query);
-  //   listVehicle.value = await _registerRepository.getVillages(selectedDistricts);
-  //   for (var i in listVehicle.value!.result!.data!) {
-  //     list.add(i.name ?? '');
-  //   }
-  //   listName.addAll(list);
-  //   listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
-  //   return listName;
-  // }
+  // String selectedVehicleMotor = '';
+  // String selectedVehicleMobil = '';
+
+  Future<List<String>> getListVehicleMotor(String query) async {
+    List<String> listName = [];
+    List<String> list = [];
+    // selectedVehicleMotor = listVehicleMotor.value!.firstWhere((element) => element == tecMerkKendaraan.text);
+    listVehicleMotor.value = [
+      'Honda',
+      'Suzuki',
+      'Yamaha',
+      'Kawasaki',
+    ];
+    for (var i in listVehicleMotor.value!) {
+      list.add(i);
+    }
+    listName.addAll(list);
+    listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
+    return listName;
+  }
+
+  Future<List<String>> getListVehicleMobil(String query) async {
+    List<String> listName = [];
+    List<String> list = [];
+    // selectedVehicleMobil = listVehicleMobil.value!.firstWhere((element) => element == tecMerkKendaraan.text);
+    listVehicleMobil.value = [
+      'Honda',
+      'Suzuki',
+      'Toyota',
+      'Daihatsu',
+      'Isuzu',
+      'Mitsubishi',
+    ];
+    for (var i in listVehicleMobil.value!) {
+      list.add(i);
+    }
+    listName.addAll(list);
+    listName.retainWhere((String s) => s.toLowerCase().contains(query.toLowerCase()));
+    return listName;
+  }
 
   Future<void> verifyDataStnk({
     required VerifyStnkBodyModel body,

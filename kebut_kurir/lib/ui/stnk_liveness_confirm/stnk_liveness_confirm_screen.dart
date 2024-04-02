@@ -134,14 +134,24 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                                   ),
                           ),
                           SizedBox(height: 16.h),
-                          ConfirmDataFieldWidget(label: 'Merk Kendaraan', hint: 'Merk Kendaraan anda', controller: controller.tecMerkKendaraan),
-                          // ConfirmDataLocWidget(
-                          //   controller: controller.tecMerkKendaraan,
-                          //   suggestionsCallback: (String v) async {
-                          //     return ;
-                          //   },
-                          //   label: "Merk Kendaraan",
-                          // ),
+                          // ConfirmDataFieldWidget(label: 'Merk Kendaraan', hint: 'Merk Kendaraan anda', controller: controller.tecMerkKendaraan),
+                          Obx(
+                            () => controller.selectedJenisRoda.value == 'Roda 2'
+                                ? ConfirmDataLocWidget(
+                                    label: "Merk Kendaraan",
+                                    controller: controller.tecMerkKendaraan,
+                                    suggestionsCallback: (String v) async {
+                                      return controller.getListVehicleMotor(v);
+                                    },
+                                  )
+                                : ConfirmDataLocWidget(
+                                    label: "Merk Kendaraan",
+                                    controller: controller.tecMerkKendaraan,
+                                    suggestionsCallback: (String v) async {
+                                      return controller.getListVehicleMobil(v);
+                                    },
+                                  ),
+                          ),
                           SizedBox(height: 16.h),
                           ConfirmDataFieldWidget(label: 'Type Kendaraan', hint: 'Type Kendaraan anda', controller: controller.tecTypeKendaraan),
                           SizedBox(height: 16.h),

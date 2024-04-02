@@ -47,6 +47,7 @@ class ConfirmDataRadioWidget extends GetView<STNKLivenessConfirmController> {
                       onChanged: (value) {
                         if (value != null) {
                           controller.selectedJenisRoda.value = value;
+                          controller.tecMerkKendaraan.clear();
                         }
                       },
                     ),
