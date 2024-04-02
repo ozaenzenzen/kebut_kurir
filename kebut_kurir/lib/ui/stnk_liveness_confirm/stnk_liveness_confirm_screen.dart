@@ -210,7 +210,7 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime(1800),
-                                lastDate: DateTime.now(),
+                                lastDate: DateTime(2100),
                               ).then(
                                 (DateTime? value) {
                                   if (value != null) {
