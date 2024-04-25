@@ -373,7 +373,22 @@ class KTPOcrConfirmScreen extends GetView<KTPOcrConfirmController> {
                       },
                     );
                   },
-                  onFailed: (value) {},
+                  onFailed: (value) async {
+                    await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CustomDialog(
+                          title: 'Terjadi Kesalahan',
+                          primaryButtonText: 'Kembali',
+                          asset: 'assets/icon_popup_error.png',
+                          subTitle: 'Silahkan coba kembali.\n {$value}',
+                          onTapPrimary: () {
+                            Get.back();
+                          },
+                        );
+                      },
+                    );
+                  },
                 );
               },
               width: MediaQuery.of(context).size.width,

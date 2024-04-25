@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart' as dio;
@@ -13,6 +14,8 @@ import 'package:kebut_kurir/features/register/data/province_model.dart';
 import 'package:kebut_kurir/features/register/data/regencies_model.dart';
 import 'package:kebut_kurir/features/register/data/register_step_one_body_model.dart';
 import 'package:kebut_kurir/features/register/data/register_step_one_model.dart';
+import 'package:kebut_kurir/features/register/data/register_verify_ktp_failed_model.dart';
+import 'package:kebut_kurir/features/register/data/register_verify_ktp_success_model.dart';
 import 'package:kebut_kurir/features/register/data/verify_ktp_model.dart';
 import 'package:kebut_kurir/features/register/data/verify_stnk_model.dart';
 import 'package:kebut_kurir/features/register/data/villages_model.dart';
@@ -319,28 +322,48 @@ class RegisterRepository {
     }
   }
 
-  Future<bool> registerVerifyKtp({required VerifyKtpBodyModel body, required String uuid}) async {
+  Future<dynamic> registerVerifyKtp({required VerifyKtpBodyModel body, required String uuid}) async {
     try {
-      bool result = false;
-      await apiClient
-          .putRequest(
+      // bool result = false;
+      // await apiClient
+      //     .putRequest(
+      //   'api/auth/register/kurir/$uuid',
+      //   data: body.toJson(),
+      // )
+      //     .then(
+      //   (value) {
+      //     print('VALUE STATUS KTP ${jsonEncode(value.data)}');
+      //     if (value.data['status'] == 200) {
+      //       RegisterVerifyKtpSuccessModel successResult = RegisterVerifyKtpSuccessModel.fromJson(value.data);
+      //       // result = true;
+      //       return successResult;
+      //     } else {
+      //       RegisterVerifyKtpFailedModel failedResult = RegisterVerifyKtpFailedModel.fromJson(value.data);
+      //       // result = false;
+      //       return failedResult;
+      //     }
+      //   },
+      // );
+      // return result;
+
+      var value = await apiClient.putRequest(
         'api/auth/register/kurir/$uuid',
         data: body.toJson(),
-      )
-          .then(
-        (value) {
-          print('VALUE STATUS KTP ${value.data}');
-          if (value.data['status'] == 200) {
-            result = true;
-          } else {
-            result = false;
-          }
-        },
       );
-      return result;
+      print('VALUE STATUS KTP ${jsonEncode(value.data)}');
+      if (value.data['status'] == 200) {
+        RegisterVerifyKtpSuccessModel successResult = RegisterVerifyKtpSuccessModel.fromJson(value.data);
+        // result = true;
+        return successResult;
+      } else {
+        RegisterVerifyKtpFailedModel failedResult = RegisterVerifyKtpFailedModel.fromJson(value.data);
+        // result = false;
+        return failedResult;
+      }
     } catch (e) {
       print(e);
-      return false;
+      // return false;
+      return e.toString();
     }
   }
 

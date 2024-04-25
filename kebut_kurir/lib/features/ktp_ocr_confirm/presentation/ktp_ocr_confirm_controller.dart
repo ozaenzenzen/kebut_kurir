@@ -17,6 +17,8 @@ import 'package:kebut_kurir/features/register/data/districts_model.dart';
 import 'package:kebut_kurir/features/register/data/postal_code_model.dart';
 import 'package:kebut_kurir/features/register/data/province_model.dart';
 import 'package:kebut_kurir/features/register/data/regencies_model.dart';
+import 'package:kebut_kurir/features/register/data/register_verify_ktp_failed_model.dart';
+import 'package:kebut_kurir/features/register/data/register_verify_ktp_success_model.dart';
 import 'package:kebut_kurir/features/register/data/verify_ktp_model.dart';
 import 'package:kebut_kurir/features/register/data/villages_model.dart';
 import 'package:kebut_kurir/features/register/domain/register_repository.dart';
@@ -304,16 +306,26 @@ class KTPOcrConfirmController extends GetxController {
     required Function() onSucces,
     required Function(String value) onFailed,
   }) async {
-    dialogUtils.showLoading();
-    log("body verify data KTP : ${body.toJson()} ");
-    final bool result = await _registerRepository.registerVerifyKtp(body: body, uuid: await Prefs.userId);
-    if (result) {
-      dialogUtils.hideLoading();
-
-      return onSucces();
-    } else {
-      dialogUtils.hideLoading();
-      return onFailed('Proses Gagal');
+    try {
+      dialogUtils.showLoading();
+      log("body verify data KTP : ${body.toJson()} ");
+      final dynamic result = await _registerRepository.registerVerifyKtp(body: body, uuid: await Prefs.userId);
+      if (result is RegisterVerifyKtpSuccessModel) {
+        dialogUtils.hideLoading();
+        return onSucces();
+      } else if (result is RegisterVerifyKtpFailedModel) {
+        dialogUtils.hideLoading();
+        if (result.result?.the0?.message != null) {
+          return onFailed('Error ${result.result?.the0?.message}');
+        } else {
+          return onFailed('Error ${result.result?.the0?.message?[0].message}');
+        }
+      } else {
+        dialogUtils.hideLoading();
+        return onFailed('Error $result');
+      }
+    } catch (e) {
+      return onFailed('Error $e');
     }
   }
 
