@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,10 +14,12 @@ enum MainPopupButtonDirection { Vertical, Horizontal }
 
 class DialogsUtils {
   bool _isDialogLoadingShowing = false;
+  bool isDialogLoadingShowing = false;
 
   void showLoading() {
     print('ISI SHOW DIALOG $_isDialogLoadingShowing');
     if (_isDialogLoadingShowing == false) {
+      isDialogLoadingShowing = true;
       _isDialogLoadingShowing = true;
       Get.dialog(
         const LoadingDialog(),
@@ -30,6 +34,7 @@ class DialogsUtils {
 
   void hideLoading() {
     _isDialogLoadingShowing = false;
+    isDialogLoadingShowing = false;
     Get.back();
   }
 
@@ -59,7 +64,7 @@ class DialogsUtils {
     showDialog(
       context: context,
       barrierDismissible: isBarrierDismissible,
-      builder: (context) {
+      builder: (BuildContext context) {
         return CustomDialog(
           title: title,
           subTitle: subTitle,
@@ -74,9 +79,8 @@ class DialogsUtils {
       },
     );
   }
-  
 
-  void showSuccessDialog({
+  Future<void> showSuccessDialog({
     required BuildContext context,
     String? title,
     String? description,
@@ -90,7 +94,24 @@ class DialogsUtils {
     Function()? secondaryOnTap,
     String? secondaryButtonText,
     bool reverseButton = false,
-  }) {
+    bool useTimeOut = true,
+    bool isHorizontal = true,
+  }) async {
+    Timer? timer;
+    if (useTimeOut && isDismissible) {
+      if (primaryButtonText != null || secondaryButtonText != null) {
+        //
+      } else {
+        timer = Timer(
+          const Duration(milliseconds: 3000),
+          () {
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+        );
+      }
+    } else {
+      //
+    }
     showDialog(
       context: context,
       barrierDismissible: isDismissible,
@@ -133,16 +154,20 @@ class DialogsUtils {
                 secondaryOnTap: secondaryOnTap,
                 secondaryButtonText: secondaryButtonText,
                 reverseButton: reverseButton,
+                isHorizontal: isHorizontal,
               ),
               // : const SizedBox(),
             ],
           ),
         );
       },
-    );
+    ).then((_) {
+      timer?.cancel();
+      timer = null;
+    });
   }
 
-  void showFailedDialog({
+  Future<void> showFailedDialog({
     required BuildContext context,
     String? title,
     String? description,
@@ -156,7 +181,24 @@ class DialogsUtils {
     Function()? secondaryOnTap,
     String? secondaryButtonText,
     bool reverseButton = false,
-  }) {
+    bool useTimeOut = true,
+    bool isHorizontal = true,
+  }) async {
+    Timer? timer;
+    if (useTimeOut && isDismissible) {
+      if (primaryButtonText != null || secondaryButtonText != null) {
+        //
+      } else {
+        timer = Timer(
+          const Duration(milliseconds: 3000),
+          () {
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+        );
+      }
+    } else {
+      //
+    }
     showDialog(
       context: context,
       barrierDismissible: isDismissible,
@@ -199,16 +241,20 @@ class DialogsUtils {
                 secondaryOnTap: secondaryOnTap,
                 secondaryButtonText: secondaryButtonText,
                 reverseButton: reverseButton,
+                isHorizontal: isHorizontal,
               ),
               // : const SizedBox(),
             ],
           ),
         );
       },
-    );
+    ).then((_) {
+      timer?.cancel();
+      timer = null;
+    });
   }
 
-  void showWarningDialog({
+  Future<void> showWarningDialog({
     required BuildContext context,
     String? title,
     String? description,
@@ -222,7 +268,24 @@ class DialogsUtils {
     Function()? secondaryOnTap,
     String? secondaryButtonText,
     bool reverseButton = false,
-  }) {
+    bool useTimeOut = true,
+    bool isHorizontal = true,
+  }) async {
+    Timer? timer;
+    if (useTimeOut && isDismissible) {
+      if (primaryButtonText != null || secondaryButtonText != null) {
+        //
+      } else {
+        timer = Timer(
+          const Duration(milliseconds: 3000),
+          () {
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+        );
+      }
+    } else {
+      //
+    }
     showDialog(
       context: context,
       barrierDismissible: isDismissible,
@@ -265,13 +328,17 @@ class DialogsUtils {
                 secondaryOnTap: secondaryOnTap,
                 secondaryButtonText: secondaryButtonText,
                 reverseButton: reverseButton,
+                isHorizontal: isHorizontal,
               ),
               // : const SizedBox(),
             ],
           ),
         );
       },
-    );
+    ).then((_) {
+      timer?.cancel();
+      timer = null;
+    });
   }
 
   Widget buttonHandlerForDialog({
@@ -281,6 +348,7 @@ class DialogsUtils {
     Function()? secondaryOnTap,
     String? secondaryButtonText,
     bool reverseButton = false,
+    bool isHorizontal = true,
   }) {
     if (primaryButtonText == null && secondaryButtonText == null) {
       return const SizedBox();
@@ -291,127 +359,241 @@ class DialogsUtils {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         SizedBox(height: 24.h),
-        reverseButton
-            ? Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  if (secondaryButtonText != null)
-                    Expanded(
-                      child: InkWell(
-                        onTap: secondaryOnTap ??
-                            () {
-                              Get.back();
-                            },
-                        child: Container(
-                          height: 48.h,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffE6F7EE),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            secondaryButtonText,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.mukta(
-                              color: const Color(0xff00B050),
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18.sp,
+        isHorizontal
+            ? reverseButton
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      if (secondaryButtonText != null)
+                        Expanded(
+                          child: InkWell(
+                            onTap: secondaryOnTap ??
+                                () {
+                                  Get.back();
+                                },
+                            child: Container(
+                              height: 48.h,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                color: AppTheme.colors.whiteColor4,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                secondaryButtonText,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.mukta(
+                                  color: AppTheme.colors.neutral500,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18.sp,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  if (primaryButtonText != null && secondaryButtonText != null) SizedBox(width: 12.w),
-                  if (primaryButtonText != null)
-                    Expanded(
-                      child: InkWell(
-                        onTap: primaryOnTap ??
-                            () {
-                              Get.back();
-                            },
-                        child: Container(
-                          height: 48.h,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: const Color(0xff00B050),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            primaryButtonText,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.mukta(
-                              color: const Color(0xffFFFFFF),
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18.sp,
+                      if (primaryButtonText != null && secondaryButtonText != null) SizedBox(width: 12.w),
+                      if (primaryButtonText != null)
+                        Expanded(
+                          child: InkWell(
+                            onTap: primaryOnTap ??
+                                () {
+                                  Get.back();
+                                },
+                            child: Container(
+                              height: 48.h,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                color: AppTheme.colors.primaryColor,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                primaryButtonText,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.mukta(
+                                  color: AppTheme.colors.neutral500,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18.sp,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                ],
-              )
-            : Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  if (primaryButtonText != null)
-                    Expanded(
-                      child: InkWell(
-                        onTap: primaryOnTap ??
-                            () {
-                              Get.back();
-                            },
-                        child: Container(
-                          height: 48.h,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: const Color(0xff00B050),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            primaryButtonText,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.mukta(
-                              color: const Color(0xffFFFFFF),
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18.sp,
+                    ],
+                  )
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      if (primaryButtonText != null)
+                        Expanded(
+                          child: InkWell(
+                            onTap: primaryOnTap ??
+                                () {
+                                  Get.back();
+                                },
+                            child: Container(
+                              height: 48.h,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                color: AppTheme.colors.primaryColor,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                primaryButtonText,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.mukta(
+                                  color: AppTheme.colors.neutral500,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18.sp,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  if (primaryButtonText != null && secondaryButtonText != null) SizedBox(width: 12.w),
-                  if (secondaryButtonText != null)
-                    Expanded(
-                      child: InkWell(
-                        onTap: secondaryOnTap ??
-                            () {
-                              Get.back();
-                            },
-                        child: Container(
-                          height: 48.h,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffE6F7EE),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            secondaryButtonText,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.mukta(
-                              color: const Color(0xff00B050),
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18.sp,
+                      if (primaryButtonText != null && secondaryButtonText != null) SizedBox(width: 12.w),
+                      if (secondaryButtonText != null)
+                        Expanded(
+                          child: InkWell(
+                            onTap: secondaryOnTap ??
+                                () {
+                                  Get.back();
+                                },
+                            child: Container(
+                              height: 48.h,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                color: AppTheme.colors.neutral500,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                secondaryButtonText,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.mukta(
+                                  color: AppTheme.colors.whiteColor4,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18.sp,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                ],
-              ),
+                    ],
+                  )
+            : reverseButton
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      if (secondaryButtonText != null)
+                        InkWell(
+                          onTap: secondaryOnTap ??
+                              () {
+                                Get.back();
+                              },
+                          child: Container(
+                            height: 48.h,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: AppTheme.colors.whiteColor4,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              secondaryButtonText,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.mukta(
+                                color: AppTheme.colors.neutral500,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      if (primaryButtonText != null && secondaryButtonText != null) SizedBox(height: 12.w),
+                      if (primaryButtonText != null)
+                        InkWell(
+                          onTap: primaryOnTap ??
+                              () {
+                                Get.back();
+                              },
+                          child: Container(
+                            height: 48.h,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: AppTheme.colors.primaryColor,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              primaryButtonText,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.mukta(
+                                color: AppTheme.colors.neutral500,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  )
+                : Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      if (primaryButtonText != null)
+                        InkWell(
+                          onTap: primaryOnTap ??
+                              () {
+                                Get.back();
+                              },
+                          child: Container(
+                            height: 48.h,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: AppTheme.colors.primaryColor,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              primaryButtonText,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.mukta(
+                                color: AppTheme.colors.neutral500,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      if (primaryButtonText != null && secondaryButtonText != null) SizedBox(height: 12.w),
+                      if (secondaryButtonText != null)
+                        InkWell(
+                          onTap: secondaryOnTap ??
+                              () {
+                                Get.back();
+                              },
+                          child: Container(
+                            height: 48.h,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: AppTheme.colors.neutral500,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              secondaryButtonText,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.mukta(
+                                color: AppTheme.colors.whiteColor4,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
       ],
     );
   }

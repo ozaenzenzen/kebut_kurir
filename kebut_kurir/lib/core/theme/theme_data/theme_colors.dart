@@ -41,4 +41,12 @@ class _ThemeColors {
   Color get whiteColor4 => const Color(0xffF5F6F7);
   Color get whiteColor5 => const Color(0xffF6F6F6);
   Color get neutral500 => const Color(0xff42526D);
+
+  Color get buttonGrey => const Color(0xffF5F6F7);
+
+  Color get newTextBlack1 => const Color(0xff1D2129);
+  Color get disabledColor => const Color(0xffC2C7D0);
+  
+  Color get newTextBlack2 => const Color(0xff121419);
+  Color get newGreyColor1 => const Color(0xff4E5969);  
 }

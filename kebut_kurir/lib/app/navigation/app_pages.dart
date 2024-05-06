@@ -7,6 +7,7 @@ import 'package:kebut_kurir/features/delivery_barang/presentation/delivery_baran
 import 'package:kebut_kurir/features/detail_delivery/presentation/detail_delivery_binding.dart';
 import 'package:kebut_kurir/features/detail_pickup_barang/presentation/detail_pickup_barang_binding.dart';
 import 'package:kebut_kurir/features/edit_profile/presentation/edit_profile_binding.dart';
+import 'package:kebut_kurir/features/forgot_password/presentation/fogot_password_binding.dart';
 import 'package:kebut_kurir/features/home/presentation/home_binding.dart';
 import 'package:kebut_kurir/features/info_driver/presentation/info_driver_binding.dart';
 import 'package:kebut_kurir/features/info_pengajuan/presentation/info_pengajuan_binding.dart';
@@ -36,6 +37,8 @@ import 'package:kebut_kurir/ui/delivery_barang/delivery_barang_screen.dart';
 import 'package:kebut_kurir/ui/detail_delivery_barang/detail_delivery_barang_screen.dart';
 import 'package:kebut_kurir/ui/detail_pickup_barang/detail_pickup_barang_screen.dart';
 import 'package:kebut_kurir/ui/edit_profile/edit_profile_screen.dart';
+import 'package:kebut_kurir/ui/forgot_password/forgot_password_screen.dart';
+import 'package:kebut_kurir/ui/forgot_password/new_password_screen.dart';
 import 'package:kebut_kurir/ui/home/home_screen.dart';
 import 'package:kebut_kurir/ui/info_driver/info_driver_screen.dart';
 import 'package:kebut_kurir/ui/info_pengajuan/info_pengajuan_screen.dart';
@@ -83,6 +86,12 @@ class AppPages {
       page: () => const HomeScreen(),
       transition: Transition.rightToLeftWithFade,
       binding: HomeBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.forgotPassword,
+      page: () => const ForgotPasswordScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: ForgotPasswordBinding(),
     ),
     GetPage<dynamic>(
       name: Routes.chat,
