@@ -64,109 +64,116 @@ class SIMLivenessController extends GetxController {
 
   Rx<File?> croppedFile = Rx<File?>(null);
 
-  void onTakePictureButtonPressed() {
-    dialogsUtils.showLoading();
-    takePicture().then(
-      (XFile? file) async {
-        final XFile? imageCaptured = file;
-        final File tempImage = File(imageCaptured!.path);
-        File compressedFile = await FlutterNativeImage.compressImage(
-          tempImage.path,
-          quality: 50,
-          percentage: 100,
-        );
-        ImageProperties properties = await FlutterNativeImage.getImageProperties(compressedFile.path);
+  void onTakePictureButtonPressed() async {
+    try {
+      dialogsUtils.showLoading();
+      // takePicture().then(
+      //   (XFile? file) async {
 
-        int heightPhoto = 0;
-        double yValue = 0.0;
-        if (properties.orientation == ImageOrientation.rotate90) {
-          heightPhoto = ((properties.height! / 6) * 4).toInt();
-          yValue = ((cameraKey.globalPaintBounds!.top - cameraWidgetKey.globalPaintBounds!.top) / cameraWidgetKey.globalPaintBounds!.height) * 100;
-          yValue = (yValue / 90) * properties.width!;
-        } else {
-          heightPhoto = ((properties.width! / 6) * 4).toInt();
-          yValue = ((cameraKey.globalPaintBounds!.top - cameraWidgetKey.globalPaintBounds!.top) / cameraWidgetKey.globalPaintBounds!.height) * 100;
-          yValue = (yValue / 90) * properties.height!;
-        }
-        if (properties.orientation == ImageOrientation.rotate90) {
-          croppedFile.value = await FlutterNativeImage.cropImage(
-            tempImage.path,
-            yValue.round(), // Y
-            0, // X
-            heightPhoto, // HEIGHT
-            properties.height!,
-          ); // WIDTH
-        } else {
-          croppedFile.value = await FlutterNativeImage.cropImage(
-            tempImage.path,
-            0, // X
-            yValue.round(), // Y
-            properties.width!, //WIDTH
-            heightPhoto,
-          ); //HEIGHT
-        }
-        dialogsUtils.hideLoading();
-        if (data != null) {
-          Get.toNamed(
-            Routes.simLivenessResult,
-            arguments: SIMLivenessResultArgs(
-              card: data!.card,
-              nik: data!.nik,
-              name: data!.name,
-              address: data!.address,
-              rtRw: data!.rtRw,
-              subDistrict: data!.subDistrict,
-              district: data!.district,
-              city: data!.city,
-              province: data!.province,
-              pob: data!.pob,
-              dob: data!.dob,
-              height: data!.height,
-              profession: data!.profession,
-              expired: data!.expired,
-              bloodType: data!.bloodType,
-              citizenship: data!.citizenship,
-              maritalStatus: data!.maritalStatus,
-              religion: data!.religion,
-              gender: data!.gender,
-              ktpImage: tempImage,
-              croppedKtpImage: tempImage,
-              // liveness: compressedFile,
-              liveness: croppedFile.value,
-            ),
-          );
-        } else {
-          Get.toNamed(
-            Routes.simLivenessResult,
-            arguments: SIMLivenessResultArgs(
-              card: data2!.card,
-              nik: '',
-              name: '',
-              address: '',
-              rtRw: '',
-              subDistrict: '',
-              district: '',
-              city: '',
-              province: '',
-              pob: '',
-              dob: '',
-              height: '',
-              profession: '',
-              expired: '',
-              bloodType: '',
-              citizenship: '',
-              maritalStatus: '',
-              religion: '',
-              gender: '',
-              ktpImage: tempImage,
-              croppedKtpImage: tempImage,
-              // liveness: compressedFile,
-              liveness: croppedFile.value,
-            ),
-          );
-        }
-      },
-    );
+      //   },
+      // );
+
+      XFile? file = await takePicture();
+      final XFile? imageCaptured = file;
+      final File tempImage = File(imageCaptured!.path);
+      File compressedFile = await FlutterNativeImage.compressImage(
+        tempImage.path,
+        quality: 50,
+        percentage: 100,
+      );
+      ImageProperties properties = await FlutterNativeImage.getImageProperties(compressedFile.path);
+
+      int heightPhoto = 0;
+      double yValue = 0.0;
+      // if (properties.orientation == ImageOrientation.rotate90) {
+      heightPhoto = ((properties.height! / 6) * 4).toInt();
+      yValue = ((cameraKey.globalPaintBounds!.top - cameraWidgetKey.globalPaintBounds!.top) / cameraWidgetKey.globalPaintBounds!.height) * 100;
+      yValue = (yValue / 90) * properties.width!;
+      // } else {
+      //   heightPhoto = ((properties.width! / 6) * 4).toInt();
+      //   yValue = ((cameraKey.globalPaintBounds!.top - cameraWidgetKey.globalPaintBounds!.top) / cameraWidgetKey.globalPaintBounds!.height) * 100;
+      //   yValue = (yValue / 90) * properties.height!;
+      // }
+      // if (properties.orientation == ImageOrientation.rotate90) {
+      croppedFile.value = await FlutterNativeImage.cropImage(
+        tempImage.path,
+        yValue.round(), // Y
+        0, // X
+        heightPhoto, // HEIGHT
+        properties.height!,
+      ); // WIDTH
+      // } else {
+      //   croppedFile.value = await FlutterNativeImage.cropImage(
+      //     tempImage.path,
+      //     0, // X
+      //     yValue.round(), // Y
+      //     properties.width!, //WIDTH
+      //     heightPhoto,
+      //   ); //HEIGHT
+      // }
+      dialogsUtils.hideLoading();
+      if (data != null) {
+        Get.toNamed(
+          Routes.simLivenessResult,
+          arguments: SIMLivenessResultArgs(
+            card: data!.card,
+            nik: data!.nik,
+            name: data!.name,
+            address: data!.address,
+            rtRw: data!.rtRw,
+            subDistrict: data!.subDistrict,
+            district: data!.district,
+            city: data!.city,
+            province: data!.province,
+            pob: data!.pob,
+            dob: data!.dob,
+            height: data!.height,
+            profession: data!.profession,
+            expired: data!.expired,
+            bloodType: data!.bloodType,
+            citizenship: data!.citizenship,
+            maritalStatus: data!.maritalStatus,
+            religion: data!.religion,
+            gender: data!.gender,
+            ktpImage: tempImage,
+            croppedKtpImage: tempImage,
+            // liveness: compressedFile,
+            liveness: croppedFile.value,
+          ),
+        );
+      } else {
+        Get.toNamed(
+          Routes.simLivenessResult,
+          arguments: SIMLivenessResultArgs(
+            card: data2!.card,
+            nik: '',
+            name: '',
+            address: '',
+            rtRw: '',
+            subDistrict: '',
+            district: '',
+            city: '',
+            province: '',
+            pob: '',
+            dob: '',
+            height: '',
+            profession: '',
+            expired: '',
+            bloodType: '',
+            citizenship: '',
+            maritalStatus: '',
+            religion: '',
+            gender: '',
+            ktpImage: tempImage,
+            croppedKtpImage: tempImage,
+            // liveness: compressedFile,
+            liveness: croppedFile.value,
+          ),
+        );
+      }
+    } catch (e) {
+      dialogsUtils.hideLoading();
+    }
   }
 
   void onSetFlashModeButtonPressed(FlashMode mode) {

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
@@ -12,6 +13,7 @@ import 'package:kebut_kurir/features/register/data/verify_stnk_model.dart';
 import 'package:kebut_kurir/features/register_upload_document/args/stnk_result_args.dart';
 import 'package:kebut_kurir/features/stnk_kendaraan_liveness/presentation/stnk_kendaraan_liveness_binding.dart';
 import 'package:kebut_kurir/features/stnk_liveness_confirm/presentation/stnk_liveness_confirm_controller.dart';
+import 'package:kebut_kurir/ui/ktp_ocr_confirm/widgets/confirm_data_loc_widget.dart';
 import 'package:kebut_kurir/ui/stnk_kendaraan_liveness/stnk_kendaraan_liveness_screen.dart';
 import 'package:kebut_kurir/ui/stnk_liveness_confirm/widgets/confirm_data_field_widget.dart';
 import 'package:kebut_kurir/ui/stnk_liveness_confirm/widgets/confirm_data_radio_widget.dart';
@@ -132,7 +134,24 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                                   ),
                           ),
                           SizedBox(height: 16.h),
-                          ConfirmDataFieldWidget(label: 'Merk Kendaraan', hint: 'Merk Kendaraan anda', controller: controller.tecMerkKendaraan),
+                          // ConfirmDataFieldWidget(label: 'Merk Kendaraan', hint: 'Merk Kendaraan anda', controller: controller.tecMerkKendaraan),
+                          Obx(
+                            () => controller.selectedJenisRoda.value == 'Roda 2'
+                                ? ConfirmDataLocWidget(
+                                    label: "Merk Kendaraan",
+                                    controller: controller.tecMerkKendaraan,
+                                    suggestionsCallback: (String v) async {
+                                      return controller.getListVehicleMotor(v);
+                                    },
+                                  )
+                                : ConfirmDataLocWidget(
+                                    label: "Merk Kendaraan",
+                                    controller: controller.tecMerkKendaraan,
+                                    suggestionsCallback: (String v) async {
+                                      return controller.getListVehicleMobil(v);
+                                    },
+                                  ),
+                          ),
                           SizedBox(height: 16.h),
                           ConfirmDataFieldWidget(label: 'Type Kendaraan', hint: 'Type Kendaraan anda', controller: controller.tecTypeKendaraan),
                           SizedBox(height: 16.h),
@@ -142,10 +161,65 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                             label: 'Tahun Kendaraan',
                             hint: 'Tahun Kendaraan anda',
                             controller: controller.tecTahunKendaraan,
+                            onTap: () async {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Select Year"),
+                                    content: Container(
+                                      // Need to use container to add size constraint.
+                                      width: 300,
+                                      height: 300,
+                                      child: YearPicker(
+                                        firstDate: DateTime(DateTime.now().year - 100, 1),
+                                        lastDate: DateTime(DateTime.now().year + 100, 1),
+                                        initialDate: DateTime.now(),
+                                        currentDate: controller.selectedDateTahunKendaraan,
+                                        // save the selected date to _selectedDate DateTime variable.
+                                        // It's used to set the previous selected date when
+                                        // re-showing the dialog.
+                                        selectedDate: controller.selectedDateTahunKendaraan,
+                                        onChanged: (DateTime dateTime) {
+                                          // close the dialog when year is selected.
+                                          controller.tecTahunKendaraan.text = DateFormat('yyyy').format(dateTime);
+                                          controller.selectedDateTahunKendaraan = dateTime;
+                                          controller.update();
+                                          Navigator.pop(context);
+
+                                          // Do something with the dateTime selected.
+                                          // Remember that you need to use dateTime.year to get the year
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            readOnly: true,
                             inputType: TextInputType.number,
                           ),
                           SizedBox(height: 16.h),
-                          ConfirmDataFieldWidget(label: 'Tanggal Pajak Kendaraan', hint: 'Tanggal Pajak Kendaraan anda', controller: controller.tecPajakKendaraan),
+                          ConfirmDataFieldWidget(
+                            label: 'Pajak Kendaraan Berlaku Sampai',
+                            hint: 'Pajak Kendaraan Berlaku Sampai',
+                            controller: controller.tecPajakKendaraan,
+                            readOnly: true,
+                            onTap: () async {
+                              await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1800),
+                                lastDate: DateTime(2100),
+                              ).then(
+                                (DateTime? value) {
+                                  if (value != null) {
+                                    controller.tecPajakKendaraan.text = DateFormat('yyyy-MM-dd').format(value);
+                                  }
+                                },
+                              );
+                            },
+                          ),
                           SizedBox(height: 16.h),
                           SizedBox(
                             width: size.width,
@@ -202,7 +276,7 @@ class STNKLivenessConfirmScreen extends GetView<STNKLivenessConfirmController> {
                             ),
                           ),
                           SizedBox(height: 16.h),
-      
+
                           SizedBox(
                             width: size.width,
                             child: Text(
