@@ -47,6 +47,7 @@ dependencies:
   firebase_dynamic_links: ^5.3.3
   fimber: ^0.6.6
   open_mail_app: ^0.4.5
+  app_links: ^4.0.0
   flutter_native_image: ^0.0.6+1
   flutter_image_compress: 2.0.3
   fluttertoast: ^8.1.1
