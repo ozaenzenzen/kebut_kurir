@@ -33,6 +33,7 @@ class _AppMainState extends State<AppMain> {
   }
 
   Future<void> initDinamycLinks() async {
+    debugPrint("start dynamic links");
     dynamicLinks.onLink.listen((dynamicLinkData) async {
       debugPrint('DYNAMIC LINK DATA ${dynamicLinkData.link.toString()}');
       Get.toNamed(
@@ -46,7 +47,7 @@ class _AppMainState extends State<AppMain> {
   @override
   void initState() {
     initDinamycLinks();
-    initSecurityState();
+    // initSecurityState();
     super.initState();
   }
 

@@ -20,13 +20,23 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   if (Platform.isAndroid) {
+    // await Firebase.initializeApp(
+    //   name: "Kebut",
+    //   options: const FirebaseOptions(
+    //     apiKey: 'AIzaSyDDPVuIfMugGlc6bNtYsHFnR7suo6-T-Ic',
+    //     appId: '1:28782427280:android:7530dcc67077f837efec15',
+    //     messagingSenderId: '28782427280',
+    //     projectId: 'kebut-458c7',
+    //     storageBucket: 'kebut-458c7.appspot.com',
+    //   ),
+    // );
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: 'AIzaSyDDPVuIfMugGlc6bNtYsHFnR7suo6-T-Ic',
-        appId: '1:28782427280:android:7530dcc67077f837efec15',
-        messagingSenderId: '28782427280',
-        projectId: 'kebut-458c7',
-        storageBucket: 'kebut-458c7.appspot.com',
+        apiKey: 'AIzaSyDIK1fnmi-2iCa3NeZQ7E4aCvXo7yDWOwQ',
+        appId: '1:603358870220:android:6abbb9059366028d112069',
+        messagingSenderId: '603358870220',
+        projectId: 'kebut-kurir-zzz',
+        storageBucket: 'kebut-kurir-zzz.appspot.com',
       ),
     );
   } else if (Platform.isIOS) {
