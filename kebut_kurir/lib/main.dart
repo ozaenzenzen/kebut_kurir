@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
@@ -16,6 +19,29 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  if (Platform.isAndroid) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: 'AIzaSyDDPVuIfMugGlc6bNtYsHFnR7suo6-T-Ic',
+        appId: '1:28782427280:android:7530dcc67077f837efec15',
+        messagingSenderId: '28782427280',
+        projectId: 'kebut-458c7',
+        storageBucket: 'kebut-458c7.appspot.com',
+      ),
+    );
+  } else if (Platform.isIOS) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: '',
+        appId: '',
+        messagingSenderId: '28782427280',
+        projectId: 'kebut-458c7',
+        storageBucket: 'kebut-458c7.appspot.com',
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   // bool isLogin = prefs.getBool('isLogin') ?? true;
   // isLogin;
   // if (isLogin != null){
