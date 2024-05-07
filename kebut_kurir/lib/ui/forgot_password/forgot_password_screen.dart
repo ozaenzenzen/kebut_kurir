@@ -52,9 +52,7 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                       ),
                       SizedBox(height: 25.h),
                       Text(
-                        controller.isSend.value
-                            ? 'Permintaan reset password anda telah terkirim silahkan cek kotak masuk email anda'
-                            : 'Silahkan masukkan alamat email anda untuk permintaan reset password.',
+                        controller.isSend.value ? 'Permintaan reset password anda telah terkirim silahkan cek kotak masuk email anda' : 'Silahkan masukkan alamat email anda untuk permintaan reset password.',
                         style: AppTheme.textStyle.blackTextStyle.copyWith(
                           fontSize: AppTheme.textConfig.size.ml,
                         ),
@@ -142,25 +140,25 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                               Get.offNamed(Routes.login);
                             } else {
                               FocusManager.instance.primaryFocus?.unfocus();
-                              await controller.sendEmail().then((_) async {
-                                DialogsUtils()
-                                    .showSuccessDialog(
-                                  context: context,
-                                  title: 'Berhasil',
-                                  description: 'Permintaan reset password anda telah terkirim. Silahkan cek email anda',
-                                  useTimeOut: false,
-                                );
-                                //     .whenComplete(() async {
-                                //   await Future<dynamic>.delayed(const Duration(milliseconds: 2500));
-                                //   Get.back();
-                                //   Get.back();
-                                // });
-                              });
-                              // final DialogsUtils _dialog = DialogsUtils();
-                              // _dialog.showLoading();
+                              await controller.sendEmail(
+                                onSuccess: () {
+                                  DialogsUtils().showSuccessDialog(
+                                    context: context,
+                                    title: 'Berhasil',
+                                    description: 'Permintaan reset password anda telah terkirim. Silahkan cek email anda',
+                                    useTimeOut: false,
+                                  );
+                                },
+                                onFailed: (String errorMessage) {
+                                  DialogsUtils().showFailedDialog(
+                                    context: context,
+                                    title: 'Terjadi Kesalahan',
+                                    description: errorMessage,
+                                    useTimeOut: false,
+                                  );
+                                },
+                              );
                               controller.isSend.value = true;
-                              // await Future<dynamic>.delayed(const Duration(milliseconds: 500));
-                              // _dialog.hideLoading();
                             }
                           }
                         },

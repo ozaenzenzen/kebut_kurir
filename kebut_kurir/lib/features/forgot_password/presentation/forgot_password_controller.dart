@@ -20,10 +20,24 @@ class ForgotPasswordController extends GetxController {
 
   RxBool emailFilled = false.obs;
 
-  Future<void> sendEmail() async {
+  Future<void> sendEmail({
+    void Function()? onSuccess,
+    void Function(String errorMessage)? onFailed,
+  }) async {
     _dialogsUtils.showLoading();
-    await _forgotPasswordRepository.sendEmail(email: tecEmail.text);
-    _dialogsUtils.hideLoading();
+    var status = await _forgotPasswordRepository.sendEmail(email: tecEmail.text);
+    if (status != null) {
+      if (status.data['status'] == 200) {
+        _dialogsUtils.hideLoading();
+        onSuccess?.call();
+      } else {
+        _dialogsUtils.hideLoading();
+        onFailed?.call("Error ${status.data['result']['message_detail']}");
+      }
+    } else {
+      _dialogsUtils.hideLoading();
+      onFailed?.call("Other error");
+    }
   }
 
   Future<void> resetPassword() async {

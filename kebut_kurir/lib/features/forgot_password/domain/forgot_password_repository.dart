@@ -1,20 +1,29 @@
 import 'package:dio/src/response.dart';
+import 'package:flutter/material.dart';
 import 'package:kebut_kurir/core/utils/api_function.dart';
 
 class ForgotPasswordRepository {
   final ApiClient apiClient = ApiClient();
 
-  Future<void> sendEmail({required String email}) async {
+  Future<Response<dynamic>?> sendEmail({required String email}) async {
     try {
-      await apiClient.postRequest('api/web/forgot-password', data: <String, dynamic>{
-        'email': email,
-      }).then((Response<dynamic> value) {
-        print('REPONSE LOGIN $value');
-      });
+      var status = await apiClient.postRequest(
+        'api/web/forgot-password',
+        data: <String, dynamic>{
+          'email': email,
+        },
+      );
+      debugPrint('REPONSE LOGIN ${status.data['status']}');
+      debugPrint('Error ${status.data['result']['message_detail']}');
+      if (status.data['status'] == 200) {
+        return status;
+      } else {
+        return status;
+      }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
+      return null;
     }
-    return null;
   }
 
   Future<void> resetPassword({

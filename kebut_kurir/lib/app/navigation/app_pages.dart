@@ -38,7 +38,6 @@ import 'package:kebut_kurir/ui/detail_delivery_barang/detail_delivery_barang_scr
 import 'package:kebut_kurir/ui/detail_pickup_barang/detail_pickup_barang_screen.dart';
 import 'package:kebut_kurir/ui/edit_profile/edit_profile_screen.dart';
 import 'package:kebut_kurir/ui/forgot_password/forgot_password_screen.dart';
-import 'package:kebut_kurir/ui/forgot_password/new_password_screen.dart';
 import 'package:kebut_kurir/ui/home/home_screen.dart';
 import 'package:kebut_kurir/ui/info_driver/info_driver_screen.dart';
 import 'package:kebut_kurir/ui/info_pengajuan/info_pengajuan_screen.dart';
