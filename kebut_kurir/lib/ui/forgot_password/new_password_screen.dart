@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
+import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
+import 'package:kebut_kurir/core/widgets/app_bar_widgetV2.dart';
 import 'package:kebut_kurir/core/widgets/textfield_widget/underline_textfield_widget.dart';
 import 'package:kebut_kurir/features/forgot_password/presentation/forgot_password_controller.dart';
 
@@ -16,10 +18,16 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        backgroundColor: AppTheme.colors.whiteColor1,
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+        // appBar: AppBarWidgetV2(
+        //   title: "Buat Password Baru",
+        //   onBack: () {
+        //     Get.back();
+        //   },
+        // ),
         appBar: AppBar(
-          backgroundColor: AppTheme.colors.whiteColor1,
-          elevation: 10,
+          backgroundColor: Colors.white,
+          // elevation: 10,
           shadowColor: const Color(0xff1018280D),
           centerTitle: true,
           title: Text(
