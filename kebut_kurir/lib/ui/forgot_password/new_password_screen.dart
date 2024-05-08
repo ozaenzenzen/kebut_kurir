@@ -48,7 +48,7 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
               Align(
                 alignment: Alignment.center,
                 child: Image.asset(
-                  'assets/icon_ubah_password_page_yellow.png',
+                  'assets/icon_ubah_password_page.png',
                   height: 120.h,
                 ),
               ),
