@@ -91,7 +91,7 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
                     },
                     child: Icon(
                       Icons.remove_red_eye,
-                      color: controller.showPasswordBaruField.value ? AppTheme.colors.primaryColor : const Color(0xff121419),
+                      color: controller.showPasswordBaruField.value ? AppTheme.colors.secondaryColor : AppTheme.colors.greyColor6,
                       size: 20.h,
                     ),
                   ),
@@ -120,7 +120,7 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
                     },
                     child: Icon(
                       Icons.remove_red_eye,
-                      color: controller.showKonfirmasiPasswordBaruField.value ? AppTheme.colors.primaryColor : const Color(0xff121419),
+                      color: controller.showKonfirmasiPasswordBaruField.value ? AppTheme.colors.secondaryColor : AppTheme.colors.greyColor6,
                       size: 20.h,
                     ),
                   ),
@@ -138,6 +138,7 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
                     (_) => DialogsUtils().showSuccessDialog(
                       context: context,
                       title: 'Selamat! Password baru berhasil dibuat',
+                      titleColor: Colors.white,
                       description: 'Sekarang kamu bisa login kembali menggunakan password baru.',
                       primaryButtonText: 'Oke, tutup',
                       primaryOnTap: () {

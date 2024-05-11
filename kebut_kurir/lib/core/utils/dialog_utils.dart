@@ -403,7 +403,7 @@ class DialogsUtils {
                               height: 48.h,
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
-                                color: AppTheme.colors.primaryColor,
+                                color: AppTheme.colors.secondaryColor,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               alignment: Alignment.center,
@@ -521,7 +521,7 @@ class DialogsUtils {
                             height: 48.h,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
-                              color: AppTheme.colors.primaryColor,
+                              color: AppTheme.colors.secondaryColor,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             alignment: Alignment.center,

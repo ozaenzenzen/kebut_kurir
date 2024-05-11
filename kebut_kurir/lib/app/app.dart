@@ -1,6 +1,6 @@
 import 'dart:async';
 
-// import 'package:app_links/app_links.dart';
+import 'package:app_links/app_links.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,42 +45,42 @@ class _AppMainState extends State<AppMain> {
     });
   }
 
-  // final _navigatorKey = GlobalKey<NavigatorState>();
-  // late AppLinks _appLinks;
-  // StreamSubscription<Uri>? _linkSubscription;
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  late AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
 
-  // @override
-  // void dispose() {
-  //   _linkSubscription?.cancel();
+  @override
+  void dispose() {
+    _linkSubscription?.cancel();
 
-  //   super.dispose();
-  // }
+    super.dispose();
+  }
 
-  // Future<void> initDeepLinks() async {
-  //   debugPrint('initDeepLinks');
-  //   _appLinks = AppLinks();
+  Future<void> initDeepLinks() async {
+    debugPrint('initDeepLinks');
+    _appLinks = AppLinks();
 
-  //   // Check initial link if app was in cold state (terminated)
-  //   final appLink = await _appLinks.getInitialAppLink();
-  //   if (appLink != null) {
-  //     print('getInitialAppLink: $appLink');
-  //     openAppLink(appLink);
-  //   }
+    // Check initial link if app was in cold state (terminated)
+    final appLink = await _appLinks.getInitialAppLink();
+    if (appLink != null) {
+      print('getInitialAppLink: $appLink');
+      openAppLink(appLink);
+    }
 
-  //   // Handle link when app is in warm state (front or background)
-  //   _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
-  //     print('onAppLink: $uri');
-  //     openAppLink(uri);
-  //   });
-  // }
+    // Handle link when app is in warm state (front or background)
+    _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
+      print('onAppLink: $uri');
+      openAppLink(uri);
+    });
+  }
 
-  // void openAppLink(Uri uri) {
-  //   // _navigatorKey.currentState?.pushNamed(uri.fragment);
-  //   // debugPrint('DYNAMIC LINK DATA ${dynamicLinkData.link.toString()}');
-  //     Get.toNamed(
-  //       Routes.newPasswordScreen,
-  //     );
-  // }
+  void openAppLink(Uri uri) {
+    // _navigatorKey.currentState?.pushNamed(uri.fragment);
+    // debugPrint('DYNAMIC LINK DATA ${dynamicLinkData.link.toString()}');
+      Get.toNamed(
+        Routes.newPasswordScreen,
+      );
+  }
 
   @override
   void initState() {

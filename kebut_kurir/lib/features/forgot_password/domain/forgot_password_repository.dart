@@ -8,7 +8,7 @@ class ForgotPasswordRepository {
   Future<Response<dynamic>?> sendEmail({required String email}) async {
     try {
       var status = await apiClient.postRequest(
-        'api/web/forgot-password',
+        'api/web/forgot-password-courier',
         data: <String, dynamic>{
           'email': email,
         },
