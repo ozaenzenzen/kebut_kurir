@@ -15,7 +15,7 @@ dependencies:
   shimmer: ^2.0.0
   intl: any
   permission_handler: ^10.2.0
-  flutter_phone_direct_caller: ^2.1.1
+  # flutter_phone_direct_caller: ^2.1.1
   get: ^4.6.5
   flutter_html: any
   flutter_typeahead: ^4.6.1
@@ -28,21 +28,21 @@ dependencies:
   carousel_slider: ^4.2.1
   cached_network_image: ^3.2.3
   freerasp: ^3.0.2
-  url_launcher: ^6.1.7
-  share_plus: ^7.0.1
+  # url_launcher: ^6.1.7
+  # share_plus: ^7.0.1
   shared_preferences: ^2.1.1
   flutter_statusbarcolor_ns: ^0.5.0
   get_it: ^7.3.0
-  callkeep: ^0.3.3
+  # callkeep: ^0.3.3
   geolocator: ^9.0.2
   geocoding: ^2.0.5
-  file_picker: ^5.3.1
+  # file_picker: ^5.3.1
   image_picker: ^0.8.7+5
   google_maps_flutter: ^2.2.7
   dio: ^5.1.1
   # firebase_core: ^2.4.1
   firebase_core: ^2.10.0
-  google_sign_in: ^5.4.2
+  # google_sign_in: ^5.4.2
   pinput: ^2.2.31
   # firebase_auth: ^4.2.4
   camera: ^0.10.5
@@ -50,7 +50,7 @@ dependencies:
   firebase_dynamic_links: 5.3.3
   fimber: ^0.6.6
   open_mail_app: ^0.4.5
-  app_links: ^3.5.1
+  # app_links: ^3.5.1
   flutter_native_image: ^0.0.6+1
   flutter_image_compress: 2.0.3
   fluttertoast: ^8.1.1

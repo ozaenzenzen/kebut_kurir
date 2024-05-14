@@ -25,14 +25,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.13.0"
-  app_links:
-    dependency: "direct main"
-    description:
-      name: app_links
-      sha256: "3ced568a5d9e309e99af71285666f1f3117bddd0bd5b3317979dccc1a40cada4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.5.1"
   archive:
     dependency: transitive
     description:
@@ -153,14 +145,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  callkeep:
-    dependency: "direct main"
-    description:
-      name: callkeep
-      sha256: "9e86e9632a603a61f7045c179ea5ca0ee4da0a49fc5f80c2fe09fb422b96d3c6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.3"
   camera:
     dependency: "direct main"
     description:
@@ -353,14 +337,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
-  file_picker:
-    dependency: "direct main"
-    description:
-      name: file_picker
-      sha256: "9d6e95ec73abbd31ec54d0e0df8a961017e165aba1395e462e5b31ea0c165daf"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.1"
   file_selector_linux:
     dependency: transitive
     description:
@@ -606,14 +582,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
-  flutter_phone_direct_caller:
-    dependency: "direct main"
-    description:
-      name: flutter_phone_direct_caller
-      sha256: a50abfb49656d39e777278348742d0d09ecfa5d4918bbc4e0b19df46e8dfd858
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -863,46 +831,6 @@ packages:
       relative: false
     source: path
     version: "0.11.0"
-  google_sign_in:
-    dependency: "direct main"
-    description:
-      name: google_sign_in
-      sha256: "821f354c053d51a2d417b02d42532a19a6ea8057d2f9ebb8863c07d81c98aaf9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.4.4"
-  google_sign_in_android:
-    dependency: transitive
-    description:
-      name: google_sign_in_android
-      sha256: "8d60a787b29cb7d2bcf29230865f4a91f17323c6ac5b6b9027a6418e48d9ffc3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.18"
-  google_sign_in_ios:
-    dependency: transitive
-    description:
-      name: google_sign_in_ios
-      sha256: "6ec0e13a4c5c646471b9f6a25ceb3ae76d339889d4c0f79b729bf0714215a63e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.6.2"
-  google_sign_in_platform_interface:
-    dependency: transitive
-    description:
-      name: google_sign_in_platform_interface
-      sha256: e69553c0fc6a76216e9d06a8c3767e291ad9be42171f879aab7ab708569d4393
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.1"
-  google_sign_in_web:
-    dependency: transitive
-    description:
-      name: google_sign_in_web
-      sha256: "75cc41ebc53b1756320ee14d9c3018ad3e6cea298147dbcd86e9d0c8d6720b40"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.2+1"
   graphs:
     dependency: transitive
     description:
@@ -911,14 +839,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
-  gtk:
-    dependency: transitive
-    description:
-      name: gtk
-      sha256: e8ce9ca4b1df106e4d72dad201d345ea1a036cc12c360f1a7d5a758f78ffa42c
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   html:
     dependency: transitive
     description:
@@ -1423,22 +1343,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  share_plus:
-    dependency: "direct main"
-    description:
-      name: share_plus
-      sha256: ed3fcea4f789ed95913328e629c0c53e69e80e08b6c24542f1b3576046c614e8
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.2"
-  share_plus_platform_interface:
-    dependency: transitive
-    description:
-      name: share_plus_platform_interface
-      sha256: "0c6e61471bd71b04a138b8b588fa388e66d8b005e6f2deda63371c5c505a0981"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.1"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -1661,7 +1565,7 @@ packages:
     source: hosted
     version: "1.0.0+1"
   url_launcher:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: url_launcher
       sha256: "781bd58a1eb16069412365c98597726cd8810ae27435f04b3b4d3a470bacd61e"
