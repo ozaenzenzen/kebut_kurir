@@ -43,8 +43,9 @@ class STNKLivenessResultScreen extends GetView<STNKLivenessResultController> {
                       borderRadius: BorderRadius.circular(12),
                       child: Image.file(
                         File(controller.stnk.value!.path),
-                        width: 280.w,
-                        height: 355.h,
+                        width: MediaQuery.of(context).size.width,
+                        // width: 250.w,
+                        height: 300.h,
                         fit: BoxFit.fitWidth,
                       ),
                     ),
