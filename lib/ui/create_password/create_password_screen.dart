@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
 import 'package:kebut_kurir/core/widgets/textfield_widget/underline_textfield_widget.dart';
-import 'package:kebut_kurir/features/forgot_password/presentation/forgot_password_controller.dart';
+import 'package:kebut_kurir/features/create_password/presentation/create_password_controller.dart';
 
-class NewPasswordScreen extends GetView<ForgotPasswordController> {
-  const NewPasswordScreen({super.key});
+class CreatePasswordScreen extends GetView<CreatePasswordController> {
+  const CreatePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +18,12 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
       },
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-        // appBar: AppBarWidgetV2(
-        //   title: "Buat Password Baru",
-        //   onBack: () {
-        //     Get.back();
-        //   },
-        // ),
         appBar: AppBar(
           backgroundColor: Colors.white,
-          // elevation: 10,
-          shadowColor: const Color(0xff1018280D),
+          shadowColor: const Color(0xff1018280d),
           centerTitle: true,
           title: Text(
-            'Buat Password Baru',
+            'Buat Password',
             style: AppTheme.textStyle.blackTextStyle.copyWith(
               fontSize: AppTheme.textConfig.size.nl,
               fontWeight: AppTheme.textConfig.weight.semiBold,
@@ -60,7 +54,7 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
               ),
               SizedBox(height: 32.h),
               Text(
-                'Silahkan masukkan password baru kamu.',
+                'Silakan daftarkan email dan password kamu',
                 style: AppTheme.textStyle.blackTextStyle.copyWith(
                   fontSize: AppTheme.textConfig.size.n,
                   fontWeight: AppTheme.textConfig.weight.regular,
@@ -68,7 +62,23 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
               ),
               SizedBox(height: 24.h),
               Text(
-                'Password baru',
+                'Email',
+                style: AppTheme.textStyle.blackTextStyle.copyWith(
+                  fontSize: AppTheme.textConfig.size.m,
+                  fontWeight: AppTheme.textConfig.weight.regular,
+                ),
+              ),
+              SizedBox(height: 6.h),
+              UnderlineTextFieldWidget(
+                hintText: 'Masukkan email',
+                label: 'Masukkan email',
+                filled: true,
+                controller: controller.emailController,
+                onChanged: (String value) {},
+              ),
+              SizedBox(height: 16.h),
+              Text(
+                'Password',
                 style: AppTheme.textStyle.blackTextStyle.copyWith(
                   fontSize: AppTheme.textConfig.size.m,
                   fontWeight: AppTheme.textConfig.weight.regular,
@@ -77,10 +87,10 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
               SizedBox(height: 6.h),
               Obx(
                 () => UnderlineTextFieldWidget(
-                  hintText: 'Masukkan password baru',
-                  label: 'Masukkan password baru',
+                  hintText: 'Masukkan password',
+                  label: 'Masukkan password',
                   filled: true,
-                  controller: controller.passwordBaruController,
+                  controller: controller.passwordController,
                   isObstruct: (controller.showPasswordBaruField.value) ? false : true,
                   onChanged: (String value) {},
                   suffixIcon: InkWell(
@@ -97,7 +107,7 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
               ),
               SizedBox(height: 16.h),
               Text(
-                'Konfirmasi Password baru',
+                'Konfirmasi Password',
                 style: AppTheme.textStyle.blackTextStyle.copyWith(
                   fontSize: AppTheme.textConfig.size.m,
                   fontWeight: AppTheme.textConfig.weight.regular,
@@ -106,10 +116,10 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
               SizedBox(height: 6.h),
               Obx(
                 () => UnderlineTextFieldWidget(
-                  hintText: 'ketik ulang password baru',
-                  label: 'ketik ulang password baru',
+                  hintText: 'ketik ulang password',
+                  label: 'ketik ulang password',
                   filled: true,
-                  controller: controller.konfirmasiPasswordBaruController,
+                  controller: controller.confirmPasswordController,
                   isObstruct: (controller.showKonfirmasiPasswordBaruField.value) ? false : true,
                   onChanged: (String value) {},
                   suffixIcon: InkWell(
@@ -131,20 +141,31 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
           height: 80.h,
           padding: EdgeInsets.all(16.h),
           child: InkWell(
-            onTap: () {
-              controller.resetPassword().then(
-                    (_) => DialogsUtils().showSuccessDialog(
-                      context: context,
-                      title: 'Selamat! Password baru berhasil dibuat',
-                      titleColor: Colors.white,
-                      description: 'Sekarang kamu bisa login kembali menggunakan password baru.',
-                      primaryButtonText: 'Oke, tutup',
-                      primaryOnTap: () {
-                        Get.back();
-                        Get.back();
-                      },
-                    ),
+            onTap: () async {
+              await controller.createPassword(
+                onSuccess: () {
+                  DialogsUtils().showSuccessDialog(
+                    context: context,
+                    title: 'Selamat! Password berhasil dibuat',
+                    description: 'Sekarang kamu bisa melakukan login',
+                    primaryButtonText: 'Ke Halaman Login',
+                    primaryOnTap: () {
+                      Get.offAllNamed(Routes.login);
+                    },
                   );
+                },
+                onFailed: (errorMessage) {
+                  DialogsUtils().showFailedDialog(
+                    context: context,
+                    title: 'Terjadi kesalahan',
+                    description: errorMessage,
+                    primaryButtonText: 'Kembali',
+                    primaryOnTap: () {
+                      Get.back();
+                    },
+                  );
+                },
+              );
             },
             child: Container(
               alignment: Alignment.center,
@@ -154,7 +175,7 @@ class NewPasswordScreen extends GetView<ForgotPasswordController> {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Text(
-                'Buat Password Baru',
+                'Buat Password',
                 style: AppTheme.textStyle.whiteTextStyle.copyWith(
                   color: AppTheme.colors.whiteColor1,
                   fontSize: AppTheme.textConfig.size.nl,

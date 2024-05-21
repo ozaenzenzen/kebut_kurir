@@ -61,6 +61,7 @@ class Routes {
   static const String formKomplainScreen = '/form_komplain_screen';
   static const String paymentMyOrderScreen = '/payment_my_order_screen';
   static const String newPasswordScreen = '/new_password_screen';
+  static const String createPasswordScreen = '/create_password_screen';
   static const String pesanScreen = '/pesan_screen';
   static const String infoPengajuanScreen = '/info_pengajuan_screen';
   static const String infoDriverScreen = '/info_driver_screen';
