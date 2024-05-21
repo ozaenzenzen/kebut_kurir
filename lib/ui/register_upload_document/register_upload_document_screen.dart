@@ -615,7 +615,8 @@ class RegisterUploadDocumentScreen extends GetView<RegisterUploadDocumentControl
                                   asset: 'assets/check_img.png',
                                   subTitle: 'Selamat, akun anda akan telah didaftarkan.',
                                   onTapPrimary: () {
-                                    Get.offAllNamed(Routes.login);
+                                    // Get.offAllNamed(Routes.login);
+                                    Get.toNamed(Routes.createPasswordScreen);
                                   },
                                 );
                               },
