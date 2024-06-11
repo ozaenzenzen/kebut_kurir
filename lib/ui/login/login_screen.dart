@@ -115,7 +115,7 @@ class LoginScreen extends GetView<LoginController> {
                               style: AppTheme.textStyle.primaryTextStyle.copyWith(
                                 fontSize: AppTheme.textConfig.size.m,
                                 fontWeight: AppTheme.textConfig.weight.bold,
-                                color: AppTheme.colors.secondaryColor,
+                                color: const Color(0xff00A3FF),
                               ),
                             ),
                           ),
@@ -210,7 +210,7 @@ class LoginScreen extends GetView<LoginController> {
                               style: AppTheme.textStyle.primaryTextStyle.copyWith(
                                 fontSize: AppTheme.textConfig.size.n,
                                 fontWeight: AppTheme.textConfig.weight.bold,
-                                color: AppTheme.colors.secondaryColor,
+                                color: AppTheme.colors.primaryColor2,
                               ),
                             ),
                           ],

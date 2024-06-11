@@ -48,7 +48,7 @@ class CreatePasswordScreen extends GetView<CreatePasswordController> {
               Align(
                 alignment: Alignment.center,
                 child: Image.asset(
-                  'assets/icon_ubah_password_page.png',
+                  'assets/icon_ubah_password_page_yellow.png',
                   height: 120.h,
                 ),
               ),
@@ -99,7 +99,7 @@ class CreatePasswordScreen extends GetView<CreatePasswordController> {
                     },
                     child: Icon(
                       Icons.remove_red_eye,
-                      color: controller.showPasswordBaruField.value ? AppTheme.colors.secondaryColor : AppTheme.colors.greyColor6,
+                      color: controller.showPasswordBaruField.value ? AppTheme.colors.primaryColor2 : AppTheme.colors.greyColor6,
                       size: 20.h,
                     ),
                   ),
@@ -128,7 +128,7 @@ class CreatePasswordScreen extends GetView<CreatePasswordController> {
                     },
                     child: Icon(
                       Icons.remove_red_eye,
-                      color: controller.showKonfirmasiPasswordBaruField.value ? AppTheme.colors.secondaryColor : AppTheme.colors.greyColor6,
+                      color: controller.showKonfirmasiPasswordBaruField.value ? AppTheme.colors.primaryColor2 : AppTheme.colors.greyColor6,
                       size: 20.h,
                     ),
                   ),
@@ -171,13 +171,13 @@ class CreatePasswordScreen extends GetView<CreatePasswordController> {
               alignment: Alignment.center,
               height: 48.h,
               decoration: BoxDecoration(
-                color: AppTheme.colors.secondaryColor,
+                color: AppTheme.colors.primaryColor,
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Text(
                 'Buat Password',
                 style: AppTheme.textStyle.whiteTextStyle.copyWith(
-                  color: AppTheme.colors.whiteColor1,
+                  color: AppTheme.colors.neutral500,
                   fontSize: AppTheme.textConfig.size.nl,
                   fontWeight: AppTheme.textConfig.weight.semiBold,
                 ),
