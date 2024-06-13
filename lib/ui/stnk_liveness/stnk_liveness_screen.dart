@@ -30,11 +30,43 @@ class STNKLivenessScreen extends GetView<STNKLivenessController> {
               icon: Icon(
                 Icons.arrow_back_ios_rounded,
                 color: Colors.white,
-                size: 25.w,
+                size: 25,
               ),
               onPressed: () => Get.back(),
             ),
             actions: <Widget>[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  side: BorderSide.none,
+                ),
+                onPressed: () {
+                  controller.isCameraPortrait.value = !controller.isCameraPortrait.value;
+                },
+                child: Obx(() {
+                  if (controller.isCameraPortrait.value) {
+                    return Text(
+                      "Portrait",
+                      style: AppTheme.textStyle.blackTextStyle.copyWith(
+                        color: Colors.white,
+                        fontSize: AppTheme.textConfig.size.n,
+                        fontWeight: AppTheme.textConfig.weight.medium,
+                        height: 1.50,
+                      ),
+                    );
+                  } else {
+                    return Text(
+                      "Landscape",
+                      style: AppTheme.textStyle.blackTextStyle.copyWith(
+                        color: Colors.white,
+                        fontSize: AppTheme.textConfig.size.n,
+                        fontWeight: AppTheme.textConfig.weight.medium,
+                        height: 1.50,
+                      ),
+                    );
+                  }
+                }),
+              ),
               IconButton(
                 icon: Obx(
                   () => Icon(
@@ -79,7 +111,7 @@ class STNKLivenessScreen extends GetView<STNKLivenessController> {
                     controller.update();
                   });
                 },
-              )
+              ),
             ],
           ),
           body: Stack(

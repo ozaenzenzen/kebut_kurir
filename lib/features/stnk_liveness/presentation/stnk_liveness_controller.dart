@@ -25,6 +25,7 @@ class STNKLivenessController extends GetxController {
 
   RxBool isCameraInit = false.obs;
   RxBool isCameraFlashOn = false.obs;
+  RxBool isCameraPortrait = true.obs;
 
   // double scaleCamera = 0;
 
@@ -170,7 +171,12 @@ class STNKLivenessController extends GetxController {
       (XFile? file) async {
         final XFile? imageCaptured = file;
         final File tempImage = File(imageCaptured!.path);
-        final File? rotate = await _rotateImage(imageCaptured.path);
+        final File? rotate;
+        if (isCameraPortrait.value) {
+          rotate = tempImage;
+        } else {
+          rotate = await _rotateImage(imageCaptured.path);
+        }
         // final File? rotate = await compute(
         //   _rotateImage,
         //   tempImage.path,
