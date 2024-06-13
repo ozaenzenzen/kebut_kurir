@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
+import 'package:kebut_kurir/core/utils/prefs.dart';
 import 'package:kebut_kurir/core/utils/toast_custom.dart';
 import 'package:kebut_kurir/core/widgets/app_bar_widget.dart';
 import 'package:kebut_kurir/core/widgets/button_custom_widget.dart';
@@ -123,8 +124,9 @@ class RegisterScreen extends GetView<RegisterController> {
                   text: 'Lanjut',
                   textColor: AppTheme.colors.blackColor2,
                   textSize: 18,
-                  onTap: () {
+                  onTap: () async {
                     // Get.toNamed(Routes.registerUploadDocumentScreen);
+                    await Prefs.setEmail(controller.tecEmail.text);
                     controller.registerStepOne(
                       onSucces: () {
                         Get.toNamed(Routes.registerUploadDocumentScreen);

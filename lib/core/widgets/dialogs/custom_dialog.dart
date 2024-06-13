@@ -96,6 +96,7 @@ class CustomDialog extends StatelessWidget {
                           paddingHor: 12.w,
                           text: !reverseButton! ? primaryButtonText! : secondaryButtonText!,
                           textColor: !reverseButton! ? AppTheme.colors.primaryColor : const Color(0xFF42526D),
+                          textSize: 15.sp,
                           buttonColor: !reverseButton! ? AppTheme.colors.secondaryColor : AppTheme.colors.whiteColor,
                           onTap: () {
                             if (!reverseButton!) {
@@ -123,6 +124,7 @@ class CustomDialog extends StatelessWidget {
                           borderRadius: 6.r,
                           text: !reverseButton! ? secondaryButtonText! : primaryButtonText,
                           textColor: !reverseButton! ? AppTheme.colors.secondaryColor : const Color(0xFF42526D),
+                          textSize: 16.sp,
                           buttonColor: !reverseButton! ? AppTheme.colors.whiteColor : AppTheme.colors.primaryColor,
                           onTap: () {
                             if (!reverseButton!) {
@@ -150,6 +152,7 @@ class CustomDialog extends StatelessWidget {
                           borderRadius: 6.r,
                           text: primaryButtonText!,
                           textColor: AppTheme.colors.whiteColor,
+                          textSize: 16.sp,
                           buttonColor: onTapPrimary != null ? AppTheme.colors.primaryColor : AppTheme.colors.greyColor,
                           onTap: onTapPrimary,
                         ),
@@ -163,6 +166,7 @@ class CustomDialog extends StatelessWidget {
                     borderRadius: 6.r,
                     text: secondaryButtonText ?? '',
                     textColor: AppTheme.colors.whiteColor,
+                    textSize: 16.sp,
                     buttonColor: onTapSecondary != null ? AppTheme.colors.primaryColor : AppTheme.colors.greyColor,
                     onTap: () => onTapSecondary,
                   ),

@@ -26,6 +26,7 @@ class UnderlineTextFieldWidget extends StatelessWidget {
   final double? radius;
   final BoxConstraints? suffixIconConstraints;
   final bool? alignLabelWithHint;
+  final bool enabled;
 
   const UnderlineTextFieldWidget({
     super.key,
@@ -52,6 +53,7 @@ class UnderlineTextFieldWidget extends StatelessWidget {
     this.suffixIconConstraints,
     this.alignLabelWithHint = true,
     this.radius,
+    this.enabled = true,
   });
 
   @override
@@ -77,6 +79,7 @@ class UnderlineTextFieldWidget extends StatelessWidget {
       decoration: InputDecoration(
         alignLabelWithHint: alignLabelWithHint,
         filled: filled,
+        enabled: enabled,
         labelText: label,
         isCollapsed: true,
         fillColor: filled ? AppTheme.colors.whiteColor4 : Colors.transparent,

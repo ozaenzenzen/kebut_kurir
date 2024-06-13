@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/core/utils/bottomsheet_utils.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
+import 'package:kebut_kurir/core/utils/prefs.dart';
 import 'package:kebut_kurir/features/create_password/domain/create_password_repository.dart';
 
 class CreatePasswordController extends GetxController {
@@ -19,6 +20,12 @@ class CreatePasswordController extends GetxController {
   RxBool showKonfirmasiPasswordBaruField = false.obs;
 
   RxBool emailFilled = false.obs;
+
+  @override
+  void onInit() async {
+    emailController.text = await Prefs.email;
+    super.onInit();
+  }
 
   Future<void> createPassword({
     void Function()? onSuccess,
