@@ -358,7 +358,6 @@ class KTPOcrConfirmScreen extends GetView<KTPOcrConfirmController> {
                             Get.back();
                             Get.back();
                             Get.back();
-                            Get.back();
                             Get.back(result: controller.ocr.value!.path);
                             // Get.offAndToNamed(
                             //   Routes.ktpGuide,

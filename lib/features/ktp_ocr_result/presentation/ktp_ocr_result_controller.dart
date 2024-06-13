@@ -697,6 +697,7 @@ class KTPOcrResultController extends GetxController {
       dialogsUtils.showLoading();
       await recognizedText(ocr.value!.path);
       if (ocr.value != null && ocrCropped.value != null) {
+        dialogsUtils.hideLoading();
         Get.toNamed(
           Routes.ocrKtpConfirm,
           arguments: KtpConfirmDataArgs(
