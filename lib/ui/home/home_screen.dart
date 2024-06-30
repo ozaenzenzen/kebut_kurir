@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:kebut_kurir/app/navigation/app_routes.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/core/widgets/asset_image_widget.dart';
 import 'package:kebut_kurir/features/home/presentation/home_controller.dart';
@@ -39,7 +40,9 @@ class HomeScreen extends GetView<HomeController> {
               children: <Widget>[
                 InkWell(
                   // onTap: () => Get.toNamed(Routes.formKomplainScreen),
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.notificationScreen);
+                  },
                   child: Icon(
                     Icons.notifications,
                     color: AppTheme.colors.blackColor2,

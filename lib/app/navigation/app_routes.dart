@@ -20,7 +20,6 @@ class Routes {
   static const String chat = '/chat';
   static const String selectChat = '/select_chat';
   static const String myOrder = '/my_order';
-  static const String notif = '/notif';
   static const String activeOrder = '/active_order';
   static const String static = '/static';
   static const String kartuPegawai = '/kartu_pegawai';
@@ -78,5 +77,6 @@ class Routes {
   static const String stnkLivenessResultScreen = '/stnk_liveness_result_screen';
   static const String stnkLivenessConfirmScreen = '/stnk_liveness_confirm_screen';
   static const String stnkKendaraanLivenessResultScreen = '/stnk_kendaraan_liveness_result_screen';
+  static const String notificationScreen = '/notification_screen';
 
 }

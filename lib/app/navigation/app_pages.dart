@@ -50,6 +50,8 @@ import 'package:kebut_kurir/ui/ktp_ocr_confirm/ktp_ocr_confirm_screen.dart';
 import 'package:kebut_kurir/ui/ktp_ocr_result/ktp_ocr_result_screen.dart';
 import 'package:kebut_kurir/ui/login/login_screen.dart';
 import 'package:kebut_kurir/ui/main/main_screen.dart';
+import 'package:kebut_kurir/ui/notification/presentation/notification_binding.dart';
+import 'package:kebut_kurir/ui/notification/presentation/notification_screen.dart';
 import 'package:kebut_kurir/ui/pick_up_barang/pick_up_barang_screen.dart';
 import 'package:kebut_kurir/ui/register/register_screen.dart';
 import 'package:kebut_kurir/ui/register_upload_document/register_upload_document_screen.dart';
@@ -248,6 +250,11 @@ class AppPages {
       name: Routes.createPasswordScreen,
       page: () => const CreatePasswordScreen(),
       binding: CreatePasswordBinding(),
+    ),
+    GetPage<dynamic>(
+      name: Routes.notificationScreen,
+      page: () => const NotificationScreen(),
+      binding: NotificationBinding(),
     ),
   ];
 }

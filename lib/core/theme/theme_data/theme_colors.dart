@@ -10,6 +10,9 @@ class _ThemeColors {
   Color get secondaryColor => const Color(0xFF00B050);
   Color get secondaryColor2 => const Color(0xff1E1E1E);
   Color get secondaryColor3 => const Color(0xff00A6B5);
+  Color get softPrimaryColorExt => const Color(0xffFFFFB0);
+  Color get softPrimaryColorExt2 => const Color(0xffFFFFE6);
+  Color get softPrimaryColorExt3 => const Color(0xffCCCC00);
   Color get blackColor1 => const Color(0xFF121419);
   Color get blackColor2 => const Color(0xFF42526D);
   Color get blackColor3 => const Color(0xFF43474D);
