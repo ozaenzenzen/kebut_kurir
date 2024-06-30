@@ -43,7 +43,6 @@ class _ProfileScreenV2State extends State<ProfileScreenV2> {
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-
         // backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         title: Text(

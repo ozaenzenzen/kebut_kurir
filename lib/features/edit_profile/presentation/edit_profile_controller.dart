@@ -66,7 +66,7 @@ class EditProfileController extends GetxController {
 
       if (dataResponse != null) {
         if (dataResponse.status == 200) {
-          await Prefs.setProfilePicture(imageData.base64Value!);
+          // await Prefs.setProfilePicture(imageData.base64Value!);
           _dialogsUtils.hideLoading();
           onSuccess();
         } else {
