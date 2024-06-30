@@ -8,77 +8,63 @@ environment:
   sdk: '>=3.1.5 <4.0.0'
 
 dependencies:
+  cached_network_image: ^3.2.3
+  camera: ^0.10.5
+  carousel_slider: ^4.2.1
+  cupertino_icons: ^1.0.2
+  device_info_plus: ^9.0.2
+  dio: ^5.1.1
+  fimber: ^0.6.6
+  firebase_core: ^2.10.0
+  firebase_dynamic_links: 5.3.3
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.2
-  shimmer: ^2.0.0
-  intl: any
-  permission_handler: ^10.2.0
-  # flutter_phone_direct_caller: ^2.1.1
-  get: ^4.6.5
-  flutter_html: any
-  flutter_typeahead: ^4.6.1
-  # google_ml_kit: ^0.14.0
-  # google_mlkit_text_recognition: ^0.11.0
-  # google_mlkit_text_recognition:
-  #   path: /Users/qoin/Documents/Flutter Folder/google_mlkit_text_recognition
-  google_mlkit_text_recognition: 
-    path: C:\Users\recov\Documents\Ozan\Repo Flutter\google_mlkit_text_recognition-0.11.0-custom
-  carousel_slider: ^4.2.1
-  cached_network_image: ^3.2.3
-  freerasp: ^3.0.2
-  # url_launcher: ^6.1.7
-  # share_plus: ^7.0.1
-  shared_preferences: ^2.1.1
-  flutter_statusbarcolor_ns: ^0.5.0
-  get_it: ^7.3.0
-  # callkeep: ^0.3.3
-  geolocator: ^9.0.2
-  geocoding: ^2.0.5
-  # file_picker: ^5.3.1
-  image_picker: ^0.8.7+5
-  google_maps_flutter: ^2.2.7
-  dio: ^5.1.1
-  # firebase_core: ^2.4.1
-  firebase_core: ^2.10.0
-  # google_sign_in: ^5.4.2
-  pinput: ^2.2.31
-  # firebase_auth: ^4.2.4
-  camera: ^0.10.5
-  http_parser:
-  firebase_dynamic_links: 5.3.3
-  fimber: ^0.6.6
-  open_mail_app: ^0.4.5
-  # app_links: ^3.5.1
-  flutter_native_image: ^0.0.6+1
-  flutter_image_compress: 2.0.3
-  fluttertoast: ^8.1.1
-  flutter_svg: ^2.0.2
-  google_fonts: ^4.0.4
-  skeletons: ^0.0.3
-  screenshot: ^2.1.0
-  flutter_native_splash: ^2.2.19
-  injectable: ^2.1.1
-  flutter_screenutil: ^5.6.0
-  objectbox: ^1.7.0
   flutter_callkit_incoming: ^2.0.0
+  flutter_html: any
+  flutter_image_compress: 2.0.3
   flutter_keyboard_visibility: ^5.4.1
+  flutter_native_image: ^0.0.6+1
+  flutter_native_splash: ^2.2.19
+  flutter_screenutil: ^5.6.0
+  flutter_statusbarcolor_ns: ^0.5.0
+  flutter_svg: ^2.0.2
+  flutter_typeahead: ^4.6.1
+  fluttertoast: ^8.1.1
+  freerasp: ^3.0.2
+  geocoding: ^2.0.5
+  geolocator: ^9.0.2
+  get: ^4.6.5
+  get_it: ^7.3.0
+  google_fonts: ^4.0.4
+  google_maps_flutter: ^2.2.7
+  google_mlkit_text_recognition:
+    path: C:\Users\recov\Documents\Ozan\Repo
+      Flutter\google_mlkit_text_recognition-0.11.0-custom
+  http_parser: null
+  image_picker: ^0.8.7+5
+  injectable: ^2.1.1
+  intl: any
   nfc_manager: ^3.2.0
-  package_info_plus: ^3.0.2
+  objectbox: ^1.7.0
   objectbox_flutter_libs: ^1.7.0
-  # firebase_messaging: ^14.6.1
-  device_info_plus: ^9.0.2
+  open_mail_app: ^0.4.5
+  package_info_plus: ^3.0.2
+  permission_handler: ^10.2.0
+  pinput: ^2.2.31
   qr_code_scanner: ^1.0.1
+  screenshot: ^2.1.0
+  shared_preferences: ^2.1.1
+  shimmer: ^2.0.0
+  skeletons: ^0.0.3
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  build_runner: ^2.2.0
+  flutter_launcher_icons: ^0.13.1
 
   flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
   injectable_generator: ^2.1.5
-  flutter_launcher_icons: ^0.13.1
-  build_runner: ^2.2.0
 
 flutter:
 

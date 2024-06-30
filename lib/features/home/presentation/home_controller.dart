@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:kebut_kurir/core/utils/prefs.dart';
+import 'package:kebut_kurir/features/edit_profile/data/get_user_data_response_model.dart';
 import 'package:kebut_kurir/features/home/data/home_banner_model.dart';
 import 'package:kebut_kurir/features/home/data/home_menu_model.dart';
 import 'package:kebut_kurir/features/home/data/total_delivery_daily_model.dart';
@@ -52,7 +55,7 @@ class HomeController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     // fetchHomeBanner();
     // fetchListMenu();
     // getUserDataRemote(
@@ -62,6 +65,7 @@ class HomeController extends GetxController {
     //   onFailed: (String errorMessage) {},
     // );
     super.onInit();
+    await getUserDataLocal();
     Future.wait([
       isAlreadyAbsen(),
       fetchTotalDelivertDaily(),
@@ -134,21 +138,23 @@ class HomeController extends GetxController {
   //   }
   // }
 
-  // ResultUserData? resultUserData;
+  ResultUserData? resultUserData;
 
-  // Future<ResultUserData?> getUserDataLocal() async {
-  //   try {
-  //     try {
-  //       String returnUserData = await Prefs.userData;
-  //       resultUserData = ResultUserData.fromJson(json.decode(returnUserData));
-  //       return resultUserData;
-  //     } catch (e) {
-  //       return null;
-  //     }
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
+  RxBool loadingNameHome = false.obs;
+
+  Future<ResultUserData?> getUserDataLocal() async {
+    try {
+      loadingNameHome.value = true;
+      String returnUserData = await Prefs.userData;
+      await Future.delayed(Duration(seconds: 2));
+      resultUserData = ResultUserData.fromJson(json.decode(returnUserData));
+      loadingNameHome.value = false;
+      return resultUserData;
+    } catch (e) {
+      loadingNameHome.value = false;
+      return null;
+    }
+  }
 
   // final DialogsUtils _dialogsUtils = DialogsUtils();
 

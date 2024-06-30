@@ -3,9 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 import 'package:kebut_kurir/features/home/presentation/home_controller.dart';
+import 'package:skeletons/skeletons.dart';
 
 class HomeScreenHeader extends StatelessWidget {
-  const HomeScreenHeader({super.key});
+  final HomeController controller;
+  const HomeScreenHeader({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +34,36 @@ class HomeScreenHeader extends StatelessWidget {
               ),
               SizedBox(width: 12.w),
               // resultUserData
-              GetBuilder<HomeController>(
-                builder: (HomeController controller) {
+              Obx(() {
+                if (controller.loadingNameHome.value == true) {
+                  return SizedBox(
+                    height: 50.h,
+                    width: 150.w,
+                    child: SkeletonLine(),
+                  );
+                } else {
                   return Text(
-                    'Hello Driver!',
+                    (controller.resultUserData != null) ? "${controller.resultUserData?.fullname}" : "",
+                    // 'Hello Driver!',
                     style: AppTheme.textStyle.blackTextStyle.copyWith(
                       fontSize: 17.sp,
                       fontWeight: AppTheme.textConfig.weight.semiBold,
                     ),
                   );
-                },
-              ),
+                }
+              }),
+              // GetBuilder<HomeController>(
+              //   builder: (HomeController controller) {
+              //     return Text(
+              //       (controller.resultUserData != null) ? "${controller.resultUserData?.fullname}" : "",
+              //       // 'Hello Driver!',
+              //       style: AppTheme.textStyle.blackTextStyle.copyWith(
+              //         fontSize: 17.sp,
+              //         fontWeight: AppTheme.textConfig.weight.semiBold,
+              //       ),
+              //     );
+              //   },
+              // ),
               // Text(
               //   'Hello, Agung!',
               //   style: AppTheme.textStyle.blackTextStyle.copyWith(

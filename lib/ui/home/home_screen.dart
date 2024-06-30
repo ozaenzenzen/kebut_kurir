@@ -60,7 +60,7 @@ class HomeScreen extends GetView<HomeController> {
         },
         child: ListView(
           children: [
-            const HomeScreenHeader(),
+            HomeScreenHeader(controller: controller),
             HomeScreenBanner(controller: controller),
             SizedBox(height: 17.h),
             const HomeScreenAbsensi(),
