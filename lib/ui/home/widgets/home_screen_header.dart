@@ -74,46 +74,59 @@ class HomeScreenHeader extends StatelessWidget {
             ],
           ),
           GetBuilder<HomeController>(
-            builder: (HomeController controller) {
-              return FutureBuilder<String?>(
-                future: controller.getImageProfile(),
-                builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
-                  if (snapshot.hasError) {
-                    return Icon(
-                      Icons.account_circle,
-                      color: Colors.grey,
-                      size: 40.w,
-                    );
-                  } else {
-                    if (snapshot.hasData) {
-                      if (snapshot.data != '') {
-                        return CircleAvatar(
-                          radius: 25.h, // Image radius
-                          backgroundImage: NetworkImage(
-                            snapshot.data!,
-                          ),
-                        );
-                        // return CircleAvatar(
-                        //   radius: 25.h, // Image radius
-                        //   backgroundImage: MemoryImage(
-                        //     base64Decode(snapshot.data!),
-                        //   ),
-                        // );
-                      } else {
+                builder: (HomeController controller) {
+                  return FutureBuilder<String?>(
+                    future: controller.getImageProfile(),
+                    builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                      if (snapshot.hasError) {
                         return Icon(
                           Icons.account_circle,
                           color: Colors.grey,
                           size: 40.w,
                         );
+                      } else {
+                        if (snapshot.hasData) {
+                          if (snapshot.data != '') {
+                            return CircleAvatar(
+                              radius: 25.h, // Image radius
+                              backgroundImage: NetworkImage(
+                                snapshot.data!,
+                              ),
+                            );
+                            // return CircleAvatar(
+                            //   radius: 25.h, // Image radius
+                            //   backgroundImage: MemoryImage(
+                            //     base64Decode(snapshot.data!),
+                            //   ),
+                            // );
+                          } else {
+                            return Icon(
+                              Icons.account_circle,
+                              color: Colors.grey,
+                              size: 40.w,
+                            );
+                          }
+                        } else {
+                          return const SizedBox();
+                        }
                       }
-                    } else {
-                      return const SizedBox();
-                    }
-                  }
+                    },
+                  );
                 },
-              );
-            },
-          ),
+              )
+          // Obx(() {
+          //   if (controller.imageProfileLoading.value) {
+          //     return const SkeletonAvatar(
+          //       style: SkeletonAvatarStyle(
+          //         shape: BoxShape.circle,
+          //         width: 50,
+          //         height: 50,
+          //       ),
+          //     );
+          //   } else {
+          //     return ;
+          //   }
+          // }),
         ],
       ),
     );

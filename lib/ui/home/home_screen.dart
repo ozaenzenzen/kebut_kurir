@@ -57,6 +57,10 @@ class HomeScreen extends GetView<HomeController> {
             controller.fetchTotalDelivertDaily(),
             controller.fetchTotalPickupDaily(),
           ]);
+          await controller.getUserDataRemote(
+            onSuccess: (data) {},
+            onFailed: (errorMessage) {},
+          );
         },
         child: ListView(
           children: [

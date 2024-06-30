@@ -8,6 +8,7 @@ import 'package:kebut_kurir/features/home/data/home_menu_model.dart';
 import 'package:kebut_kurir/features/home/data/total_delivery_daily_model.dart';
 import 'package:kebut_kurir/features/home/data/total_pickup_daily_model.dart';
 import 'package:kebut_kurir/features/home/domain/home_repository.dart';
+import 'package:kebut_kurir/features/login/domain/login_repository.dart';
 
 class HomeController extends GetxController {
   List<String> homeBanner = <String>[];
@@ -92,66 +93,78 @@ class HomeController extends GetxController {
   RxString imageProfile = ''.obs;
 
   Future<String?> getImageProfile() async {
+    imageProfileLoading.value = true;
     try {
       var returnImageData = await Prefs.userProfilePicture;
       imageProfile.value = returnImageData;
+      imageProfileLoading.value = false;
       return await Prefs.userProfilePicture;
     } catch (e) {
       return null;
     }
   }
 
-  // Future<void> getUserDataRemote({
-  //   required Function(GetUserDataResponseModel) onSuccess,
-  //   required Function(String) onFailed,
-  // }) async {
-  //   // _dialogsUtils.showLoading();
-  //   String uuid = await Prefs.userId;
-  //   try {
-  //     GetUserDataResponseModel? result = await LoginRepository().getUserDataRemote(
-  //       uuid: uuid,
-  //     );
-  //     if (result != null) {
-  //       if (result.status == 200) {
-  //         if (result.result!.isNotEmpty) {
-  //           await Prefs.setUserData(json.encode(result.result!.first.toJson()));
-  //           String dataPhoto = result.result!.first.photoProfile!;
-  //           await Prefs.setProfilePicture('https://kebut-main-api.jdi.web.id${dataPhoto.replaceAll(' ', '%20')}');
-  //           resultUserData = result.result!.first;
-  //           // _dialogsUtils.hideLoading();
-  //           onSuccess(result);
-  //         } else {
-  //           // _dialogsUtils.hideLoading();
-  //           onFailed('data is null');
-  //         }
-  //       } else {
-  //         // _dialogsUtils.hideLoading();
-  //         onFailed('data is null');
-  //       }
-  //     } else {
-  //       // _dialogsUtils.hideLoading();
-  //       onFailed('data is null');
-  //     }
-  //   } catch (e) {
-  //     // _dialogsUtils.hideLoading();
-  //     onFailed(e.toString());
-  //   }
-  // }
+  Future<void> getUserDataRemote({
+    required Function(GetUserDataResponseModel) onSuccess,
+    required Function(String) onFailed,
+  }) async {
+    // _dialogsUtils.showLoading();
+    imageProfileLoading.value = true;
+    String uuid = await Prefs.userId;
+    try {
+      GetUserDataResponseModel? result = await LoginRepository().getUserDataRemote(
+        uuid: uuid,
+      );
+      if (result != null) {
+        if (result.status == 200) {
+          if (result.result!.isNotEmpty) {
+            await Prefs.setUserData(json.encode(result.result!.first.toJson()));
+            String dataPhoto = result.result!.first.photoProfile!;
+            await Prefs.setProfilePicture('https://kebut-main-api.jdi.web.id${dataPhoto.replaceAll(' ', '%20')}');
+            resultUserData = result.result!.first;
+            // _dialogsUtils.hideLoading();
+            imageProfileLoading.value = false;
+            onSuccess(result);
+          } else {
+            // _dialogsUtils.hideLoading();
+            imageProfileLoading.value = false;
+            onFailed('data is null');
+          }
+        } else {
+          // _dialogsUtils.hideLoading();
+          imageProfileLoading.value = false;
+          onFailed('data is null');
+        }
+      } else {
+        // _dialogsUtils.hideLoading();
+        imageProfileLoading.value = false;
+        onFailed('data is null');
+      }
+    } catch (e) {
+      // _dialogsUtils.hideLoading();
+      imageProfileLoading.value = false;
+      onFailed(e.toString());
+    }
+  }
 
   ResultUserData? resultUserData;
 
   RxBool loadingNameHome = false.obs;
+  RxBool imageProfileLoading = false.obs;
 
   Future<ResultUserData?> getUserDataLocal() async {
+    loadingNameHome.value = true;
+    // imageProfileLoading.value = true;
     try {
-      loadingNameHome.value = true;
       String returnUserData = await Prefs.userData;
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       resultUserData = ResultUserData.fromJson(json.decode(returnUserData));
       loadingNameHome.value = false;
+      // imageProfileLoading.value = false;
       return resultUserData;
     } catch (e) {
       loadingNameHome.value = false;
+      // imageProfileLoading.value = false;
       return null;
     }
   }
