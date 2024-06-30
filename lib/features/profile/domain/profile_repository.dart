@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 // import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:kebut_kurir/app/app_constant.dart';
 import 'package:kebut_kurir/core/utils/api_function.dart';
+import 'package:kebut_kurir/features/edit_profile/data/get_user_data_response_model.dart';
 import 'package:kebut_kurir/features/profile/data/req/change_password_request_model.dart';
 import 'package:kebut_kurir/features/profile/data/resp/change_password_response_model.dart';
 import 'package:kebut_kurir/features/profile/data/resp/get_faq_response_model.dart';
@@ -17,19 +20,19 @@ class ProfileRepository {
     return prefsData;
   }
 
-  // Future<ResultUserData?> getUserDataLocal() async {
-  //   try {
-  //     // String prefsData = await Prefs.userData;
-  //     // debugPrint('prefsData ${prefsData}');
-  //     String prefsData = await helper();
-  //     debugPrint('prefsData $prefsData');
-  //     ResultUserData resultUserData = ResultUserData.fromJson(jsonDecode(prefsData));
-  //     // debugPrint('resultUserData ${resultUserData}');
-  //     return resultUserData;
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
+  Future<ResultUserData?> getUserDataLocal() async {
+    try {
+      // String prefsData = await Prefs.userData;
+      // debugPrint('prefsData ${prefsData}');
+      String prefsData = await helper();
+      debugPrint('prefsData $prefsData');
+      ResultUserData resultUserData = ResultUserData.fromJson(jsonDecode(prefsData));
+      // debugPrint('resultUserData ${resultUserData}');
+      return resultUserData;
+    } catch (e) {
+      return null;
+    }
+  }
 
   Future<ChangePasswordResponseModel?> changePassword({
     required ChangePasswordRequestModel data,

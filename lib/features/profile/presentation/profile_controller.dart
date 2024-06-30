@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
 import 'package:kebut_kurir/core/utils/prefs.dart';
+import 'package:kebut_kurir/features/edit_profile/data/get_user_data_response_model.dart';
 import 'package:kebut_kurir/features/profile/data/req/change_password_request_model.dart';
 import 'package:kebut_kurir/features/profile/data/resp/change_password_response_model.dart';
 import 'package:kebut_kurir/features/profile/data/resp/get_faq_response_model.dart';
@@ -28,28 +29,28 @@ class ProfileController extends GetxController {
     }
   }
 
-  // ResultUserData? resultUserData;
+  ResultUserData? resultUserData;
 
-  // Future<void> getUserDataLocal({
-  //   required Function(ResultUserData) onSuccess,
-  //   required Function(String) onFailed,
-  // }) async {
-  //   _dialogsUtils.showLoading();
-  //   try {
-  //     ResultUserData? result = await ProfileRepository().getUserDataLocal();
-  //     if (result != null) {
-  //       resultUserData = result;
-  //       _dialogsUtils.hideLoading();
-  //       onSuccess(result);
-  //     } else {
-  //       _dialogsUtils.hideLoading();
-  //       onFailed('data is null');
-  //     }
-  //   } catch (e) {
-  //     _dialogsUtils.hideLoading();
-  //     onFailed(e.toString());
-  //   }
-  // }
+  Future<void> getUserDataLocal({
+    required Function(ResultUserData) onSuccess,
+    required Function(String) onFailed,
+  }) async {
+    _dialogsUtils.showLoading();
+    try {
+      ResultUserData? result = await ProfileRepository().getUserDataLocal();
+      if (result != null) {
+        resultUserData = result;
+        _dialogsUtils.hideLoading();
+        onSuccess(result);
+      } else {
+        _dialogsUtils.hideLoading();
+        onFailed('data is null');
+      }
+    } catch (e) {
+      _dialogsUtils.hideLoading();
+      onFailed(e.toString());
+    }
+  }
 
   // Future<void> getUserDataRemote({
   //   required Function(GetUserDataResponseModel) onSuccess,

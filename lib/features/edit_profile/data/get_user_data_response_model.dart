@@ -106,7 +106,7 @@ class ResultUserData {
         uuidDistricts: json['uuid_districts'],
         uuidVillages: json['uuid_villages'],
         bloodType: json['blood_type'],
-        company: json['company'] == null
+        company: (json['company'] == null || json['company'] == "")
             ? null
             : List<Company>.from(
                 json['company'].map(
@@ -140,11 +140,13 @@ class ResultUserData {
         'uuid_districts': uuidDistricts,
         'uuid_villages': uuidVillages,
         'blood_type': bloodType,
-        'company': List<dynamic>.from(
-          company!.map(
-            (Company x) => x.toJson(),
-          ),
-        ),
+        'company': (company == null)
+            ? ""
+            : List<dynamic>.from(
+                company!.map(
+                  (Company x) => x.toJson(),
+                ),
+              ),
       };
 }
 
