@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kebut_kurir/core/theme/app_theme.dart';
 
 class UnderlineTextFieldWidget extends StatelessWidget {
-  final String hintText;
+  final String? hintText;
   final TextStyle? hintTextStyle;
   final Function(String)? onChanged;
   final Function()? onEditingComplete;
@@ -30,7 +30,7 @@ class UnderlineTextFieldWidget extends StatelessWidget {
 
   const UnderlineTextFieldWidget({
     super.key,
-    required this.hintText,
+    this.hintText,
     this.suffixIcon,
     this.isObstruct = false,
     this.onChanged,
