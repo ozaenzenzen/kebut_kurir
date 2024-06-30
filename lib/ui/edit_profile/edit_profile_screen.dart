@@ -62,68 +62,78 @@ class EditProfileScreen extends GetView<EditProfileController> {
                               //   height: 30.h,
                               //   width: 30.h,
                               // );
-                              return controller.imageProfile.value == ""
-                                  ? InsertPhotoWidget(
-                                      isProfile: true,
-                                      size: 50.h,
-                                      onImageSelected: (ImageData imgResult) {
-                                        // debugPrint('imageString ${imgResult.filePath}');
-                                        // debugPrint('base64Value ${imgResult.base64Value}');
-                                        // setState(() {
-                                        controller.profileImage = imgResult;
-                                        // });
-                                      },
-                                      placeholderWidget: CircleAvatar(
-                                        backgroundColor: const Color(0xffD9D9D9),
-                                        radius: 30.h,
-                                        child: AssetImageWidget(
-                                          assets: 'assets/icon_person.png',
-                                          height: 30.h,
-                                          width: 30.h,
+                              if (controller.imageProfileLoading.value) {
+                                return SkeletonAvatar(
+                                  style: SkeletonAvatarStyle(
+                                    shape: BoxShape.circle,
+                                    width: 50,
+                                    height: 50,
+                                  ),
+                                );
+                              } else {
+                                return controller.imageProfile.value == ""
+                                    ? InsertPhotoWidget(
+                                        isProfile: true,
+                                        size: 50.h,
+                                        onImageSelected: (ImageData imgResult) {
+                                          // debugPrint('imageString ${imgResult.filePath}');
+                                          // debugPrint('base64Value ${imgResult.base64Value}');
+                                          // setState(() {
+                                          controller.profileImage = imgResult;
+                                          // });
+                                        },
+                                        placeholderWidget: CircleAvatar(
+                                          backgroundColor: const Color(0xffD9D9D9),
+                                          radius: 30.h,
+                                          child: AssetImageWidget(
+                                            assets: 'assets/icon_person.png',
+                                            height: 30.h,
+                                            width: 30.h,
+                                          ),
                                         ),
-                                      ),
-                                    )
-                                  : controller.imageProfile.value.contains('http')
-                                      ? InsertPhotoWidget(
-                                          isProfile: true,
-                                          size: 50.h,
-                                          value: controller.imageProfile.value,
-                                          // useValueBase64: true,
-                                          onImageSelected: (ImageData imgResult) {
-                                            // debugPrint('imageString ${imgResult.filePath}');
-                                            // debugPrint('base64Value ${imgResult.base64Value}');
-                                            controller.profileImage = imgResult;
-                                          },
-                                          placeholderWidget: CircleAvatar(
-                                            backgroundColor: const Color(0xffD9D9D9),
-                                            radius: 30.h,
-                                            child: AssetImageWidget(
-                                              assets: 'assets/icon_person.png',
-                                              height: 30.h,
-                                              width: 30.h,
+                                      )
+                                    : controller.imageProfile.value.contains('http')
+                                        ? InsertPhotoWidget(
+                                            isProfile: true,
+                                            size: 50.h,
+                                            value: controller.imageProfile.value,
+                                            // useValueBase64: true,
+                                            onImageSelected: (ImageData imgResult) {
+                                              // debugPrint('imageString ${imgResult.filePath}');
+                                              // debugPrint('base64Value ${imgResult.base64Value}');
+                                              controller.profileImage = imgResult;
+                                            },
+                                            placeholderWidget: CircleAvatar(
+                                              backgroundColor: const Color(0xffD9D9D9),
+                                              radius: 30.h,
+                                              child: AssetImageWidget(
+                                                assets: 'assets/icon_person.png',
+                                                height: 30.h,
+                                                width: 30.h,
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      : InsertPhotoWidget(
-                                          isProfile: true,
-                                          size: 50.h,
-                                          value: controller.imageProfile.value,
-                                          useValueBase64: true,
-                                          onImageSelected: (ImageData imgResult) {
-                                            // debugPrint('imageString ${imgResult.filePath}');
-                                            // debugPrint('base64Value ${imgResult.base64Value}');
-                                            controller.profileImage = imgResult;
-                                          },
-                                          placeholderWidget: CircleAvatar(
-                                            backgroundColor: const Color(0xffD9D9D9),
-                                            radius: 30.h,
-                                            child: AssetImageWidget(
-                                              assets: 'assets/icon_person.png',
-                                              height: 30.h,
-                                              width: 30.h,
+                                          )
+                                        : InsertPhotoWidget(
+                                            isProfile: true,
+                                            size: 50.h,
+                                            value: controller.imageProfile.value,
+                                            useValueBase64: true,
+                                            onImageSelected: (ImageData imgResult) {
+                                              // debugPrint('imageString ${imgResult.filePath}');
+                                              // debugPrint('base64Value ${imgResult.base64Value}');
+                                              controller.profileImage = imgResult;
+                                            },
+                                            placeholderWidget: CircleAvatar(
+                                              backgroundColor: const Color(0xffD9D9D9),
+                                              radius: 30.h,
+                                              child: AssetImageWidget(
+                                                assets: 'assets/icon_person.png',
+                                                height: 30.h,
+                                                width: 30.h,
+                                              ),
                                             ),
-                                          ),
-                                        );
+                                          );
+                              }
                             }),
                             SizedBox(height: 8.h),
                             InkWell(

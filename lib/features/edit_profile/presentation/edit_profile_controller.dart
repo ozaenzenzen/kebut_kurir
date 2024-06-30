@@ -85,9 +85,11 @@ class EditProfileController extends GetxController {
 
   Future<String?> getImageProfile() async {
     debugPrint('getImageProfile');
+    imageProfileLoading.value = true;
     try {
       imageProfile.value = await Prefs.userProfilePicture;
       // debugPrint('imageProfile.value ${imageProfile.value}');
+      imageProfileLoading.value = false;
       return await Prefs.userProfilePicture;
     } catch (e) {
       return null;
@@ -95,6 +97,7 @@ class EditProfileController extends GetxController {
   }
 
   RxBool getRemoteDataLoading = false.obs;
+  RxBool imageProfileLoading = false.obs;
 
   ResultUserData? resultUserData;
 
@@ -104,6 +107,7 @@ class EditProfileController extends GetxController {
   }) async {
     // _dialogsUtils.showLoading();
     getRemoteDataLoading.value = true;
+    imageProfileLoading.value = true;
     String uuid = await Prefs.userId;
     try {
       GetUserDataResponseModel? result = await LoginRepository().getUserDataRemote(
@@ -122,25 +126,30 @@ class EditProfileController extends GetxController {
             resultUserData = result.result!.first;
             // _dialogsUtils.hideLoading();
             getRemoteDataLoading.value = false;
+            imageProfileLoading.value = false;
             onSuccess(result);
           } else {
             // _dialogsUtils.hideLoading();
             getRemoteDataLoading.value = false;
+            imageProfileLoading.value = false;
             onFailed('data is null');
           }
         } else {
           // _dialogsUtils.hideLoading();
           getRemoteDataLoading.value = false;
+          imageProfileLoading.value = false;
           onFailed('data is null');
         }
       } else {
         // _dialogsUtils.hideLoading();
         getRemoteDataLoading.value = false;
+        imageProfileLoading.value = false;
         onFailed('data is null');
       }
     } catch (e) {
       // _dialogsUtils.hideLoading();
       getRemoteDataLoading.value = false;
+      imageProfileLoading.value = false;
       onFailed(e.toString());
     }
   }
