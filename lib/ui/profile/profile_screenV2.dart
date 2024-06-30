@@ -8,6 +8,7 @@ import 'package:kebut_kurir/features/profile/domain/profile_pengaturan_profile_m
 import 'package:kebut_kurir/features/profile/domain/profile_tentang_kami_menu.dart';
 import 'package:kebut_kurir/features/profile/presentation/profile_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:skeletons/skeletons.dart';
 
 // class ProfileScreenV2 extends GetView<ProfileController> {
 //   const ProfileScreenV2({super.key});
@@ -109,57 +110,59 @@ class _ProfileScreenV2State extends State<ProfileScreenV2> {
                         },
                       ),
                       SizedBox(width: 12.h),
-                      GetBuilder<ProfileController>(builder: (ProfileController controller) {
+                      Obx(() {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             // controller.resultUserData?.shortname == null
-                            //     ? SkeletonLine(
-                            //         style: SkeletonLineStyle(
-                            //           height: 14.h,
-                            //           width: 100.w,
-                            //           borderRadius: BorderRadius.circular(8.h),
-                            //         ),
-                            //       )
-                            //     : Text(
-                            //         // 'Agung Azhari',
-                            //         '${controller.resultUserData?.shortname}',
-                            //         style: AppTheme.textStyle.whiteTextStyle.copyWith(
-                            //           fontSize: AppTheme.textConfig.size.n,
-                            //           fontWeight: AppTheme.textConfig.weight.semiBold,
-                            //         ),
-                            //       ),
-                            Text(
-                              'Agung Azhari',
-                              // '${controller.resultUserData?.shortname}',
-                              style: AppTheme.textStyle.blackTextStyle.copyWith(
-                                fontSize: AppTheme.textConfig.size.n,
-                                fontWeight: AppTheme.textConfig.weight.semiBold,
-                              ),
-                            ),
+                            profileController.getUserDataLoading.value == true
+                                ? SkeletonLine(
+                                    style: SkeletonLineStyle(
+                                      height: 14.h,
+                                      width: 100.w,
+                                      borderRadius: BorderRadius.circular(8.h),
+                                    ),
+                                  )
+                                : Text(
+                                    // 'Agung Azhari',
+                                    '${profileController.resultUserData?.fullname}',
+                                    style: AppTheme.textStyle.blackTextStyle.copyWith(
+                                      fontSize: AppTheme.textConfig.size.n,
+                                      fontWeight: AppTheme.textConfig.weight.semiBold,
+                                    ),
+                                  ),
+                            // Text(
+                            //   'Agung Azhari',
+                            //   // '${controller.resultUserData?.shortname}',
+                            //   style: AppTheme.textStyle.blackTextStyle.copyWith(
+                            //     fontSize: AppTheme.textConfig.size.n,
+                            //     fontWeight: AppTheme.textConfig.weight.semiBold,
+                            //   ),
+                            // ),
                             SizedBox(height: 2.h),
                             // controller.resultUserData?.email == null
-                            //     ? SkeletonLine(
-                            //         style: SkeletonLineStyle(
-                            //           height: 14.h,
-                            //           width: 100.w,
-                            //           borderRadius: BorderRadius.circular(8.h),
-                            //         ),
-                            //       )
-                            //     : Text(
-                            //         // 'agungazharii@gmail.com',
-                            //         '${controller.resultUserData?.email}',
-                            //         style: AppTheme.textStyle.whiteTextStyle.copyWith(
-                            //           fontSize: AppTheme.textConfig.size.m,
-                            //         ),
-                            //       ),
-                            Text(
-                              '#userID',
-                              // '${controller.resultUserData?.email}',
-                              style: AppTheme.textStyle.blackTextStyle.copyWith(
-                                fontSize: AppTheme.textConfig.size.m,
-                              ),
-                            ),
+                            profileController.getUserDataLoading.value == true
+                                ? SkeletonLine(
+                                    style: SkeletonLineStyle(
+                                      height: 14.h,
+                                      width: 100.w,
+                                      borderRadius: BorderRadius.circular(8.h),
+                                    ),
+                                  )
+                                : Text(
+                                    // 'agungazharii@gmail.com',
+                                    '${profileController.resultUserData?.email}',
+                                    style: AppTheme.textStyle.blackTextStyle.copyWith(
+                                      fontSize: AppTheme.textConfig.size.m,
+                                    ),
+                                  ),
+                            // Text(
+                            //   '#userID',
+                            //   // '${controller.resultUserData?.email}',
+                            //   style: AppTheme.textStyle.blackTextStyle.copyWith(
+                            //     fontSize: AppTheme.textConfig.size.m,
+                            //   ),
+                            // ),
                           ],
                         );
                       }),

@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kebut_kurir/core/utils/dialog_utils.dart';
 import 'package:kebut_kurir/core/utils/prefs.dart';
 import 'package:kebut_kurir/features/edit_profile/data/get_user_data_response_model.dart';
+import 'package:kebut_kurir/features/login/domain/login_repository.dart';
 import 'package:kebut_kurir/features/profile/data/req/change_password_request_model.dart';
 import 'package:kebut_kurir/features/profile/data/resp/change_password_response_model.dart';
 import 'package:kebut_kurir/features/profile/data/resp/get_faq_response_model.dart';
@@ -14,6 +17,17 @@ class ProfileController extends GetxController {
   RxString version = ''.obs;
 
   RxString imageProfile = ''.obs;
+
+  @override
+  void onInit() async {
+    await getUserDataLocal(onSuccess: (data) {
+      //
+    }, onFailed: (message) {
+      //
+    });
+    generateVersionApp();
+    super.onInit();
+  }
 
   Future<String?> getImageProfile() async {
     try {
@@ -30,64 +44,73 @@ class ProfileController extends GetxController {
   }
 
   ResultUserData? resultUserData;
+  RxBool getUserDataLoading = false.obs;
 
   Future<void> getUserDataLocal({
     required Function(ResultUserData) onSuccess,
     required Function(String) onFailed,
   }) async {
-    _dialogsUtils.showLoading();
+    // _dialogsUtils.showLoading();
+    getUserDataLoading.value = true;
     try {
       ResultUserData? result = await ProfileRepository().getUserDataLocal();
       if (result != null) {
         resultUserData = result;
-        _dialogsUtils.hideLoading();
+        // _dialogsUtils.hideLoading();
+        getUserDataLoading.value = false;
         onSuccess(result);
       } else {
-        _dialogsUtils.hideLoading();
+        // _dialogsUtils.hideLoading();
+        getUserDataLoading.value = false;
         onFailed('data is null');
       }
     } catch (e) {
-      _dialogsUtils.hideLoading();
+      // _dialogsUtils.hideLoading();
+      getUserDataLoading.value = false;
       onFailed(e.toString());
     }
   }
 
-  // Future<void> getUserDataRemote({
-  //   required Function(GetUserDataResponseModel) onSuccess,
-  //   required Function(String) onFailed,
-  // }) async {
-  //   // _dialogsUtils.showLoading();
-  //   String uuid = await Prefs.userId;
-  //   try {
-  //     GetUserDataResponseModel? result = await LoginRepository().getUserDataRemote(
-  //       uuid: uuid,
-  //     );
-  //     if (result != null) {
-  //       if (result.status == 200) {
-  //         if (result.result!.isNotEmpty) {
-  //           await Prefs.setUserData(json.encode(result.result!.first.toJson()));
-  //           String dataPhoto = result.result!.first.photoProfile!;
-  //           await Prefs.setProfilePicture('https://kebut-main-api.jdi.web.id${dataPhoto.replaceAll(' ', '%20')}');
-  //           resultUserData = result.result!.first;
-  //           // _dialogsUtils.hideLoading();
-  //           onSuccess(result);
-  //         } else {
-  //           // _dialogsUtils.hideLoading();
-  //           onFailed('data is null');
-  //         }
-  //       } else {
-  //         // _dialogsUtils.hideLoading();
-  //         onFailed('data is null');
-  //       }
-  //     } else {
-  //       // _dialogsUtils.hideLoading();
-  //       onFailed('data is null');
-  //     }
-  //   } catch (e) {
-  //     // _dialogsUtils.hideLoading();
-  //     onFailed(e.toString());
-  //   }
-  // }
+  Future<void> getUserDataRemote({
+    required Function(GetUserDataResponseModel) onSuccess,
+    required Function(String) onFailed,
+  }) async {
+    // _dialogsUtils.showLoading();
+    String uuid = await Prefs.userId;
+    try {
+      GetUserDataResponseModel? result = await LoginRepository().getUserDataRemote(
+        uuid: uuid,
+      );
+      if (result != null) {
+        if (result.status == 200) {
+          if (result.result!.isNotEmpty) {
+            await Prefs.setUserData(json.encode(result.result!.first.toJson()));
+            if (result.result!.first.photoProfile != null) {
+              String dataPhoto = result.result!.first.photoProfile!;
+              await Prefs.setProfilePicture('https://kebut-main-api.jdi.web.id${dataPhoto.replaceAll(' ', '%20')}');
+            } else {
+              //
+            }
+            resultUserData = result.result!.first;
+            // _dialogsUtils.hideLoading();
+            onSuccess(result);
+          } else {
+            // _dialogsUtils.hideLoading();
+            onFailed('data is null');
+          }
+        } else {
+          // _dialogsUtils.hideLoading();
+          onFailed('data is null');
+        }
+      } else {
+        // _dialogsUtils.hideLoading();
+        onFailed('data is null');
+      }
+    } catch (e) {
+      // _dialogsUtils.hideLoading();
+      onFailed(e.toString());
+    }
+  }
 
   Future<void> changePassword({
     required ChangePasswordRequestModel data,
@@ -151,12 +174,6 @@ class ProfileController extends GetxController {
     WidgetsFlutterBinding.ensureInitialized();
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     version.value = '${packageInfo.version}+${packageInfo.buildNumber}';
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    generateVersionApp();
   }
 
   ScrollController scrollController = ScrollController();
