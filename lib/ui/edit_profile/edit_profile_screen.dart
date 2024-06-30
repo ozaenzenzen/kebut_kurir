@@ -166,7 +166,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                           ),
                         );
                       } else {
-                        controller.namaPanggilanController.text = controller.resultUserData?.fullname;
+                        controller.namaPanggilanController.text = controller.resultUserData?.shortname ?? "";
                         return UnderlineTextFieldWidget(
                           // hintText: '',
                           label: 'hintText',
