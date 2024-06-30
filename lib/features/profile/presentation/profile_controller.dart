@@ -29,7 +29,10 @@ class ProfileController extends GetxController {
     super.onInit();
   }
 
+  RxBool imageProfileLoading = false.obs;
+
   Future<String?> getImageProfile() async {
+    imageProfileLoading.value = true;
     try {
       var returnImageData = await Prefs.userProfilePicture;
       imageProfile.value = returnImageData;
@@ -37,6 +40,7 @@ class ProfileController extends GetxController {
       // SharedPreferences prefs = await SharedPreferences.getInstance();
       // imageProfile.value = await prefs.getString(AppConstant.USER_PROFILE_PICTURE)!;
       // debugPrint('imageProfile.value ${imageProfile.value}');
+      imageProfileLoading.value = false;
       return await Prefs.userProfilePicture;
     } catch (e) {
       return null;

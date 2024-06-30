@@ -69,45 +69,57 @@ class _ProfileScreenV2State extends State<ProfileScreenV2> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      GetBuilder<ProfileController>(
-                        builder: (ProfileController controller) {
-                          return FutureBuilder<String?>(
-                            future: profileController.getImageProfile(),
-                            builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
-                              if (snapshot.hasError) {
-                                return CircleAvatar(
-                                  radius: 32.h, // Image radius
-                                  backgroundImage: const NetworkImage(
-                                    'https://blog.logrocket.com/wp-content/uploads/2021/05/intro-dart-flutter-feature.png',
-                                  ),
-                                );
-                              } else {
-                                if (snapshot.hasData) {
-                                  if (snapshot.data != '') {
-                                    // debugPrint('datanya ${snapshot.data}');
-                                    // return const SizedBox();
-                                    return CircleAvatar(
-                                      radius: 32.h, // Image radius
-                                      backgroundImage: NetworkImage(
-                                        snapshot.data!,
-                                      ),
-                                    );
-                                  } else {
+                      Obx(() {
+                        if (profileController.imageProfileLoading.value) {
+                          return const SkeletonAvatar(
+                            style: SkeletonAvatarStyle(
+                              shape: BoxShape.circle,
+                              width: 50,
+                              height: 50,
+                            ),
+                          );
+                        } else {
+                          return GetBuilder<ProfileController>(
+                            builder: (ProfileController controller) {
+                              return FutureBuilder<String?>(
+                                future: profileController.getImageProfile(),
+                                builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                                  if (snapshot.hasError) {
                                     return CircleAvatar(
                                       radius: 32.h, // Image radius
                                       backgroundImage: const NetworkImage(
                                         'https://blog.logrocket.com/wp-content/uploads/2021/05/intro-dart-flutter-feature.png',
                                       ),
                                     );
+                                  } else {
+                                    if (snapshot.hasData) {
+                                      if (snapshot.data != '') {
+                                        // debugPrint('datanya ${snapshot.data}');
+                                        // return const SizedBox();
+                                        return CircleAvatar(
+                                          radius: 32.h, // Image radius
+                                          backgroundImage: NetworkImage(
+                                            snapshot.data!,
+                                          ),
+                                        );
+                                      } else {
+                                        return CircleAvatar(
+                                          radius: 32.h, // Image radius
+                                          backgroundImage: const NetworkImage(
+                                            'https://blog.logrocket.com/wp-content/uploads/2021/05/intro-dart-flutter-feature.png',
+                                          ),
+                                        );
+                                      }
+                                    } else {
+                                      return const SizedBox();
+                                    }
                                   }
-                                } else {
-                                  return const SizedBox();
-                                }
-                              }
+                                },
+                              );
                             },
                           );
-                        },
-                      ),
+                        }
+                      }),
                       SizedBox(width: 12.h),
                       Obx(() {
                         return Column(
