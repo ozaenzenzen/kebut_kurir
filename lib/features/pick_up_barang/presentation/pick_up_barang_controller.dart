@@ -26,7 +26,7 @@ class PickupBarangController extends GetxController {
     dialogsUtils.showLoading();
     final PickupData? result = await _pickupRepository.getListPickup(
       uuid: await Prefs.userId,
-      isHardcode: true,
+      isHardcode: false,
     );
     if (result != null) {
       if (result.result != null) {
