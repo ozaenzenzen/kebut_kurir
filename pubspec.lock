@@ -812,17 +812,19 @@ packages:
     dependency: transitive
     description:
       name: google_mlkit_commons
-      sha256: "046586b381cdd139f7f6a05ad6998f7e339d061bd70158249907358394b5f496"
+      sha256: "42173a8ba89f386486cc5b8249e84da4a4b861daa70498373627d985eb418689"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.1"
+    version: "0.5.0"
   google_mlkit_text_recognition:
     dependency: "direct main"
     description:
-      path: "C:\\Users\\recov\\Documents\\Ozan\\Repo Flutter\\google_mlkit_text_recognition-0.11.0-custom"
-      relative: false
-    source: path
-    version: "0.11.0"
+      path: "."
+      ref: master
+      resolved-ref: ec9392c5c9479212c322193266e7129384faa520
+      url: "https://github.com/ozaenzenzen/google_mlkit_text_recognition_unbundled.git"
+    source: git
+    version: "0.9.0"
   graphs:
     dependency: transitive
     description:

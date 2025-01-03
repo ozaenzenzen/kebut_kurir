@@ -37,9 +37,13 @@ dependencies:
   get_it: ^7.3.0
   google_fonts: ^4.0.4
   google_maps_flutter: ^2.2.7
+  # google_mlkit_text_recognition:
+  #   path: C:\Users\recov\Documents\Ozan\Repo
+  #     Flutter\google_mlkit_text_recognition-0.11.0-custom
   google_mlkit_text_recognition:
-    path: C:\Users\recov\Documents\Ozan\Repo
-      Flutter\google_mlkit_text_recognition-0.11.0-custom
+    git:
+      url: https://github.com/ozaenzenzen/google_mlkit_text_recognition_unbundled.git
+      ref: master
   http_parser: null
   image_picker: ^0.8.7+5
   injectable: ^2.1.1
